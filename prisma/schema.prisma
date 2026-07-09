@@ -1,0 +1,580 @@
+// Mandarin Quest data model.
+//
+// Design notes:
+// - Every content table is scoped under `Language`, so adding Japanese,
+//   Korean, Spanish, etc. later is a data change, not a schema change.
+// - `Json` is used instead of native scalar lists (e.g. for
+//   `Exercise.supportedModes`) because SQLite has no native array type —
+//   this keeps the schema identical across the SQLite (dev) / Postgres
+//   (prod) split called for in the build plan.
+// - The curriculum is a knowledge graph, not a flat lesson sequence:
+//   `KnowledgeNode` is every teachable concept (vocabulary, grammar,
+//   sentence patterns, conversation/listening/pronunciation skills,
+//   dialogue structures, conversation goals), `NodeEdge` declares
+//   prerequisites between them, and `UserNodeMastery` is the single
+//   SM-2-scheduled mastery record per learner per node — shared by every
+//   node type, replacing what used to be three separate tables
+//   (VocabularyItem/GrammarConcept + a polymorphic ReviewItem). Lessons
+//   still exist as the authored, sequenced teaching unit, but they are a
+//   *view onto* the graph (via `LessonNode`), not the source of truth for
+//   progress or recommendations.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum Role {
+  LEARNER
+  ADMIN
+}
+
+/// Mirrors the onboarding practice-style choice and the Settings screen.
+enum PracticeMode {
+  FULL_SPEAKING
+  QUIET
+  TYPING_ONLY
+  LISTENING_ONLY
+}
+
+enum ExerciseType {
+  MULTIPLE_CHOICE
+  LISTENING
+  SENTENCE_ORDER
+  FILL_BLANK
+  TRANSLATION
+  LISTENING_COMPREHENSION
+  SPEAKING
+  CONVERSATION_SIM
+  RAPID_REVIEW
+}
+
+/// How a learner answers a given exercise. Every SPEAKING/CONVERSATION_SIM
+/// exercise must support every one of these except MIC_SPEAKING is the only
+/// mode that requires a live microphone — see Exercise.supportedModes.
+enum InteractionMode {
+  MIC_SPEAKING
+  TYPE_PINYIN
+  TYPE_ENGLISH_GUIDED
+  WORD_TILE_SELECT
+  SENTENCE_REORDER
+  DIALOGUE_CHOICE
+  SHADOW_LISTEN
+  AI_TEXT_CHAT
+}
+
+enum LessonStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum AiTutorRole {
+  USER
+  ASSISTANT
+}
+
+/// Every teachable concept in the knowledge graph is one of these types.
+enum KnowledgeNodeType {
+  VOCAB
+  GRAMMAR
+  SENTENCE_PATTERN
+  CONVERSATION_SKILL
+  LISTENING_SKILL
+  PRONUNCIATION_SKILL
+  DIALOGUE_STRUCTURE
+  CONVERSATION_GOAL
+}
+
+enum NodeEdgeRelation {
+  PREREQUISITE
+  RELATED
+  PART_OF
+}
+
+enum LessonNodeRole {
+  TEACHES
+  REVIEWS
+  GOAL
+}
+
+// ---------------------------------------------------------------------------
+// Language & curriculum content
+// ---------------------------------------------------------------------------
+
+model Language {
+  id   String @id @default(cuid())
+  code String @unique // "zh", "ja", "ko", "es", ...
+  name String
+
+  levels         Level[]
+  knowledgeNodes KnowledgeNode[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Level {
+  id          String  @id @default(cuid())
+  languageId  String
+  index       Int
+  title       String
+  description String
+  themeColor  String?
+
+  language Language @relation(fields: [languageId], references: [id], onDelete: Cascade)
+  modules  Module[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([languageId, index])
+}
+
+/// A Module is a situation-based unit (Coffee Shop, Airport, ...) — this
+/// doubles as the RPG "world": completing its final lesson unlocks the next
+/// module in the level.
+model Module {
+  id          String  @id @default(cuid())
+  levelId     String
+  index       Int
+  key         String // stable slug, e.g. "coffee-shop"
+  title       String
+  description String
+  worldIcon   String? // lucide icon name or emoji
+  worldTheme  String? // used for RPG map styling
+
+  level   Level    @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([levelId, index])
+  @@unique([levelId, key])
+}
+
+model Lesson {
+  id               String  @id @default(cuid())
+  moduleId         String
+  index            Int
+  title            String
+  situationTag     String
+  estimatedMinutes Int     @default(18)
+  isPublished      Boolean @default(false)
+  /// Structured objectives (grammarGoal/vocabularyGoal/conversationGoal) for
+  /// lessons that only have an outline so far (Levels 3-8 at launch). Null
+  /// once the lesson is fully authored.
+  outline          Json?
+
+  module Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  lessonNodes  LessonNode[]
+  dialogues    Dialogue[]
+  exercises    Exercise[]
+  userProgress UserLessonProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([moduleId, index])
+}
+
+/// Every teachable concept: vocabulary, grammar, sentence patterns,
+/// conversation/listening/pronunciation skills, dialogue structures, and
+/// conversation goals all live here, discriminated by `type` with a
+/// type-specific `data` payload — the same pattern `Exercise.data` already
+/// uses, validated in lib/validation/knowledge.ts.
+model KnowledgeNode {
+  id          String            @id @default(cuid())
+  languageId  String
+  type        KnowledgeNodeType
+  code        String
+  title       String
+  description String
+  data        Json
+  difficulty  Int               @default(1)
+  version     Int               @default(1)
+
+  language Language @relation(fields: [languageId], references: [id], onDelete: Cascade)
+
+  prerequisiteEdges NodeEdge[]          @relation("ToNode")
+  dependentEdges    NodeEdge[]          @relation("FromNode")
+  lessonLinks       LessonNode[]
+  masteries         UserNodeMastery[]
+  mistakes          MistakeLog[]
+  exercises         Exercise[]
+  dialogues         Dialogue[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([languageId, code])
+  @@index([languageId, type])
+}
+
+/// A directed edge between two nodes. `fromNode` is the prerequisite,
+/// `toNode` is the dependent concept that requires it (for PREREQUISITE
+/// edges) — RELATED/PART_OF are looser associations used for
+/// recommendations without gating progression.
+model NodeEdge {
+  id         String           @id @default(cuid())
+  fromNodeId String
+  toNodeId   String
+  relation   NodeEdgeRelation @default(PREREQUISITE)
+
+  fromNode KnowledgeNode @relation("FromNode", fields: [fromNodeId], references: [id], onDelete: Cascade)
+  toNode   KnowledgeNode @relation("ToNode", fields: [toNodeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([fromNodeId, toNodeId, relation])
+}
+
+/// Links a lesson to the nodes it teaches, reviews, or serves as a goal for
+/// — replaces the old LessonVocabulary join table and the
+/// Lesson.primaryGrammarConceptId scalar FK with one general-purpose join.
+model LessonNode {
+  id       String         @id @default(cuid())
+  lessonId String
+  nodeId   String
+  role     LessonNodeRole @default(TEACHES)
+  order    Int
+
+  lesson Lesson        @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  node   KnowledgeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, nodeId, role])
+}
+
+model Dialogue {
+  id              String  @id @default(cuid())
+  lessonId        String
+  title           String
+  situationTag    String
+  structureNodeId String?
+
+  lesson        Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  structureNode KnowledgeNode? @relation(fields: [structureNodeId], references: [id], onDelete: SetNull)
+  lines         DialogueLine[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DialogueLine {
+  id           String  @id @default(cuid())
+  dialogueId   String
+  order        Int
+  speaker      String
+  script       String
+  romanization String
+  english      String
+  audioKey     String?
+
+  dialogue Dialogue @relation(fields: [dialogueId], references: [id], onDelete: Cascade)
+
+  @@unique([dialogueId, order])
+}
+
+/// `data` is a discriminated union keyed by `type` (validated with Zod at
+/// content-authoring/import time, see lib/validation/content.ts).
+/// `supportedModes` lists which InteractionMode values this exercise can
+/// render; SPEAKING/CONVERSATION_SIM exercises are required by that same
+/// Zod validation to carry data for every non-mic InteractionMode.
+model Exercise {
+  id             String       @id @default(cuid())
+  lessonId       String
+  type           ExerciseType
+  order          Int
+  prompt         String
+  data           Json
+  supportedModes Json // InteractionMode[]
+  primaryNodeId  String? // the concept this exercise most tests — used by mistake intelligence
+
+  lesson           Lesson            @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  primaryNode      KnowledgeNode?    @relation(fields: [primaryNodeId], references: [id], onDelete: SetNull)
+  speakingAttempts SpeakingAttempt[]
+  mistakes         MistakeLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([lessonId, order])
+}
+
+model Achievement {
+  id          String @id @default(cuid())
+  code        String @unique
+  title       String
+  description String
+  icon        String
+  criteria    Json
+
+  userAchievements UserAchievement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Auth (Better Auth standard shape)
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String  @id @default(cuid())
+  name          String
+  email         String  @unique
+  emailVerified Boolean @default(false)
+  image         String?
+  role          Role    @default(LEARNER)
+
+  sessions Session[]
+  accounts Account[]
+
+  languageProfiles UserLanguageProfile[]
+  lessonProgress   UserLessonProgress[]
+  achievements     UserAchievement[]
+  nodeMasteries    UserNodeMastery[]
+  speakingAttempts SpeakingAttempt[]
+  aiTutorSessions  AiTutorSession[]
+  mistakes         MistakeLog[]
+  settings         UserSettings?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  userId                String
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([providerId, accountId])
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Learner progress
+// ---------------------------------------------------------------------------
+
+model UserLanguageProfile {
+  id                String    @id @default(cuid())
+  userId            String
+  languageId        String
+  xp                Int       @default(0)
+  streak            Int       @default(0)
+  longestStreak     Int       @default(0)
+  lastActivityAt    DateTime?
+  conversationLevel Int       @default(1)
+  currentModuleId   String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, languageId])
+}
+
+model UserLessonProgress {
+  id          String       @id @default(cuid())
+  userId      String
+  lessonId    String
+  status      LessonStatus @default(NOT_STARTED)
+  bestScore   Int?
+  attempts    Int          @default(0)
+  completedAt DateTime?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonId])
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String
+  earnedAt      DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+}
+
+/// Per-learner, per-node SM-2 mastery record — shared by every
+/// KnowledgeNodeType (vocab, grammar, sentence patterns, skills, ...).
+/// `masteryScore`/`confidenceScore` are read-time-decayed summaries (see
+/// lib/stats.ts) derived from the same SM-2 state used to schedule reviews.
+model UserNodeMastery {
+  id              String    @id @default(cuid())
+  userId          String
+  nodeId          String
+  masteryScore    Float     @default(0)
+  confidenceScore Float     @default(0)
+  easeFactor      Float     @default(2.5)
+  intervalDays    Int       @default(0)
+  repetitions     Int       @default(0)
+  lapses          Int       @default(0)
+  nextReviewAt    DateTime  @default(now())
+  lastReviewedAt  DateTime?
+
+  user User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  node KnowledgeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  logs UserNodeMasteryLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, nodeId])
+  @@index([userId, nextReviewAt])
+}
+
+model UserNodeMasteryLog {
+  id             String   @id @default(cuid())
+  masteryId      String
+  quality        Int // 0-5, SM-2 grading scale
+  responseTimeMs Int?
+  reviewedAt     DateTime @default(now())
+
+  mastery UserNodeMastery @relation(fields: [masteryId], references: [id], onDelete: Cascade)
+
+  @@index([masteryId])
+}
+
+model SpeakingAttempt {
+  id            String  @id @default(cuid())
+  userId        String
+  exerciseId    String
+  transcript    String?
+  targetText    String
+  accuracyScore Float?
+  toneScore     Float?
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, exerciseId])
+}
+
+enum MistakeType {
+  WRONG_GRAMMAR
+  WRONG_WORD_ORDER
+  WRONG_VOCAB
+  WRONG_TONE
+  WRONG_PARTICLE
+  ENGLISH_STRUCTURE
+  WRONG_MEASURE_WORD
+  OTHER
+}
+
+/// Why a learner got something wrong, not just that they did — feeds
+/// targeted review generation (lib/mistakes/analyze.ts).
+model MistakeLog {
+  id          String      @id @default(cuid())
+  userId      String
+  nodeId      String?
+  exerciseId  String?
+  mistakeType MistakeType
+  detail      String?
+
+  user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  node     KnowledgeNode? @relation(fields: [nodeId], references: [id], onDelete: SetNull)
+  exercise Exercise?      @relation(fields: [exerciseId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, mistakeType])
+}
+
+model AiTutorSession {
+  id        String    @id @default(cuid())
+  userId    String
+  lessonId  String?
+  startedAt DateTime  @default(now())
+  endedAt   DateTime?
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages AiTutorMessage[]
+
+  @@index([userId])
+}
+
+model AiTutorMessage {
+  id        String      @id @default(cuid())
+  sessionId String
+  role      AiTutorRole
+  content   String
+  createdAt DateTime    @default(now())
+
+  session AiTutorSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+}
+
+model UserSettings {
+  id                  String       @id @default(cuid())
+  userId              String       @unique
+  practiceMode        PracticeMode @default(FULL_SPEAKING)
+  theme               String       @default("system")
+  audioSpeed          Float        @default(1.0)
+  showPinyin          Boolean      @default(true)
+  showEnglish         Boolean      @default(true)
+  speakingSensitivity Float        @default(0.5)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

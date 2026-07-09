@@ -1,0 +1,1247 @@
+{
+  "index": 2,
+  "title": "Everyday Basics",
+  "description": "Talk about your neighbourhood and order a full meal.",
+  "themeColor": "amber",
+  "modules": [
+    {
+      "index": 1,
+      "key": "neighbourhood",
+      "title": "Neighbourhood",
+      "description": "Describe where you live and who lives nearby.",
+      "worldIcon": "home",
+      "worldTheme": "neighbourhood",
+      "lessons": [
+        {
+          "index": 1,
+          "title": "My Neighbourhood",
+          "situationTag": "neighbourhood",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "location-words",
+            "title": "Upstairs / Downstairs (在 + 楼上/楼下)",
+            "simpleExplanation": "You already know 在 (zài) means 'is located at.' Now pair it with location words to say exactly where something is inside a building: 楼上 (lóushàng, upstairs) and 楼下 (lóuxià, downstairs). Just like 在这儿/在那儿, the location word slots right after 在: 我家在楼上 = My home is upstairs.",
+            "visualExamples": [
+              {
+                "script": "我家在楼上。",
+                "romanization": "Wǒ jiā zài lóushàng.",
+                "english": "My home is upstairs."
+              },
+              {
+                "script": "洗手间在楼下。",
+                "romanization": "Xǐshǒujiān zài lóuxià.",
+                "english": "The bathroom is downstairs.",
+                "note": "楼下 slots right after 在, exactly like 这儿/那儿 did"
+              },
+              {
+                "script": "你的公寓在楼上吗?",
+                "romanization": "Nǐ de gōngyù zài lóushàng ma?",
+                "english": "Is your apartment upstairs?"
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "How do you say 'My home is upstairs'?",
+                "options": ["我家在楼上", "我楼上在家", "家我在楼上", "在我家楼上"],
+                "correctIndex": 0
+              },
+              {
+                "prompt": "楼下 means:",
+                "options": ["upstairs", "downstairs", "nearby", "street"],
+                "correctIndex": 1
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "公寓", "romanization": "gōngyù", "english": "apartment" },
+            { "script": "家", "romanization": "jiā", "english": "home / family" },
+            { "script": "楼上", "romanization": "lóushàng", "english": "upstairs" },
+            { "script": "楼下", "romanization": "lóuxià", "english": "downstairs" },
+            { "script": "住", "romanization": "zhù", "english": "to live" },
+            { "script": "街", "romanization": "jiē", "english": "street" },
+            { "script": "新", "romanization": "xīn", "english": "new" },
+            { "script": "老", "romanization": "lǎo", "english": "old" }
+          ],
+          "dialogue": {
+            "title": "My Neighbourhood",
+            "situationTag": "neighbourhood",
+            "lines": [
+              {
+                "speaker": "A",
+                "script": "你好!你住在这儿附近吗?",
+                "romanization": "Nǐ hǎo! Nǐ zhù zài zhèr fùjìn ma?",
+                "english": "Hello! Do you live near here?"
+              },
+              {
+                "speaker": "B",
+                "script": "是,我住在附近的公寓。我家在楼上。",
+                "romanization": "Shì, wǒ zhù zài fùjìn de gōngyù. Wǒ jiā zài lóushàng.",
+                "english": "Yes, I live in an apartment nearby. My home is upstairs."
+              },
+              {
+                "speaker": "A",
+                "script": "你的公寓新吗?",
+                "romanization": "Nǐ de gōngyù xīn ma?",
+                "english": "Is your apartment new?"
+              },
+              {
+                "speaker": "B",
+                "script": "不新,很老。",
+                "romanization": "Bù xīn, hěn lǎo.",
+                "english": "Not new, quite old."
+              },
+              {
+                "speaker": "A",
+                "script": "洗手间在楼下吗?",
+                "romanization": "Xǐshǒujiān zài lóuxià ma?",
+                "english": "Is the bathroom downstairs?"
+              },
+              {
+                "speaker": "B",
+                "script": "对,洗手间在楼下。",
+                "romanization": "Duì, xǐshǒujiān zài lóuxià.",
+                "english": "Right, the bathroom is downstairs."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "我家在楼上 means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "我家在楼上。",
+                "questionRomanization": "Wǒ jiā zài lóushàng.",
+                "options": [
+                  { "text": "My home is upstairs.", "isCorrect": true },
+                  { "text": "My home is downstairs.", "isCorrect": false },
+                  { "text": "My home is nearby.", "isCorrect": false },
+                  { "text": "Where is my home?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "洗手间在楼下。",
+                "audioRomanization": "Xǐshǒujiān zài lóuxià.",
+                "options": [
+                  { "text": "The bathroom is downstairs.", "isCorrect": true },
+                  { "text": "The bathroom is upstairs.", "isCorrect": false },
+                  { "text": "The bathroom is nearby.", "isCorrect": false },
+                  { "text": "Where is the bathroom?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "你的公寓___楼上吗?",
+                "correctAnswer": "在",
+                "choices": ["在", "是", "的", "住"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "My apartment is downstairs.",
+                "sourceLang": "en",
+                "correctAnswer": "我的公寓在楼下。",
+                "acceptableAnswers": ["我的公寓在楼下", "Wǒ de gōngyù zài lóuxià."]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Tell them you live nearby, and your home is upstairs.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "我住在附近,家在楼上。",
+                "targetRomanization": "Wǒ zhù zài fùjìn, jiā zài lóushàng.",
+                "targetEnglish": "I live nearby, my home is upstairs.",
+                "tokens": ["我", "住在", "附近", "家", "在", "楼上"],
+                "distractorTokens": ["楼下", "老", "新"],
+                "acceptablePinyin": ["wo zhu zai fujin jia zai loushang", "wǒ zhù zài fùjìn jiā zài lóushàng"],
+                "englishPrompt": "Tell them you live nearby, and your home is upstairs.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "我住在附近,家在楼上。",
+                    "romanization": "Wǒ zhù zài fùjìn, jiā zài lóushàng.",
+                    "english": "I live nearby, my home is upstairs.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "我的公寓很老。",
+                    "romanization": "Wǒ de gōngyù hěn lǎo.",
+                    "english": "My apartment is very old.",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "洗手间在楼下。",
+                    "romanization": "Xǐshǒujiān zài lóuxià.",
+                    "english": "The bathroom is downstairs.",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a new neighbour asking where the learner lives. React to their answer, using only 你好/住/在/附近/家/楼上/楼下/公寓/街/新/老/这儿/那儿/哪儿/吗/请问/谢谢."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  { "promptScript": "公寓", "promptRomanization": "gōngyù", "answerEnglish": "apartment" },
+                  { "promptScript": "楼上", "promptRomanization": "lóushàng", "answerEnglish": "upstairs" },
+                  { "promptScript": "街", "promptRomanization": "jiē", "answerEnglish": "street" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "title": "Who Lives Here?",
+          "situationTag": "neighbourhood",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "you-existence",
+            "title": "There Is / There Are (有 for Existence)",
+            "simpleExplanation": "有 (yǒu) usually means 'to have,' but it has another job: saying something exists somewhere. Put the place first, then 有, then what's there: 这儿有一个银行 = There's a bank here (literally 'here has a bank'). To say something does NOT exist somewhere, use 没有 instead of 不有 — 有 is one of the few verbs in Mandarin that's negated with 没, not 不.",
+            "visualExamples": [
+              {
+                "script": "这儿有一个超市。",
+                "romanization": "Zhèr yǒu yí gè chāoshì.",
+                "english": "There's a supermarket here."
+              },
+              {
+                "script": "附近有公园吗?",
+                "romanization": "Fùjìn yǒu gōngyuán ma?",
+                "english": "Is there a park nearby?"
+              },
+              {
+                "script": "这儿没有学校。",
+                "romanization": "Zhèr méiyǒu xuéxiào.",
+                "english": "There's no school here.",
+                "note": "有 is negated with 没, not 不 — say 没有, never 不有"
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "How do you say 'There's a bank here'?",
+                "options": ["这儿有银行", "这儿是银行", "银行有这儿", "这儿在银行"],
+                "correctIndex": 0
+              },
+              {
+                "prompt": "How do you negate 有 (yǒu)?",
+                "options": ["不有", "没有", "不是", "没是"],
+                "correctIndex": 1
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "有", "romanization": "yǒu", "english": "there is / are (also: to have)" },
+            { "script": "没有", "romanization": "méiyǒu", "english": "there isn't / aren't (also: to not have)" },
+            { "script": "邻居", "romanization": "línjū", "english": "neighbour" },
+            { "script": "超市", "romanization": "chāoshì", "english": "supermarket" },
+            { "script": "公园", "romanization": "gōngyuán", "english": "park" },
+            { "script": "医院", "romanization": "yīyuàn", "english": "hospital" },
+            { "script": "学校", "romanization": "xuéxiào", "english": "school" },
+            { "script": "个", "romanization": "gè", "english": "measure word (general-purpose)" }
+          ],
+          "dialogue": {
+            "title": "Who Lives Here?",
+            "situationTag": "neighbourhood",
+            "lines": [
+              {
+                "speaker": "A",
+                "script": "你好!我是新邻居。",
+                "romanization": "Nǐ hǎo! Wǒ shì xīn línjū.",
+                "english": "Hi, I'm the new neighbour."
+              },
+              {
+                "speaker": "B",
+                "script": "你好!很高兴认识你。",
+                "romanization": "Nǐ hǎo! Hěn gāoxìng rènshi nǐ.",
+                "english": "Hello! Nice to meet you."
+              },
+              {
+                "speaker": "A",
+                "script": "请问,附近有超市吗?",
+                "romanization": "Qǐngwèn, fùjìn yǒu chāoshì ma?",
+                "english": "Excuse me, is there a supermarket nearby?"
+              },
+              {
+                "speaker": "B",
+                "script": "有,这儿附近有一个超市,也有一个公园。",
+                "romanization": "Yǒu, zhèr fùjìn yǒu yí gè chāoshì, yě yǒu yí gè gōngyuán.",
+                "english": "Yes, there's a supermarket nearby, and also a park."
+              },
+              {
+                "speaker": "A",
+                "script": "附近有医院吗?",
+                "romanization": "Fùjìn yǒu yīyuàn ma?",
+                "english": "Is there a hospital nearby?"
+              },
+              {
+                "speaker": "B",
+                "script": "没有,附近没有医院。附近有学校。",
+                "romanization": "Méiyǒu, fùjìn méiyǒu yīyuàn. Fùjìn yǒu xuéxiào.",
+                "english": "No, there's no hospital nearby. There's a school nearby."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "附近有超市吗? means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "附近有超市吗?",
+                "questionRomanization": "Fùjìn yǒu chāoshì ma?",
+                "options": [
+                  { "text": "Is there a supermarket nearby?", "isCorrect": true },
+                  { "text": "Where is the supermarket?", "isCorrect": false },
+                  { "text": "I want to go to the supermarket.", "isCorrect": false },
+                  { "text": "The supermarket is nearby.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "这儿有一个公园。",
+                "audioRomanization": "Zhèr yǒu yí gè gōngyuán.",
+                "options": [
+                  { "text": "There's a park here.", "isCorrect": true },
+                  { "text": "There's a school here.", "isCorrect": false },
+                  { "text": "Is there a park here?", "isCorrect": false },
+                  { "text": "There's no park here.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "附近___医院吗?",
+                "correctAnswer": "有",
+                "choices": ["有", "是", "在", "没有"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "There's no supermarket nearby.",
+                "sourceLang": "en",
+                "correctAnswer": "附近没有超市。",
+                "acceptableAnswers": ["附近没有超市", "Fùjìn méiyǒu chāoshì."]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Tell your new neighbour there's a park nearby, but no hospital.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "附近有公园,没有医院。",
+                "targetRomanization": "Fùjìn yǒu gōngyuán, méiyǒu yīyuàn.",
+                "targetEnglish": "There's a park nearby, no hospital.",
+                "tokens": ["附近", "有", "公园", "没有", "医院"],
+                "distractorTokens": ["学校", "超市", "邻居"],
+                "acceptablePinyin": ["fujin you gongyuan meiyou yiyuan", "fùjìn yǒu gōngyuán méiyǒu yīyuàn"],
+                "englishPrompt": "Tell your new neighbour there's a park nearby, but no hospital.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "附近有公园,没有医院。",
+                    "romanization": "Fùjìn yǒu gōngyuán, méiyǒu yīyuàn.",
+                    "english": "There's a park nearby, no hospital.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "附近有医院,没有公园。",
+                    "romanization": "Fùjìn yǒu yīyuàn, méiyǒu gōngyuán.",
+                    "english": "There's a hospital nearby, no park.",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "我是新邻居。",
+                    "romanization": "Wǒ shì xīn línjū.",
+                    "english": "I'm the new neighbour.",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a new neighbour asking the learner what's in the area (supermarket, park, school, hospital). Respond using only 有/没有/附近/超市/公园/医院/学校/邻居/这儿/吗/请问/谢谢/是/一个."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  { "promptScript": "邻居", "promptRomanization": "línjū", "answerEnglish": "neighbour" },
+                  { "promptScript": "有", "promptRomanization": "yǒu", "answerEnglish": "there is / are" },
+                  { "promptScript": "超市", "promptRomanization": "chāoshì", "answerEnglish": "supermarket" }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "key": "restaurant",
+      "title": "Restaurant",
+      "description": "Order a full meal and ask for the check.",
+      "worldIcon": "utensils",
+      "worldTheme": "restaurant",
+      "lessons": [
+        {
+          "index": 1,
+          "title": "Ordering Food",
+          "situationTag": "restaurant",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "verb-object-food",
+            "title": "Ordering Food (点菜 + 份)",
+            "simpleExplanation": "点菜 (diǎn cài) literally means 'point-at dish' — it's how you say 'order food' in a restaurant. To order a specific dish, use the same pattern you already know from ordering drinks: 要 (yào, want) + number + measure word + dish. For food, the measure word is usually 份 (fèn, a portion/order): 我要一份炒饭 = I'd like a portion of fried rice.",
+            "visualExamples": [
+              {
+                "script": "我要点菜。",
+                "romanization": "Wǒ yào diǎn cài.",
+                "english": "I'd like to order food."
+              },
+              {
+                "script": "我要一份炒饭。",
+                "romanization": "Wǒ yào yí fèn chǎofàn.",
+                "english": "I'd like a portion of fried rice.",
+                "note": "份 (fèn) is the measure word for a dish/order, just like 杯 is for a cup of a drink"
+              },
+              {
+                "script": "我要一份米饭,不要辣的。",
+                "romanization": "Wǒ yào yí fèn mǐfàn, bú yào là de.",
+                "english": "I'd like a portion of rice, not spicy."
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "点菜 means:",
+                "options": ["to pay the bill", "to order food", "to cook", "to eat"],
+                "correctIndex": 1
+              },
+              {
+                "prompt": "What measure word goes with a dish/order of food?",
+                "options": ["杯", "份", "块", "条"],
+                "correctIndex": 1
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "菜", "romanization": "cài", "english": "dish" },
+            { "script": "点菜", "romanization": "diǎn cài", "english": "to order food" },
+            { "script": "米饭", "romanization": "mǐfàn", "english": "rice" },
+            { "script": "面条", "romanization": "miàntiáo", "english": "noodles" },
+            { "script": "炒饭", "romanization": "chǎofàn", "english": "fried rice" },
+            { "script": "辣", "romanization": "là", "english": "spicy" },
+            { "script": "份", "romanization": "fèn", "english": "portion (measure word for a dish/order)" },
+            { "script": "服务员", "romanization": "fúwùyuán", "english": "waiter / waitress" },
+            { "script": "菜单", "romanization": "càidān", "english": "menu" }
+          ],
+          "dialogue": {
+            "title": "Ordering Food",
+            "situationTag": "restaurant",
+            "lines": [
+              {
+                "speaker": "Waiter",
+                "script": "你好!这是菜单。",
+                "romanization": "Nǐ hǎo! Zhè shì càidān.",
+                "english": "Hello! Here's the menu."
+              },
+              {
+                "speaker": "Customer",
+                "script": "谢谢。我要一份炒饭。",
+                "romanization": "Xièxie. Wǒ yào yí fèn chǎofàn.",
+                "english": "Thanks. I'd like a portion of fried rice."
+              },
+              {
+                "speaker": "Waiter",
+                "script": "好的,要辣的吗?",
+                "romanization": "Hǎo de, yào là de ma?",
+                "english": "Okay, do you want it spicy?"
+              },
+              {
+                "speaker": "Customer",
+                "script": "不要辣的,谢谢。",
+                "romanization": "Bú yào là de, xièxie.",
+                "english": "Not spicy, thanks."
+              },
+              {
+                "speaker": "Waiter",
+                "script": "好,你也要面条吗?",
+                "romanization": "Hǎo, nǐ yě yào miàntiáo ma?",
+                "english": "Okay, would you also like noodles?"
+              },
+              {
+                "speaker": "Customer",
+                "script": "不要,谢谢。",
+                "romanization": "Bú yào, xièxie.",
+                "english": "No, thanks."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "我要一份炒饭 means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "我要一份炒饭。",
+                "questionRomanization": "Wǒ yào yí fèn chǎofàn.",
+                "options": [
+                  { "text": "I'd like a portion of fried rice.", "isCorrect": true },
+                  { "text": "I don't want fried rice.", "isCorrect": false },
+                  { "text": "Do you want fried rice?", "isCorrect": false },
+                  { "text": "I'd like a portion of noodles.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "要辣的吗?",
+                "audioRomanization": "Yào là de ma?",
+                "options": [
+                  { "text": "Do you want it spicy?", "isCorrect": true },
+                  { "text": "Is it spicy?", "isCorrect": false },
+                  { "text": "I don't want it spicy.", "isCorrect": false },
+                  { "text": "What do you want to order?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "我要一___米饭。",
+                "correctAnswer": "份",
+                "choices": ["份", "杯", "个", "条"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "I'd like a portion of noodles, not spicy.",
+                "sourceLang": "en",
+                "correctAnswer": "我要一份面条,不要辣的。",
+                "acceptableAnswers": ["我要一份面条,不要辣的", "Wǒ yào yí fèn miàntiáo, bú yào là de."]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Order a portion of fried rice and say you don't want it spicy.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "我要一份炒饭,不要辣的。",
+                "targetRomanization": "Wǒ yào yí fèn chǎofàn, bú yào là de.",
+                "targetEnglish": "I'd like a portion of fried rice, not spicy.",
+                "tokens": ["我", "要", "一", "份", "炒饭", "不要", "辣的"],
+                "distractorTokens": ["面条", "米饭", "服务员"],
+                "acceptablePinyin": ["wo yao yi fen chaofan buyao lade", "wǒ yào yí fèn chǎofàn bú yào là de"],
+                "englishPrompt": "Order a portion of fried rice and say you don't want it spicy.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "好的,不辣。",
+                    "romanization": "Hǎo de, bú là.",
+                    "english": "Okay, not spicy.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "多少钱?",
+                    "romanization": "Duōshǎo qián?",
+                    "english": "How much is it?",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "谢谢,再见。",
+                    "romanization": "Xièxie, zàijiàn.",
+                    "english": "Thanks, goodbye.",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a waiter taking the learner's order. Ask what they'd like and whether they want it spicy, using only 你好/要/点菜/一/份/菜/米饭/面条/炒饭/辣/服务员/菜单/谢谢/好的/吗."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  { "promptScript": "点菜", "promptRomanization": "diǎn cài", "answerEnglish": "to order food" },
+                  { "promptScript": "辣", "promptRomanization": "là", "answerEnglish": "spicy" },
+                  { "promptScript": "服务员", "promptRomanization": "fúwùyuán", "answerEnglish": "waiter / waitress" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "title": "The Check, Please",
+          "situationTag": "restaurant",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "bi-comparison",
+            "title": "Comparing Things with 比",
+            "simpleExplanation": "比 (bǐ) is how you compare two things in Mandarin — it means 'compared to.' Put it between the two things: A 比 B + adjective = A is more [adjective] than B. 这个比那个好吃 = This is tastier than that (literally 'this compared-to that tasty').",
+            "visualExamples": [
+              {
+                "script": "这个比那个好吃。",
+                "romanization": "Zhège bǐ nàge hǎochī.",
+                "english": "This is tastier than that."
+              },
+              {
+                "script": "鱼比肉好吃。",
+                "romanization": "Yú bǐ ròu hǎochī.",
+                "english": "Fish is tastier than meat."
+              },
+              {
+                "script": "这个汤比那个甜。",
+                "romanization": "Zhège tāng bǐ nàge tián.",
+                "english": "This soup is sweeter than that one.",
+                "note": "比 sits between the two things being compared, right before the adjective"
+              }
+            ],
+            "difficulty": 3,
+            "quiz": [
+              {
+                "prompt": "这个比那个好吃 means:",
+                "options": ["This is as tasty as that.", "This is tastier than that.", "That is tastier than this.", "This isn't tasty."],
+                "correctIndex": 1
+              },
+              {
+                "prompt": "Where does 比 go in a comparison sentence?",
+                "options": ["At the very end", "Between the two things, before the adjective", "After the adjective", "At the very beginning"],
+                "correctIndex": 1
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "买单", "romanization": "mǎidān", "english": "to pay the check" },
+            { "script": "好吃", "romanization": "hǎochī", "english": "tasty (for food)" },
+            { "script": "比", "romanization": "bǐ", "english": "compared to / -er than" },
+            { "script": "饱", "romanization": "bǎo", "english": "full (from eating)" },
+            { "script": "甜", "romanization": "tián", "english": "sweet" },
+            { "script": "酸", "romanization": "suān", "english": "sour" },
+            { "script": "汤", "romanization": "tāng", "english": "soup" },
+            { "script": "鱼", "romanization": "yú", "english": "fish" },
+            { "script": "肉", "romanization": "ròu", "english": "meat" }
+          ],
+          "dialogue": {
+            "title": "The Check, Please",
+            "situationTag": "restaurant",
+            "lines": [
+              {
+                "speaker": "A",
+                "script": "我很饱。",
+                "romanization": "Wǒ hěn bǎo.",
+                "english": "I'm very full."
+              },
+              {
+                "speaker": "B",
+                "script": "我也很饱。这个菜很好吃!",
+                "romanization": "Wǒ yě hěn bǎo. Zhège cài hěn hǎochī!",
+                "english": "I'm full too. This dish is delicious!"
+              },
+              {
+                "speaker": "A",
+                "script": "对,鱼比肉好吃。",
+                "romanization": "Duì, yú bǐ ròu hǎochī.",
+                "english": "Right, the fish is tastier than the meat."
+              },
+              {
+                "speaker": "B",
+                "script": "服务员,买单!",
+                "romanization": "Fúwùyuán, mǎidān!",
+                "english": "Waiter, check please!"
+              },
+              {
+                "speaker": "Waiter",
+                "script": "好的,一共十五块。",
+                "romanization": "Hǎo de, yígòng shíwǔ kuài.",
+                "english": "Okay, that's fifteen yuan altogether."
+              },
+              {
+                "speaker": "A",
+                "script": "谢谢!很好吃。",
+                "romanization": "Xièxie! Hěn hǎochī.",
+                "english": "Thanks! It was delicious."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "鱼比肉好吃 means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "鱼比肉好吃。",
+                "questionRomanization": "Yú bǐ ròu hǎochī.",
+                "options": [
+                  { "text": "Fish is tastier than meat.", "isCorrect": true },
+                  { "text": "Meat is tastier than fish.", "isCorrect": false },
+                  { "text": "Fish and meat are both tasty.", "isCorrect": false },
+                  { "text": "Is fish tasty?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "服务员,买单!",
+                "audioRomanization": "Fúwùyuán, mǎidān!",
+                "options": [
+                  { "text": "Waiter, check please!", "isCorrect": true },
+                  { "text": "Waiter, more rice please!", "isCorrect": false },
+                  { "text": "Waiter, is this spicy?", "isCorrect": false },
+                  { "text": "Waiter, thank you!", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "这个___那个好吃。",
+                "correctAnswer": "比",
+                "choices": ["比", "很", "酸", "甜"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "This soup is tastier than that soup.",
+                "sourceLang": "en",
+                "correctAnswer": "这个汤比那个汤好吃。",
+                "acceptableAnswers": ["这个汤比那个汤好吃", "Zhège tāng bǐ nàge tāng hǎochī."]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Tell the waiter you're full, and ask for the check.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "我很饱,买单!",
+                "targetRomanization": "Wǒ hěn bǎo, mǎidān!",
+                "targetEnglish": "I'm full, check please!",
+                "tokens": ["我", "很", "饱", "买单"],
+                "distractorTokens": ["好吃", "比", "辣"],
+                "acceptablePinyin": ["wo hen bao maidan", "wǒ hěn bǎo mǎidān"],
+                "englishPrompt": "Tell the waiter you're full, and ask for the check.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "好的,一共十五块。",
+                    "romanization": "Hǎo de, yígòng shíwǔ kuài.",
+                    "english": "Okay, that's fifteen yuan altogether.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "你要辣的吗?",
+                    "romanization": "Nǐ yào là de ma?",
+                    "english": "Do you want it spicy?",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "很高兴认识你。",
+                    "romanization": "Hěn gāoxìng rènshi nǐ.",
+                    "english": "Nice to meet you.",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a waiter. The learner says they're full and asks for the check; respond with a price and thank them, using only 好的/买单/多少钱/块/谢谢/饱/好吃/比/汤/鱼/肉/甜/酸."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  { "promptScript": "买单", "promptRomanization": "mǎidān", "answerEnglish": "to pay the check" },
+                  { "promptScript": "好吃", "promptRomanization": "hǎochī", "answerEnglish": "tasty (food)" },
+                  { "promptScript": "比", "promptRomanization": "bǐ", "answerEnglish": "compared to / -er than" }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "key": "shopping",
+      "title": "Shopping",
+      "description": "Browse, ask for a different size, and haggle politely.",
+      "worldIcon": "shopping-bag",
+      "worldTheme": "shopping",
+      "lessons": [
+        {
+          "index": 1,
+          "title": "Just Looking",
+          "situationTag": "shopping",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "size-color-request",
+            "title": "Do You Have...? (有没有)",
+            "simpleExplanation": "有没有 (yǒu méiyǒu) is another way to ask a yes/no question — instead of adding 吗 to the end, you put the verb 有 right next to its own negative 没有. It's especially natural when asking if a shop has something in stock: 有没有大一点的? = Do you have a bigger one? (literally 'have not-have bigger one').",
+            "visualExamples": [
+              {
+                "script": "有没有大一点的?",
+                "romanization": "Yǒu méiyǒu dà yìdiǎn de?",
+                "english": "Do you have a bigger one?"
+              },
+              {
+                "script": "有没有红色的?",
+                "romanization": "Yǒu méiyǒu hóngsè de?",
+                "english": "Do you have a red one?",
+                "note": "有没有 + description + 的 = 'do you have a ... one?'"
+              },
+              {
+                "script": "你有没有黑色的衣服?",
+                "romanization": "Nǐ yǒu méiyǒu hēisè de yīfu?",
+                "english": "Do you have black clothes?"
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "有没有大一点的? means:",
+                "options": ["I have a bigger one.", "Do you have a bigger one?", "This one is too big.", "I don't have a bigger one."],
+                "correctIndex": 1
+              },
+              {
+                "prompt": "有没有 is built from:",
+                "options": ["有 + 吗", "有 + 没有", "没 + 是", "大 + 小"],
+                "correctIndex": 1
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "大", "romanization": "dà", "english": "big" },
+            { "script": "小", "romanization": "xiǎo", "english": "small" },
+            { "script": "颜色", "romanization": "yánsè", "english": "color" },
+            { "script": "试", "romanization": "shì", "english": "to try (on)" },
+            { "script": "红色", "romanization": "hóngsè", "english": "red" },
+            { "script": "黑色", "romanization": "hēisè", "english": "black" },
+            { "script": "衣服", "romanization": "yīfu", "english": "clothes" },
+            { "script": "号", "romanization": "hào", "english": "size (number)" },
+            { "script": "一点", "romanization": "yìdiǎn", "english": "a bit / a little" }
+          ],
+          "dialogue": {
+            "title": "Just Looking",
+            "situationTag": "shopping",
+            "lines": [
+              {
+                "speaker": "Clerk",
+                "script": "你好!你要试吗?",
+                "romanization": "Nǐ hǎo! Nǐ yào shì ma?",
+                "english": "Hello! Would you like to try it on?"
+              },
+              {
+                "speaker": "Customer",
+                "script": "好的,谢谢。有没有小一点的?",
+                "romanization": "Hǎo de, xièxie. Yǒu méiyǒu xiǎo yìdiǎn de?",
+                "english": "Okay, thanks. Do you have a smaller one?"
+              },
+              {
+                "speaker": "Clerk",
+                "script": "有,这是小号的。你要什么颜色?",
+                "romanization": "Yǒu, zhè shì xiǎo hào de. Nǐ yào shénme yánsè?",
+                "english": "Yes, this is a small size. What color would you like?"
+              },
+              {
+                "speaker": "Customer",
+                "script": "有没有黑色的?",
+                "romanization": "Yǒu méiyǒu hēisè de?",
+                "english": "Do you have a black one?"
+              },
+              {
+                "speaker": "Clerk",
+                "script": "有黑色,也有红色。",
+                "romanization": "Yǒu hēisè, yě yǒu hóngsè.",
+                "english": "We have black, and also red."
+              },
+              {
+                "speaker": "Customer",
+                "script": "好,我要试黑色的。",
+                "romanization": "Hǎo, wǒ yào shì hēisè de.",
+                "english": "Great, I'll try the black one."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "有没有小一点的? means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "有没有小一点的?",
+                "questionRomanization": "Yǒu méiyǒu xiǎo yìdiǎn de?",
+                "options": [
+                  { "text": "Do you have a smaller one?", "isCorrect": true },
+                  { "text": "Do you have a bigger one?", "isCorrect": false },
+                  { "text": "This one is too small.", "isCorrect": false },
+                  { "text": "I don't have a small one.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "你要什么颜色?",
+                "audioRomanization": "Nǐ yào shénme yánsè?",
+                "options": [
+                  { "text": "What color would you like?", "isCorrect": true },
+                  { "text": "What size would you like?", "isCorrect": false },
+                  { "text": "Do you want to try it on?", "isCorrect": false },
+                  { "text": "How much is it?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "___大一点的?",
+                "correctAnswer": "有没有",
+                "choices": ["有没有", "是不是", "要不要", "好不好"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "Do you have a red one?",
+                "sourceLang": "en",
+                "correctAnswer": "有没有红色的?",
+                "acceptableAnswers": ["有没有红色的", "Yǒu méiyǒu hóngsè de?"]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Ask if they have a bigger black one, and ask the price.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "有没有大一点的黑色?多少钱?",
+                "targetRomanization": "Yǒu méiyǒu dà yìdiǎn de hēisè? Duōshǎo qián?",
+                "targetEnglish": "Do you have a bigger black one? How much is it?",
+                "tokens": ["有没有", "大", "一点", "的", "黑色", "多少钱"],
+                "distractorTokens": ["小", "红色", "试"],
+                "acceptablePinyin": ["you meiyou da yidian de heise duoshao qian", "yǒu méiyǒu dà yìdiǎn de hēisè duōshǎo qián"],
+                "englishPrompt": "Ask if they have a bigger black one, and ask the price.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "有,这件八十块。",
+                    "romanization": "Yǒu, zhè jiàn bāshí kuài.",
+                    "english": "Yes, this one is eighty yuan.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "你要试吗?",
+                    "romanization": "Nǐ yào shì ma?",
+                    "english": "Would you like to try it on?",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "没关系。",
+                    "romanization": "Méi guānxi.",
+                    "english": "No problem.",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a shop clerk. The learner asks about sizes and colors; answer using only 有/没有/大/小/颜色/试/红色/黑色/衣服/号/一点/多少钱/好的/这/是/的."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  { "promptScript": "颜色", "promptRomanization": "yánsè", "answerEnglish": "color" },
+                  { "promptScript": "试", "promptRomanization": "shì", "answerEnglish": "to try on" },
+                  { "promptScript": "有没有", "promptRomanization": "yǒu méiyǒu", "answerEnglish": "do you have...? (yes/no question)" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "title": "Can You Lower the Price?",
+          "situationTag": "shopping",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "tai-adjective-le",
+            "title": "Too Much! (太...了)",
+            "simpleExplanation": "太...了 (tài...le) wraps around an adjective to mean 'way too [adjective]' — it's how you complain something is excessive. 太贵了 = too expensive. Just sandwich the adjective between 太 and 了: 太 + adjective + 了.",
+            "visualExamples": [
+              {
+                "script": "太贵了!",
+                "romanization": "Tài guì le!",
+                "english": "Too expensive!"
+              },
+              {
+                "script": "这个不太贵。",
+                "romanization": "Zhège bú tài guì.",
+                "english": "This isn't too expensive.",
+                "note": "Add 不 before 太 to say something ISN'T excessively so"
+              },
+              {
+                "script": "便宜一点,好吗?",
+                "romanization": "Piányi yìdiǎn, hǎo ma?",
+                "english": "A bit cheaper, okay?"
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "太贵了 means:",
+                "options": ["Very expensive", "Too expensive!", "Not expensive", "How expensive?"],
+                "correctIndex": 1
+              },
+              {
+                "prompt": "Where does the adjective go in 太...了?",
+                "options": ["Before 太", "Between 太 and 了", "After 了", "It replaces 太"],
+                "correctIndex": 1
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "贵", "romanization": "guì", "english": "expensive" },
+            { "script": "便宜", "romanization": "piányi", "english": "cheap" },
+            { "script": "太", "romanization": "tài", "english": "too (excessively)" },
+            { "script": "了", "romanization": "le", "english": "particle used with 太 to mean 'too much' (太...了)" },
+            { "script": "老板", "romanization": "lǎobǎn", "english": "shop owner / boss" },
+            { "script": "块", "romanization": "kuài", "english": "yuan (unit of currency)" },
+            { "script": "卖", "romanization": "mài", "english": "to sell" },
+            { "script": "打折", "romanization": "dǎzhé", "english": "to give a discount" }
+          ],
+          "dialogue": {
+            "title": "Can You Lower the Price?",
+            "situationTag": "shopping",
+            "lines": [
+              {
+                "speaker": "Customer",
+                "script": "老板,这个多少钱?",
+                "romanization": "Lǎobǎn, zhège duōshǎo qián?",
+                "english": "Boss, how much is this?"
+              },
+              {
+                "speaker": "Owner",
+                "script": "这个卖一百块。",
+                "romanization": "Zhège mài yìbǎi kuài.",
+                "english": "This sells for one hundred yuan."
+              },
+              {
+                "speaker": "Customer",
+                "script": "太贵了!便宜一点,好吗?",
+                "romanization": "Tài guì le! Piányi yìdiǎn, hǎo ma?",
+                "english": "Too expensive! A bit cheaper, okay?"
+              },
+              {
+                "speaker": "Owner",
+                "script": "好,打折,八十块。",
+                "romanization": "Hǎo, dǎzhé, bāshí kuài.",
+                "english": "Okay, discounted — eighty yuan."
+              },
+              {
+                "speaker": "Customer",
+                "script": "六十块,好吗?",
+                "romanization": "Liùshí kuài, hǎo ma?",
+                "english": "Sixty yuan, okay?"
+              },
+              {
+                "speaker": "Owner",
+                "script": "好,六十块。",
+                "romanization": "Hǎo, liùshí kuài.",
+                "english": "Okay, sixty yuan."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "太贵了! means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "太贵了!",
+                "questionRomanization": "Tài guì le!",
+                "options": [
+                  { "text": "Too expensive!", "isCorrect": true },
+                  { "text": "Very cheap!", "isCorrect": false },
+                  { "text": "How much is it?", "isCorrect": false },
+                  { "text": "Not expensive.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "便宜一点,好吗?",
+                "audioRomanization": "Piányi yìdiǎn, hǎo ma?",
+                "options": [
+                  { "text": "A bit cheaper, okay?", "isCorrect": true },
+                  { "text": "How much is it?", "isCorrect": false },
+                  { "text": "This is too cheap.", "isCorrect": false },
+                  { "text": "Do you have a cheaper one?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "这个___贵了!",
+                "correctAnswer": "太",
+                "choices": ["太", "很", "不", "是"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "This is too expensive!",
+                "sourceLang": "en",
+                "correctAnswer": "太贵了!",
+                "acceptableAnswers": ["太贵了", "Tài guì le!"]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Say it's too expensive, and ask for it a bit cheaper.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "太贵了,便宜一点,好吗?",
+                "targetRomanization": "Tài guì le, piányi yìdiǎn, hǎo ma?",
+                "targetEnglish": "Too expensive, a bit cheaper, okay?",
+                "tokens": ["太", "贵", "了", "便宜", "一点", "好吗"],
+                "distractorTokens": ["打折", "老板", "块"],
+                "acceptablePinyin": ["tai gui le pianyi yidian hao ma", "tài guì le piányi yìdiǎn hǎo ma"],
+                "englishPrompt": "Say it's too expensive, and ask for it a bit cheaper.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "好,八十块。",
+                    "romanization": "Hǎo, bāshí kuài.",
+                    "english": "Okay, eighty yuan.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "这个不贵。",
+                    "romanization": "Zhège bú guì.",
+                    "english": "This isn't expensive.",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "你要试吗?",
+                    "romanization": "Nǐ yào shì ma?",
+                    "english": "Would you like to try it on?",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a shop owner haggling with the learner over a price. React to their offers, using only 老板/多少钱/块/太/贵/了/便宜/一点/好吗/打折/卖/是/这个/好."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  { "promptScript": "贵", "promptRomanization": "guì", "answerEnglish": "expensive" },
+                  { "promptScript": "便宜", "promptRomanization": "piányi", "answerEnglish": "cheap" },
+                  { "promptScript": "太...了", "promptRomanization": "tài...le", "answerEnglish": "too [adjective]" }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

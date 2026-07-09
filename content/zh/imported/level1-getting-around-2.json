@@ -1,0 +1,663 @@
+{
+  "index": 1,
+  "title": "First Contact",
+  "description": "The words and phrases you need for your very first real conversations.",
+  "themeColor": "orange",
+  "modules": [
+    {
+      "index": 3,
+      "key": "getting-around",
+      "title": "Getting Around",
+      "description": "Ask where something is and understand the answer.",
+      "worldIcon": "map-pin",
+      "worldTheme": "neighbourhood",
+      "lessons": [
+        {
+          "index": 2,
+          "title": "Taking a Taxi",
+          "situationTag": "taxi",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "dao-destination",
+            "title": "Going To (到 = to / until)",
+            "simpleExplanation": "到 (dào) marks a destination. Put it after a verb like 要 and before the place you're heading to: 我要到火车站 = \"I want to go to the train station.\" Think of 到 as pointing your sentence at an endpoint — it also works in questions: 你要到哪儿? = \"Where do you want to go (to)?\"",
+            "visualExamples": [
+              {
+                "script": "我要到火车站。",
+                "romanization": "Wǒ yào dào huǒchēzhàn.",
+                "english": "I want to go to the train station."
+              },
+              {
+                "script": "我要到机场。",
+                "romanization": "Wǒ yào dào jīchǎng.",
+                "english": "I want to go to the airport.",
+                "note": "到 + place = your destination"
+              },
+              {
+                "script": "你要到哪儿?",
+                "romanization": "Nǐ yào dào nǎr?",
+                "english": "Where do you want to go?",
+                "note": "到哪儿 = 'to where' — asking for a destination"
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "In 我要到火车站, what does 到 mark?",
+                "options": ["The destination", "The subject", "A question", "A negation"],
+                "correctIndex": 0
+              },
+              {
+                "prompt": "How do you say \"I want to go to the airport\"?",
+                "options": ["我要到机场。", "我要机场到。", "到我要机场。", "机场要到我。"],
+                "correctIndex": 0
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "出租车", "romanization": "chūzūchē", "english": "taxi" },
+            { "script": "师傅", "romanization": "shīfu", "english": "sir / master (polite address for a driver)" },
+            { "script": "到", "romanization": "dào", "english": "to / until (arrive at)" },
+            { "script": "停", "romanization": "tíng", "english": "to stop" },
+            { "script": "走", "romanization": "zǒu", "english": "to go / to drive off" },
+            { "script": "机场", "romanization": "jīchǎng", "english": "airport" },
+            { "script": "快", "romanization": "kuài", "english": "fast / quick" },
+            { "script": "一点", "romanization": "yìdiǎn", "english": "a little / a bit" },
+            { "script": "慢", "romanization": "màn", "english": "slow" }
+          ],
+          "dialogue": {
+            "title": "Hailing a Taxi",
+            "situationTag": "taxi",
+            "lines": [
+              {
+                "speaker": "Passenger",
+                "script": "师傅,你好!我要到火车站。",
+                "romanization": "Shīfu, nǐ hǎo! Wǒ yào dào huǒchēzhàn.",
+                "english": "Hello, driver! I need to go to the train station."
+              },
+              {
+                "speaker": "Driver",
+                "script": "好的,火车站在附近。",
+                "romanization": "Hǎo de, huǒchēzhàn zài fùjìn.",
+                "english": "Okay, the train station is nearby."
+              },
+              {
+                "speaker": "Passenger",
+                "script": "很好,谢谢!我很忙,请快一点。",
+                "romanization": "Hěn hǎo, xièxie! Wǒ hěn máng, qǐng kuài yìdiǎn.",
+                "english": "Great, thanks! I'm in a hurry, please go a bit faster."
+              },
+              {
+                "speaker": "Driver",
+                "script": "好,我们走。",
+                "romanization": "Hǎo, wǒmen zǒu.",
+                "english": "Okay, let's go."
+              },
+              {
+                "speaker": "Passenger",
+                "script": "请停在这儿,谢谢!",
+                "romanization": "Qǐng tíng zài zhèr, xièxie!",
+                "english": "Please stop here, thanks!"
+              },
+              {
+                "speaker": "Driver",
+                "script": "好的。",
+                "romanization": "Hǎo de.",
+                "english": "Okay."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "我要到火车站 means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "我要到火车站。",
+                "questionRomanization": "Wǒ yào dào huǒchēzhàn.",
+                "options": [
+                  { "text": "I want to go to the train station.", "isCorrect": true },
+                  { "text": "I am at the train station.", "isCorrect": false },
+                  { "text": "Where is the train station?", "isCorrect": false },
+                  { "text": "I don't want to go to the train station.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "师傅,请停在这儿。",
+                "audioRomanization": "Shīfu, qǐng tíng zài zhèr.",
+                "options": [
+                  { "text": "Driver, please stop here.", "isCorrect": true },
+                  { "text": "Driver, please go faster.", "isCorrect": false },
+                  { "text": "Where is the taxi?", "isCorrect": false },
+                  { "text": "Driver, where are you going?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "我要___火车站。",
+                "correctAnswer": "到",
+                "choices": ["到", "在", "是", "要"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "I want to go to the airport.",
+                "sourceLang": "en",
+                "correctAnswer": "我要到机场。",
+                "acceptableAnswers": ["我要到机场", "Wǒ yào dào jīchǎng."]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Tell the taxi driver you want to go to the train station.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "师傅,我要到火车站。",
+                "targetRomanization": "Shīfu, wǒ yào dào huǒchēzhàn.",
+                "targetEnglish": "Driver, I want to go to the train station.",
+                "tokens": ["师傅", "我", "要", "到", "火车站"],
+                "distractorTokens": ["机场", "停", "慢"],
+                "acceptablePinyin": ["shifu wo yao dao huochezhan", "shīfu wǒ yào dào huǒchēzhàn"],
+                "englishPrompt": "Tell the taxi driver you want to go to the train station.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "好的,火车站在附近。",
+                    "romanization": "Hǎo de, huǒchēzhàn zài fùjìn.",
+                    "english": "Okay, the train station is nearby.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "你要咖啡吗?",
+                    "romanization": "Nǐ yào kāfēi ma?",
+                    "english": "Do you want coffee?",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "洗手间在哪儿?",
+                    "romanization": "Xǐshǒujiān zài nǎr?",
+                    "english": "Where is the bathroom?",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a taxi driver. Ask the learner where they want to go and respond appropriately, using only 师傅/出租车/到/停/走/机场/快/慢/一点/火车站/在/哪儿/这儿/那儿/附近/请问/好的/谢谢/我/你/要."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  {
+                    "promptScript": "出租车",
+                    "promptRomanization": "chūzūchē",
+                    "answerEnglish": "taxi"
+                  },
+                  {
+                    "promptScript": "到",
+                    "promptRomanization": "dào",
+                    "answerEnglish": "to / until"
+                  },
+                  {
+                    "promptScript": "停",
+                    "promptRomanization": "tíng",
+                    "answerEnglish": "to stop"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "title": "From Here to There",
+          "situationTag": "directions",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "cong-dao-range",
+            "title": "From...To... (从...到...)",
+            "simpleExplanation": "从 (cóng) means \"from\" and 到 (dào) means \"to.\" Put them around two places to describe a route: 从这儿到银行 = \"from here to the bank.\" Add 很近 or 很远 at the end to say how far it is: 从这儿到银行很近 = \"From here to the bank is very close.\"",
+            "visualExamples": [
+              {
+                "script": "从这儿到银行很近。",
+                "romanization": "Cóng zhèr dào yínháng hěn jìn.",
+                "english": "From here to the bank is very close."
+              },
+              {
+                "script": "从这儿到火车站很远。",
+                "romanization": "Cóng zhèr dào huǒchēzhàn hěn yuǎn.",
+                "english": "From here to the train station is very far.",
+                "note": "远 (far) is the opposite of 近 (near)"
+              },
+              {
+                "script": "从火车站到银行不远。",
+                "romanization": "Cóng huǒchēzhàn dào yínháng bù yuǎn.",
+                "english": "From the train station to the bank isn't far.",
+                "note": "从...到... frames the start and end points of any route"
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "从...到... is used to express:",
+                "options": ["A route from one place to another", "A question", "A negation", "A number"],
+                "correctIndex": 0
+              },
+              {
+                "prompt": "从这儿到银行很近 means:",
+                "options": ["From here to the bank is very close.", "From here to the bank is very far.", "Where is the bank?", "The bank is here."],
+                "correctIndex": 0
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "从", "romanization": "cóng", "english": "from" },
+            { "script": "远", "romanization": "yuǎn", "english": "far" },
+            { "script": "近", "romanization": "jìn", "english": "near / close" },
+            { "script": "怎么", "romanization": "zěnme", "english": "how" },
+            { "script": "一直", "romanization": "yìzhí", "english": "straight (ahead)" },
+            { "script": "左边", "romanization": "zuǒbiān", "english": "left side" },
+            { "script": "右边", "romanization": "yòubiān", "english": "right side" },
+            { "script": "分钟", "romanization": "fēnzhōng", "english": "minute" },
+            { "script": "路", "romanization": "lù", "english": "road / way" }
+          ],
+          "dialogue": {
+            "title": "Asking How Far",
+            "situationTag": "directions",
+            "lines": [
+              {
+                "speaker": "A",
+                "script": "请问,从这儿到银行远吗?",
+                "romanization": "Qǐngwèn, cóng zhèr dào yínháng yuǎn ma?",
+                "english": "Excuse me, is it far from here to the bank?"
+              },
+              {
+                "speaker": "B",
+                "script": "不远,很近,银行在附近。",
+                "romanization": "Bù yuǎn, hěn jìn, yínháng zài fùjìn.",
+                "english": "Not far, very close. The bank is nearby."
+              },
+              {
+                "speaker": "A",
+                "script": "好,谢谢!火车站远吗?",
+                "romanization": "Hǎo, xièxie! Huǒchēzhàn yuǎn ma?",
+                "english": "Great, thanks! Is the train station far?"
+              },
+              {
+                "speaker": "B",
+                "script": "火车站很远,不在附近。",
+                "romanization": "Huǒchēzhàn hěn yuǎn, bú zài fùjìn.",
+                "english": "The train station is very far, it's not nearby."
+              },
+              {
+                "speaker": "A",
+                "script": "我怎么走?",
+                "romanization": "Wǒ zěnme zǒu?",
+                "english": "How do I get there?"
+              },
+              {
+                "speaker": "B",
+                "script": "一直走,银行在右边。",
+                "romanization": "Yìzhí zǒu, yínháng zài yòubiān.",
+                "english": "Go straight, the bank is on the right."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "从这儿到银行很近 means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "从这儿到银行很近。",
+                "questionRomanization": "Cóng zhèr dào yínháng hěn jìn.",
+                "options": [
+                  { "text": "From here to the bank is very close.", "isCorrect": true },
+                  { "text": "From here to the bank is very far.", "isCorrect": false },
+                  { "text": "The bank is not here.", "isCorrect": false },
+                  { "text": "Where is the bank?", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "一直走,银行在右边。",
+                "audioRomanization": "Yìzhí zǒu, yínháng zài yòubiān.",
+                "options": [
+                  { "text": "Go straight, the bank is on the right.", "isCorrect": true },
+                  { "text": "Go straight, the bank is on the left.", "isCorrect": false },
+                  { "text": "Turn around, the bank is far.", "isCorrect": false },
+                  { "text": "The bank is very close.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "___这儿到银行很近。",
+                "correctAnswer": "从",
+                "choices": ["从", "到", "在", "很"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "Is the train station far?",
+                "sourceLang": "en",
+                "correctAnswer": "火车站远吗?",
+                "acceptableAnswers": ["火车站远吗", "Huǒchēzhàn yuǎn ma?"]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Ask if it's far from here to the train station.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "从这儿到火车站远吗?",
+                "targetRomanization": "Cóng zhèr dào huǒchēzhàn yuǎn ma?",
+                "targetEnglish": "Is it far from here to the train station?",
+                "tokens": ["从", "这儿", "到", "火车站", "远", "吗"],
+                "distractorTokens": ["近", "右边", "分钟"],
+                "acceptablePinyin": ["cong zher dao huochezhan yuan ma", "cóng zhèr dào huǒchēzhàn yuǎn ma"],
+                "englishPrompt": "Ask if it's far from here to the train station.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "很远,不在附近。",
+                    "romanization": "Hěn yuǎn, bú zài fùjìn.",
+                    "english": "Very far, it's not nearby.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "我要一杯咖啡。",
+                    "romanization": "Wǒ yào yì bēi kāfēi.",
+                    "english": "I want a cup of coffee.",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "你叫什么名字?",
+                    "romanization": "Nǐ jiào shénme míngzi?",
+                    "english": "What's your name?",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a local giving directions. Answer the learner's questions about distance and direction, using only 从/到/远/近/怎么/一直/左边/右边/分钟/路/这儿/那儿/银行/火车站/附近/在/很/不/吗/请问/谢谢/好."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  {
+                    "promptScript": "从",
+                    "promptRomanization": "cóng",
+                    "answerEnglish": "from"
+                  },
+                  {
+                    "promptScript": "远",
+                    "promptRomanization": "yuǎn",
+                    "answerEnglish": "far"
+                  },
+                  {
+                    "promptScript": "近",
+                    "promptRomanization": "jìn",
+                    "answerEnglish": "near / close"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "title": "Can I Sit Here?",
+          "situationTag": "transport",
+          "estimatedMinutes": 18,
+          "isPublished": true,
+          "grammar": {
+            "code": "keyi-permission",
+            "title": "May I...? (可以 for Permission)",
+            "simpleExplanation": "可以 (kěyǐ) means \"can\" or \"may.\" Use it to ask permission to do something: put 可以 before the verb, and add 吗 at the end to make it a question — 我可以坐这儿吗? = \"Can I sit here?\" To say yes, just answer 可以 (You may); to say no, say 不可以 (You may not).",
+            "visualExamples": [
+              {
+                "script": "我可以坐这儿吗?",
+                "romanization": "Wǒ kěyǐ zuò zhèr ma?",
+                "english": "Can I sit here?"
+              },
+              {
+                "script": "可以。",
+                "romanization": "Kěyǐ.",
+                "english": "Sure, you may.",
+                "note": "可以 on its own is a simple 'yes, you may'"
+              },
+              {
+                "script": "我可以坐在你旁边吗?",
+                "romanization": "Wǒ kěyǐ zuò zài nǐ pángbiān ma?",
+                "english": "Can I sit next to you?",
+                "note": "可以 + verb + 吗 = asking permission to do anything"
+              }
+            ],
+            "difficulty": 2,
+            "quiz": [
+              {
+                "prompt": "可以 means:",
+                "options": ["can / may", "want", "is / are", "not"],
+                "correctIndex": 0
+              },
+              {
+                "prompt": "How do you ask \"Can I sit here?\"",
+                "options": ["我可以坐这儿吗?", "我坐可以这儿吗?", "这儿可以我坐吗?", "坐我可以这儿吗?"],
+                "correctIndex": 0
+              }
+            ]
+          },
+          "vocabulary": [
+            { "script": "可以", "romanization": "kěyǐ", "english": "can / may" },
+            { "script": "坐", "romanization": "zuò", "english": "to sit" },
+            { "script": "车", "romanization": "chē", "english": "car / vehicle (bus, train, etc.)" },
+            { "script": "座位", "romanization": "zuòwèi", "english": "seat" },
+            { "script": "车票", "romanization": "chēpiào", "english": "ticket" },
+            { "script": "下车", "romanization": "xiàchē", "english": "to get off (a vehicle)" },
+            { "script": "旁边", "romanization": "pángbiān", "english": "next to / beside" },
+            { "script": "空", "romanization": "kòng", "english": "empty / free (available)" },
+            { "script": "一下", "romanization": "yíxià", "english": "briefly / a little bit" }
+          ],
+          "dialogue": {
+            "title": "On the Bus",
+            "situationTag": "transport",
+            "lines": [
+              {
+                "speaker": "Passenger",
+                "script": "请问,我可以坐这儿吗?",
+                "romanization": "Qǐngwèn, wǒ kěyǐ zuò zhèr ma?",
+                "english": "Excuse me, can I sit here?"
+              },
+              {
+                "speaker": "Local",
+                "script": "可以,这儿是空的。",
+                "romanization": "Kěyǐ, zhèr shì kòng de.",
+                "english": "Sure, it's empty here."
+              },
+              {
+                "speaker": "Passenger",
+                "script": "谢谢!这是到火车站的车吗?",
+                "romanization": "Xièxie! Zhè shì dào huǒchēzhàn de chē ma?",
+                "english": "Thanks! Is this the vehicle to the train station?"
+              },
+              {
+                "speaker": "Local",
+                "script": "是,是到火车站的车。",
+                "romanization": "Shì, shì dào huǒchēzhàn de chē.",
+                "english": "Yes, it's the one to the train station."
+              },
+              {
+                "speaker": "Passenger",
+                "script": "好的,谢谢。我可以在这儿下车吗?",
+                "romanization": "Hǎo de, xièxie. Wǒ kěyǐ zài zhèr xiàchē ma?",
+                "english": "Okay, thanks. Can I get off here?"
+              },
+              {
+                "speaker": "Local",
+                "script": "可以,火车站在旁边。",
+                "romanization": "Kěyǐ, huǒchēzhàn zài pángbiān.",
+                "english": "Yes, the train station is right next to us."
+              }
+            ]
+          },
+          "exercises": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "order": 1,
+              "prompt": "我可以坐这儿吗? means:",
+              "supportedModes": ["DIALOGUE_CHOICE"],
+              "data": {
+                "questionScript": "我可以坐这儿吗?",
+                "questionRomanization": "Wǒ kěyǐ zuò zhèr ma?",
+                "options": [
+                  { "text": "Can I sit here?", "isCorrect": true },
+                  { "text": "I am sitting here.", "isCorrect": false },
+                  { "text": "Where can I sit?", "isCorrect": false },
+                  { "text": "This seat is empty.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "LISTENING",
+              "order": 2,
+              "prompt": "Listen and choose what you hear.",
+              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "data": {
+                "audioScript": "这儿是空的。",
+                "audioRomanization": "Zhèr shì kòng de.",
+                "options": [
+                  { "text": "It's empty here.", "isCorrect": true },
+                  { "text": "It's busy here.", "isCorrect": false },
+                  { "text": "Can I sit here?", "isCorrect": false },
+                  { "text": "The seat is taken.", "isCorrect": false }
+                ]
+              }
+            },
+            {
+              "type": "FILL_BLANK",
+              "order": 3,
+              "prompt": "Fill in the missing word.",
+              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "data": {
+                "sentenceTemplate": "我___坐这儿吗?",
+                "correctAnswer": "可以",
+                "choices": ["可以", "是", "要", "很"]
+              }
+            },
+            {
+              "type": "TRANSLATION",
+              "order": 4,
+              "prompt": "Translate into Mandarin.",
+              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "data": {
+                "sourceText": "Can I get off here?",
+                "sourceLang": "en",
+                "correctAnswer": "我可以在这儿下车吗?",
+                "acceptableAnswers": ["我可以在这儿下车吗", "Wǒ kěyǐ zài zhèr xiàchē ma?"]
+              }
+            },
+            {
+              "type": "SPEAKING",
+              "order": 5,
+              "prompt": "Ask politely if you can sit next to them.",
+              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "data": {
+                "targetScript": "我可以坐在你旁边吗?",
+                "targetRomanization": "Wǒ kěyǐ zuò zài nǐ pángbiān ma?",
+                "targetEnglish": "Can I sit next to you?",
+                "tokens": ["我", "可以", "坐", "在", "你", "旁边", "吗"],
+                "distractorTokens": ["座位", "车票", "不"],
+                "acceptablePinyin": ["wo keyi zuo zai ni pangbian ma", "wǒ kěyǐ zuò zài nǐ pángbiān ma"],
+                "englishPrompt": "Ask politely if you can sit next to them.",
+                "dialogueChoiceOptions": [
+                  {
+                    "script": "可以,这儿是空的。",
+                    "romanization": "Kěyǐ, zhèr shì kòng de.",
+                    "english": "Sure, it's empty here.",
+                    "isCorrect": true
+                  },
+                  {
+                    "script": "我要一杯茶。",
+                    "romanization": "Wǒ yào yì bēi chá.",
+                    "english": "I want a cup of tea.",
+                    "isCorrect": false
+                  },
+                  {
+                    "script": "银行在哪儿?",
+                    "romanization": "Yínháng zài nǎr?",
+                    "english": "Where is the bank?",
+                    "isCorrect": false
+                  }
+                ],
+                "aiScenarioPrompt": "Play a passenger already seated on a bus. Respond to the learner's requests to sit down or get off, using only 可以/坐/车/座位/车票/下车/旁边/空/一下/这儿/那儿/是/的/在/你/我/吗/谢谢/好的/请问."
+              }
+            },
+            {
+              "type": "RAPID_REVIEW",
+              "order": 6,
+              "prompt": "Quick review.",
+              "supportedModes": ["SHADOW_LISTEN"],
+              "data": {
+                "items": [
+                  {
+                    "promptScript": "可以",
+                    "promptRomanization": "kěyǐ",
+                    "answerEnglish": "can / may"
+                  },
+                  {
+                    "promptScript": "坐",
+                    "promptRomanization": "zuò",
+                    "answerEnglish": "to sit"
+                  },
+                  {
+                    "promptScript": "下车",
+                    "promptRomanization": "xiàchē",
+                    "answerEnglish": "to get off (a vehicle)"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

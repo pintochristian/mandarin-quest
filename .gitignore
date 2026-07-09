@@ -39,3 +39,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# database
+/prisma/*.db
+/prisma/*.db-journal
+/dev.db
+/dev.db-journal
+*.db
+*.db-journal
+
+# generated from prisma/schema.prisma by scripts/generate-postgres-schema.mjs
+/prisma/schema.postgres.prisma
+
+# testing
+/playwright-report
+/test-results
+
+# generated
+/lib/generated
+
+/lib/generated/prisma

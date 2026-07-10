@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { ExerciseRenderer } from "@/components/lesson/exercises/ExerciseRenderer";
 import type { ExerciseRecord } from "@/lib/types/lesson";
 
@@ -15,28 +16,36 @@ export function ExercisesStep({
   const [index, setIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [answeredThisRound, setAnsweredThisRound] = useState(false);
+  const [lastAnswerCorrect, setLastAnswerCorrect] = useState<boolean | null>(null);
 
   const exercise = exercises[index];
   const progressPct = Math.round((index / exercises.length) * 100);
 
+  function advance(correct: boolean) {
+    if (index + 1 < exercises.length) {
+      setIndex((i) => i + 1);
+      setAnsweredThisRound(false);
+      setLastAnswerCorrect(null);
+    } else {
+      const finalCorrect = correct ? correctCount + 1 : correctCount;
+      const score = Math.round((finalCorrect / exercises.length) * 100);
+      onComplete(score);
+    }
+  }
+
   function handleAnswered(correct: boolean) {
     if (answeredThisRound) return;
     setAnsweredThisRound(true);
+    setLastAnswerCorrect(correct);
     if (correct) setCorrectCount((c) => c + 1);
 
-    setTimeout(
-      () => {
-        if (index + 1 < exercises.length) {
-          setIndex((i) => i + 1);
-          setAnsweredThisRound(false);
-        } else {
-          const finalCorrect = correct ? correctCount + 1 : correctCount;
-          const score = Math.round((finalCorrect / exercises.length) * 100);
-          onComplete(score);
-        }
-      },
-      correct ? 500 : 1400,
-    );
+    // A mistake stays on screen — the learner reads the explanation and
+    // taps Continue whenever they're ready, instead of getting swept to
+    // the next exercise. A correct answer still advances quickly since
+    // there's nothing to read.
+    if (correct) {
+      setTimeout(() => advance(true), 500);
+    }
   }
 
   return (
@@ -53,6 +62,12 @@ export function ExercisesStep({
         exercise={exercise}
         onAnswered={handleAnswered}
       />
+
+      {answeredThisRound && lastAnswerCorrect === false && (
+        <Button size="lg" className="w-full rounded-full" onClick={() => advance(false)}>
+          Continue
+        </Button>
+      )}
     </div>
   );
 }

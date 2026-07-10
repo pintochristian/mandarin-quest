@@ -44,7 +44,14 @@ export function TranslationExercise({
     <div className="space-y-4">
       <p className="text-center text-sm font-medium text-muted-foreground">{prompt}</p>
       <Card className="rounded-2xl p-6 text-center">
-        <p className="text-lg">{data.sourceText}</p>
+        <p className={cn("text-lg", data.sourceLang === "zh" && "font-zh")}>
+          {data.sourceText}
+        </p>
+        {data.sourceTextRomanization && (
+          <p className="mt-1 text-sm text-muted-foreground">
+            {data.sourceTextRomanization}
+          </p>
+        )}
       </Card>
       <Input
         value={value}
@@ -59,6 +66,9 @@ export function TranslationExercise({
       {result === "incorrect" && (
         <p className="text-center text-sm text-destructive">
           Correct answer: <span className="font-zh">{data.correctAnswer}</span>
+          {data.correctAnswerRomanization && (
+            <span className="block text-xs">{data.correctAnswerRomanization}</span>
+          )}
         </p>
       )}
       {result === null ? (

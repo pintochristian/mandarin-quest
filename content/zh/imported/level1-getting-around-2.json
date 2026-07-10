@@ -45,26 +45,72 @@
             "quiz": [
               {
                 "prompt": "In 我要到火车站, what does 到 mark?",
-                "options": ["The destination", "The subject", "A question", "A negation"],
+                "options": [
+                  "The destination",
+                  "The subject",
+                  "A question",
+                  "A negation"
+                ],
                 "correctIndex": 0
               },
               {
                 "prompt": "How do you say \"I want to go to the airport\"?",
-                "options": ["我要到机场。", "我要机场到。", "到我要机场。", "机场要到我。"],
+                "options": [
+                  "我要到机场。",
+                  "我要机场到。",
+                  "到我要机场。",
+                  "机场要到我。"
+                ],
                 "correctIndex": 0
               }
             ]
           },
           "vocabulary": [
-            { "script": "出租车", "romanization": "chūzūchē", "english": "taxi" },
-            { "script": "师傅", "romanization": "shīfu", "english": "sir / master (polite address for a driver)" },
-            { "script": "到", "romanization": "dào", "english": "to / until (arrive at)" },
-            { "script": "停", "romanization": "tíng", "english": "to stop" },
-            { "script": "走", "romanization": "zǒu", "english": "to go / to drive off" },
-            { "script": "机场", "romanization": "jīchǎng", "english": "airport" },
-            { "script": "快", "romanization": "kuài", "english": "fast / quick" },
-            { "script": "一点", "romanization": "yìdiǎn", "english": "a little / a bit" },
-            { "script": "慢", "romanization": "màn", "english": "slow" }
+            {
+              "script": "出租车",
+              "romanization": "chūzūchē",
+              "english": "taxi"
+            },
+            {
+              "script": "师傅",
+              "romanization": "shīfu",
+              "english": "sir / master (polite address for a driver)"
+            },
+            {
+              "script": "到",
+              "romanization": "dào",
+              "english": "to / until (arrive at)"
+            },
+            {
+              "script": "停",
+              "romanization": "tíng",
+              "english": "to stop"
+            },
+            {
+              "script": "走",
+              "romanization": "zǒu",
+              "english": "to go / to drive off"
+            },
+            {
+              "script": "机场",
+              "romanization": "jīchǎng",
+              "english": "airport"
+            },
+            {
+              "script": "快",
+              "romanization": "kuài",
+              "english": "fast / quick"
+            },
+            {
+              "script": "一点",
+              "romanization": "yìdiǎn",
+              "english": "a little / a bit"
+            },
+            {
+              "script": "慢",
+              "romanization": "màn",
+              "english": "slow"
+            }
           ],
           "dialogue": {
             "title": "Hailing a Taxi",
@@ -113,15 +159,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "我要到火车站 means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "我要到火车站。",
                 "questionRomanization": "Wǒ yào dào huǒchēzhàn.",
                 "options": [
-                  { "text": "I want to go to the train station.", "isCorrect": true },
-                  { "text": "I am at the train station.", "isCorrect": false },
-                  { "text": "Where is the train station?", "isCorrect": false },
-                  { "text": "I don't want to go to the train station.", "isCorrect": false }
+                  {
+                    "text": "I want to go to the train station.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "I am at the train station.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Where is the train station?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I don't want to go to the train station.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -129,15 +189,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "师傅,请停在这儿。",
                 "audioRomanization": "Shīfu, qǐng tíng zài zhèr.",
                 "options": [
-                  { "text": "Driver, please stop here.", "isCorrect": true },
-                  { "text": "Driver, please go faster.", "isCorrect": false },
-                  { "text": "Where is the taxi?", "isCorrect": false },
-                  { "text": "Driver, where are you going?", "isCorrect": false }
+                  {
+                    "text": "Driver, please stop here.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Driver, please go faster.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Where is the taxi?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Driver, where are you going?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -145,37 +220,87 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "我要___火车站。",
                 "correctAnswer": "到",
-                "choices": ["到", "在", "是", "要"]
+                "choices": [
+                  {
+                    "text": "到",
+                    "romanization": "dào"
+                  },
+                  {
+                    "text": "在",
+                    "romanization": "zài"
+                  },
+                  {
+                    "text": "是",
+                    "romanization": "shì"
+                  },
+                  {
+                    "text": "要",
+                    "romanization": "yào"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Wǒ yào ___ huǒchēzhàn."
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "I want to go to the airport.",
                 "sourceLang": "en",
                 "correctAnswer": "我要到机场。",
-                "acceptableAnswers": ["我要到机场", "Wǒ yào dào jīchǎng."]
+                "acceptableAnswers": [
+                  "我要到机场",
+                  "Wǒ yào dào jīchǎng."
+                ],
+                "correctAnswerRomanization": "Wǒ yào dào jīchǎng."
               }
             },
             {
               "type": "SPEAKING",
               "order": 5,
               "prompt": "Tell the taxi driver you want to go to the train station.",
-              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "supportedModes": [
+                "MIC_SPEAKING",
+                "TYPE_PINYIN",
+                "TYPE_ENGLISH_GUIDED",
+                "WORD_TILE_SELECT",
+                "SENTENCE_REORDER",
+                "DIALOGUE_CHOICE",
+                "SHADOW_LISTEN",
+                "AI_TEXT_CHAT"
+              ],
               "data": {
                 "targetScript": "师傅,我要到火车站。",
                 "targetRomanization": "Shīfu, wǒ yào dào huǒchēzhàn.",
                 "targetEnglish": "Driver, I want to go to the train station.",
-                "tokens": ["师傅", "我", "要", "到", "火车站"],
-                "distractorTokens": ["机场", "停", "慢"],
-                "acceptablePinyin": ["shifu wo yao dao huochezhan", "shīfu wǒ yào dào huǒchēzhàn"],
+                "tokens": [
+                  "师傅",
+                  "我",
+                  "要",
+                  "到",
+                  "火车站"
+                ],
+                "distractorTokens": [
+                  "机场",
+                  "停",
+                  "慢"
+                ],
+                "acceptablePinyin": [
+                  "shifu wo yao dao huochezhan",
+                  "shīfu wǒ yào dào huǒchēzhàn"
+                ],
                 "englishPrompt": "Tell the taxi driver you want to go to the train station.",
                 "dialogueChoiceOptions": [
                   {
@@ -204,7 +329,9 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
                   {
@@ -260,26 +387,72 @@
             "quiz": [
               {
                 "prompt": "从...到... is used to express:",
-                "options": ["A route from one place to another", "A question", "A negation", "A number"],
+                "options": [
+                  "A route from one place to another",
+                  "A question",
+                  "A negation",
+                  "A number"
+                ],
                 "correctIndex": 0
               },
               {
                 "prompt": "从这儿到银行很近 means:",
-                "options": ["From here to the bank is very close.", "From here to the bank is very far.", "Where is the bank?", "The bank is here."],
+                "options": [
+                  "From here to the bank is very close.",
+                  "From here to the bank is very far.",
+                  "Where is the bank?",
+                  "The bank is here."
+                ],
                 "correctIndex": 0
               }
             ]
           },
           "vocabulary": [
-            { "script": "从", "romanization": "cóng", "english": "from" },
-            { "script": "远", "romanization": "yuǎn", "english": "far" },
-            { "script": "近", "romanization": "jìn", "english": "near / close" },
-            { "script": "怎么", "romanization": "zěnme", "english": "how" },
-            { "script": "一直", "romanization": "yìzhí", "english": "straight (ahead)" },
-            { "script": "左边", "romanization": "zuǒbiān", "english": "left side" },
-            { "script": "右边", "romanization": "yòubiān", "english": "right side" },
-            { "script": "分钟", "romanization": "fēnzhōng", "english": "minute" },
-            { "script": "路", "romanization": "lù", "english": "road / way" }
+            {
+              "script": "从",
+              "romanization": "cóng",
+              "english": "from"
+            },
+            {
+              "script": "远",
+              "romanization": "yuǎn",
+              "english": "far"
+            },
+            {
+              "script": "近",
+              "romanization": "jìn",
+              "english": "near / close"
+            },
+            {
+              "script": "怎么",
+              "romanization": "zěnme",
+              "english": "how"
+            },
+            {
+              "script": "一直",
+              "romanization": "yìzhí",
+              "english": "straight (ahead)"
+            },
+            {
+              "script": "左边",
+              "romanization": "zuǒbiān",
+              "english": "left side"
+            },
+            {
+              "script": "右边",
+              "romanization": "yòubiān",
+              "english": "right side"
+            },
+            {
+              "script": "分钟",
+              "romanization": "fēnzhōng",
+              "english": "minute"
+            },
+            {
+              "script": "路",
+              "romanization": "lù",
+              "english": "road / way"
+            }
           ],
           "dialogue": {
             "title": "Asking How Far",
@@ -328,15 +501,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "从这儿到银行很近 means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "从这儿到银行很近。",
                 "questionRomanization": "Cóng zhèr dào yínháng hěn jìn.",
                 "options": [
-                  { "text": "From here to the bank is very close.", "isCorrect": true },
-                  { "text": "From here to the bank is very far.", "isCorrect": false },
-                  { "text": "The bank is not here.", "isCorrect": false },
-                  { "text": "Where is the bank?", "isCorrect": false }
+                  {
+                    "text": "From here to the bank is very close.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "From here to the bank is very far.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The bank is not here.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Where is the bank?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -344,15 +531,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "一直走,银行在右边。",
                 "audioRomanization": "Yìzhí zǒu, yínháng zài yòubiān.",
                 "options": [
-                  { "text": "Go straight, the bank is on the right.", "isCorrect": true },
-                  { "text": "Go straight, the bank is on the left.", "isCorrect": false },
-                  { "text": "Turn around, the bank is far.", "isCorrect": false },
-                  { "text": "The bank is very close.", "isCorrect": false }
+                  {
+                    "text": "Go straight, the bank is on the right.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Go straight, the bank is on the left.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Turn around, the bank is far.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The bank is very close.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -360,37 +562,88 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "___这儿到银行很近。",
                 "correctAnswer": "从",
-                "choices": ["从", "到", "在", "很"]
+                "choices": [
+                  {
+                    "text": "从",
+                    "romanization": "cóng"
+                  },
+                  {
+                    "text": "到",
+                    "romanization": "dào"
+                  },
+                  {
+                    "text": "在",
+                    "romanization": "zài"
+                  },
+                  {
+                    "text": "很",
+                    "romanization": "hěn"
+                  }
+                ],
+                "sentenceTemplateRomanization": "___ zhèr dào yínháng hěn jìn."
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "Is the train station far?",
                 "sourceLang": "en",
                 "correctAnswer": "火车站远吗?",
-                "acceptableAnswers": ["火车站远吗", "Huǒchēzhàn yuǎn ma?"]
+                "acceptableAnswers": [
+                  "火车站远吗",
+                  "Huǒchēzhàn yuǎn ma?"
+                ],
+                "correctAnswerRomanization": "Huǒchēzhàn yuǎn ma?"
               }
             },
             {
               "type": "SPEAKING",
               "order": 5,
               "prompt": "Ask if it's far from here to the train station.",
-              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "supportedModes": [
+                "MIC_SPEAKING",
+                "TYPE_PINYIN",
+                "TYPE_ENGLISH_GUIDED",
+                "WORD_TILE_SELECT",
+                "SENTENCE_REORDER",
+                "DIALOGUE_CHOICE",
+                "SHADOW_LISTEN",
+                "AI_TEXT_CHAT"
+              ],
               "data": {
                 "targetScript": "从这儿到火车站远吗?",
                 "targetRomanization": "Cóng zhèr dào huǒchēzhàn yuǎn ma?",
                 "targetEnglish": "Is it far from here to the train station?",
-                "tokens": ["从", "这儿", "到", "火车站", "远", "吗"],
-                "distractorTokens": ["近", "右边", "分钟"],
-                "acceptablePinyin": ["cong zher dao huochezhan yuan ma", "cóng zhèr dào huǒchēzhàn yuǎn ma"],
+                "tokens": [
+                  "从",
+                  "这儿",
+                  "到",
+                  "火车站",
+                  "远",
+                  "吗"
+                ],
+                "distractorTokens": [
+                  "近",
+                  "右边",
+                  "分钟"
+                ],
+                "acceptablePinyin": [
+                  "cong zher dao huochezhan yuan ma",
+                  "cóng zhèr dào huǒchēzhàn yuǎn ma"
+                ],
                 "englishPrompt": "Ask if it's far from here to the train station.",
                 "dialogueChoiceOptions": [
                   {
@@ -419,7 +672,9 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
                   {
@@ -475,26 +730,72 @@
             "quiz": [
               {
                 "prompt": "可以 means:",
-                "options": ["can / may", "want", "is / are", "not"],
+                "options": [
+                  "can / may",
+                  "want",
+                  "is / are",
+                  "not"
+                ],
                 "correctIndex": 0
               },
               {
                 "prompt": "How do you ask \"Can I sit here?\"",
-                "options": ["我可以坐这儿吗?", "我坐可以这儿吗?", "这儿可以我坐吗?", "坐我可以这儿吗?"],
+                "options": [
+                  "我可以坐这儿吗?",
+                  "我坐可以这儿吗?",
+                  "这儿可以我坐吗?",
+                  "坐我可以这儿吗?"
+                ],
                 "correctIndex": 0
               }
             ]
           },
           "vocabulary": [
-            { "script": "可以", "romanization": "kěyǐ", "english": "can / may" },
-            { "script": "坐", "romanization": "zuò", "english": "to sit" },
-            { "script": "车", "romanization": "chē", "english": "car / vehicle (bus, train, etc.)" },
-            { "script": "座位", "romanization": "zuòwèi", "english": "seat" },
-            { "script": "车票", "romanization": "chēpiào", "english": "ticket" },
-            { "script": "下车", "romanization": "xiàchē", "english": "to get off (a vehicle)" },
-            { "script": "旁边", "romanization": "pángbiān", "english": "next to / beside" },
-            { "script": "空", "romanization": "kòng", "english": "empty / free (available)" },
-            { "script": "一下", "romanization": "yíxià", "english": "briefly / a little bit" }
+            {
+              "script": "可以",
+              "romanization": "kěyǐ",
+              "english": "can / may"
+            },
+            {
+              "script": "坐",
+              "romanization": "zuò",
+              "english": "to sit"
+            },
+            {
+              "script": "车",
+              "romanization": "chē",
+              "english": "car / vehicle (bus, train, etc.)"
+            },
+            {
+              "script": "座位",
+              "romanization": "zuòwèi",
+              "english": "seat"
+            },
+            {
+              "script": "车票",
+              "romanization": "chēpiào",
+              "english": "ticket"
+            },
+            {
+              "script": "下车",
+              "romanization": "xiàchē",
+              "english": "to get off (a vehicle)"
+            },
+            {
+              "script": "旁边",
+              "romanization": "pángbiān",
+              "english": "next to / beside"
+            },
+            {
+              "script": "空",
+              "romanization": "kòng",
+              "english": "empty / free (available)"
+            },
+            {
+              "script": "一下",
+              "romanization": "yíxià",
+              "english": "briefly / a little bit"
+            }
           ],
           "dialogue": {
             "title": "On the Bus",
@@ -543,15 +844,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "我可以坐这儿吗? means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "我可以坐这儿吗?",
                 "questionRomanization": "Wǒ kěyǐ zuò zhèr ma?",
                 "options": [
-                  { "text": "Can I sit here?", "isCorrect": true },
-                  { "text": "I am sitting here.", "isCorrect": false },
-                  { "text": "Where can I sit?", "isCorrect": false },
-                  { "text": "This seat is empty.", "isCorrect": false }
+                  {
+                    "text": "Can I sit here?",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "I am sitting here.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Where can I sit?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "This seat is empty.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -559,15 +874,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "这儿是空的。",
                 "audioRomanization": "Zhèr shì kòng de.",
                 "options": [
-                  { "text": "It's empty here.", "isCorrect": true },
-                  { "text": "It's busy here.", "isCorrect": false },
-                  { "text": "Can I sit here?", "isCorrect": false },
-                  { "text": "The seat is taken.", "isCorrect": false }
+                  {
+                    "text": "It's empty here.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It's busy here.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Can I sit here?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "The seat is taken.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -575,37 +905,89 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "我___坐这儿吗?",
                 "correctAnswer": "可以",
-                "choices": ["可以", "是", "要", "很"]
+                "choices": [
+                  {
+                    "text": "可以",
+                    "romanization": "kěyǐ"
+                  },
+                  {
+                    "text": "是",
+                    "romanization": "shì"
+                  },
+                  {
+                    "text": "要",
+                    "romanization": "yào"
+                  },
+                  {
+                    "text": "很",
+                    "romanization": "hěn"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Wǒ ___ zuò zhèr ma?"
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "Can I get off here?",
                 "sourceLang": "en",
                 "correctAnswer": "我可以在这儿下车吗?",
-                "acceptableAnswers": ["我可以在这儿下车吗", "Wǒ kěyǐ zài zhèr xiàchē ma?"]
+                "acceptableAnswers": [
+                  "我可以在这儿下车吗",
+                  "Wǒ kěyǐ zài zhèr xiàchē ma?"
+                ],
+                "correctAnswerRomanization": "Wǒ kěyǐ zài zhèr xiàchē ma?"
               }
             },
             {
               "type": "SPEAKING",
               "order": 5,
               "prompt": "Ask politely if you can sit next to them.",
-              "supportedModes": ["MIC_SPEAKING", "TYPE_PINYIN", "TYPE_ENGLISH_GUIDED", "WORD_TILE_SELECT", "SENTENCE_REORDER", "DIALOGUE_CHOICE", "SHADOW_LISTEN", "AI_TEXT_CHAT"],
+              "supportedModes": [
+                "MIC_SPEAKING",
+                "TYPE_PINYIN",
+                "TYPE_ENGLISH_GUIDED",
+                "WORD_TILE_SELECT",
+                "SENTENCE_REORDER",
+                "DIALOGUE_CHOICE",
+                "SHADOW_LISTEN",
+                "AI_TEXT_CHAT"
+              ],
               "data": {
                 "targetScript": "我可以坐在你旁边吗?",
                 "targetRomanization": "Wǒ kěyǐ zuò zài nǐ pángbiān ma?",
                 "targetEnglish": "Can I sit next to you?",
-                "tokens": ["我", "可以", "坐", "在", "你", "旁边", "吗"],
-                "distractorTokens": ["座位", "车票", "不"],
-                "acceptablePinyin": ["wo keyi zuo zai ni pangbian ma", "wǒ kěyǐ zuò zài nǐ pángbiān ma"],
+                "tokens": [
+                  "我",
+                  "可以",
+                  "坐",
+                  "在",
+                  "你",
+                  "旁边",
+                  "吗"
+                ],
+                "distractorTokens": [
+                  "座位",
+                  "车票",
+                  "不"
+                ],
+                "acceptablePinyin": [
+                  "wo keyi zuo zai ni pangbian ma",
+                  "wǒ kěyǐ zuò zài nǐ pángbiān ma"
+                ],
                 "englishPrompt": "Ask politely if you can sit next to them.",
                 "dialogueChoiceOptions": [
                   {
@@ -634,7 +1016,9 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
                   {

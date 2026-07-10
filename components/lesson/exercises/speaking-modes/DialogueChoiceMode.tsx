@@ -47,7 +47,7 @@ export function DialogueChoiceMode({
                 onAnswered(opt.isCorrect);
               }}
               className={cn(
-                "flex w-full items-baseline gap-2 rounded-2xl border px-4 py-3 text-left transition-colors",
+                "flex w-full items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-colors",
                 showState &&
                   opt.isCorrect &&
                   "border-emerald-500 bg-emerald-50 dark:bg-emerald-950",
@@ -58,7 +58,10 @@ export function DialogueChoiceMode({
                 !showState && "border-border hover:border-primary/50",
               )}
             >
-              <span className="font-zh text-lg">{opt.script}</span>
+              <span className="flex flex-col">
+                <span className="font-zh text-lg">{opt.script}</span>
+                <span className="text-xs text-muted-foreground">{opt.romanization}</span>
+              </span>
               <span className="text-sm text-muted-foreground">{opt.english}</span>
             </button>
           );

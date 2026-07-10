@@ -44,27 +44,77 @@
             "quiz": [
               {
                 "prompt": "What does 点 mean in a time expression?",
-                "options": ["o'clock", "minute", "half", "now"],
+                "options": [
+                  "o'clock",
+                  "minute",
+                  "half",
+                  "now"
+                ],
                 "correctIndex": 0
               },
               {
                 "prompt": "How do you say '7:30'?",
-                "options": ["七点半", "半点七", "七半点", "点七半"],
+                "options": [
+                  "七点半",
+                  "半点七",
+                  "七半点",
+                  "点七半"
+                ],
                 "correctIndex": 0
               }
             ]
           },
           "vocabulary": [
-            { "script": "点", "romanization": "diǎn", "english": "o'clock (hour marker)" },
-            { "script": "半", "romanization": "bàn", "english": "half" },
-            { "script": "现在", "romanization": "xiànzài", "english": "now" },
-            { "script": "几点", "romanization": "jǐ diǎn", "english": "what time?" },
-            { "script": "早上", "romanization": "zǎoshang", "english": "morning" },
-            { "script": "晚上", "romanization": "wǎnshang", "english": "evening / night" },
-            { "script": "三", "romanization": "sān", "english": "three" },
-            { "script": "七", "romanization": "qī", "english": "seven" },
-            { "script": "八", "romanization": "bā", "english": "eight" },
-            { "script": "九", "romanization": "jiǔ", "english": "nine" }
+            {
+              "script": "点",
+              "romanization": "diǎn",
+              "english": "o'clock (hour marker)"
+            },
+            {
+              "script": "半",
+              "romanization": "bàn",
+              "english": "half"
+            },
+            {
+              "script": "现在",
+              "romanization": "xiànzài",
+              "english": "now"
+            },
+            {
+              "script": "几点",
+              "romanization": "jǐ diǎn",
+              "english": "what time?"
+            },
+            {
+              "script": "早上",
+              "romanization": "zǎoshang",
+              "english": "morning"
+            },
+            {
+              "script": "晚上",
+              "romanization": "wǎnshang",
+              "english": "evening / night"
+            },
+            {
+              "script": "三",
+              "romanization": "sān",
+              "english": "three"
+            },
+            {
+              "script": "七",
+              "romanization": "qī",
+              "english": "seven"
+            },
+            {
+              "script": "八",
+              "romanization": "bā",
+              "english": "eight"
+            },
+            {
+              "script": "九",
+              "romanization": "jiǔ",
+              "english": "nine"
+            }
           ],
           "dialogue": {
             "title": "Asking the Time",
@@ -107,15 +157,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "现在几点? means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "现在几点?",
                 "questionRomanization": "Xiànzài jǐ diǎn?",
                 "options": [
-                  { "text": "What time is it now?", "isCorrect": true },
-                  { "text": "Where is it now?", "isCorrect": false },
-                  { "text": "What do you want?", "isCorrect": false },
-                  { "text": "Are you busy?", "isCorrect": false }
+                  {
+                    "text": "What time is it now?",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Where is it now?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "What do you want?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Are you busy?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -123,15 +187,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "现在晚上七点。",
                 "audioRomanization": "Xiànzài wǎnshang qī diǎn.",
                 "options": [
-                  { "text": "It's 7 in the evening now.", "isCorrect": true },
-                  { "text": "It's 7 in the morning now.", "isCorrect": false },
-                  { "text": "It's 7:30 now.", "isCorrect": false },
-                  { "text": "What time is it?", "isCorrect": false }
+                  {
+                    "text": "It's 7 in the evening now.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "It's 7 in the morning now.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "It's 7:30 now.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "What time is it?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -139,23 +218,51 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "现在早上九___。",
                 "correctAnswer": "点",
-                "choices": ["点", "半", "早上", "晚上"]
+                "choices": [
+                  {
+                    "text": "点",
+                    "romanization": "diǎn"
+                  },
+                  {
+                    "text": "半",
+                    "romanization": "bàn"
+                  },
+                  {
+                    "text": "早上",
+                    "romanization": "zǎoshang"
+                  },
+                  {
+                    "text": "晚上",
+                    "romanization": "wǎnshang"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Xiànzài zǎoshang jiǔ ___."
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "It's 8 o'clock in the morning.",
                 "sourceLang": "en",
                 "correctAnswer": "现在早上八点。",
-                "acceptableAnswers": ["现在早上八点", "Xiànzài zǎoshang bā diǎn."]
+                "acceptableAnswers": [
+                  "现在早上八点",
+                  "Xiànzài zǎoshang bā diǎn."
+                ],
+                "correctAnswerRomanization": "Xiànzài zǎoshang bā diǎn."
               }
             },
             {
@@ -176,9 +283,20 @@
                 "targetScript": "请问,现在几点?",
                 "targetRomanization": "Qǐngwèn, xiànzài jǐ diǎn?",
                 "targetEnglish": "Excuse me, what time is it now?",
-                "tokens": ["请问", "现在", "几点"],
-                "distractorTokens": ["半", "忙", "茶"],
-                "acceptablePinyin": ["qingwen xianzai ji dian", "qǐngwèn xiànzài jǐ diǎn"],
+                "tokens": [
+                  "请问",
+                  "现在",
+                  "几点"
+                ],
+                "distractorTokens": [
+                  "半",
+                  "忙",
+                  "茶"
+                ],
+                "acceptablePinyin": [
+                  "qingwen xianzai ji dian",
+                  "qǐngwèn xiànzài jǐ diǎn"
+                ],
                 "englishPrompt": "Politely ask what time it is right now.",
                 "dialogueChoiceOptions": [
                   {
@@ -207,12 +325,26 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
-                  { "promptScript": "点", "promptRomanization": "diǎn", "answerEnglish": "o'clock" },
-                  { "promptScript": "现在", "promptRomanization": "xiànzài", "answerEnglish": "now" },
-                  { "promptScript": "早上", "promptRomanization": "zǎoshang", "answerEnglish": "morning" }
+                  {
+                    "promptScript": "点",
+                    "promptRomanization": "diǎn",
+                    "answerEnglish": "o'clock"
+                  },
+                  {
+                    "promptScript": "现在",
+                    "promptRomanization": "xiànzài",
+                    "answerEnglish": "now"
+                  },
+                  {
+                    "promptScript": "早上",
+                    "promptRomanization": "zǎoshang",
+                    "answerEnglish": "morning"
+                  }
                 ]
               }
             }
@@ -260,21 +392,62 @@
               },
               {
                 "prompt": "How do you ask 'What are you doing?'",
-                "options": ["你在做什么?", "你做在什么?", "你什么在做?", "在你做什么?"],
+                "options": [
+                  "你在做什么?",
+                  "你做在什么?",
+                  "你什么在做?",
+                  "在你做什么?"
+                ],
                 "correctIndex": 0
               }
             ]
           },
           "vocabulary": [
-            { "script": "吃饭", "romanization": "chī fàn", "english": "to eat / have a meal" },
-            { "script": "睡觉", "romanization": "shuìjiào", "english": "to sleep" },
-            { "script": "工作", "romanization": "gōngzuò", "english": "to work / job" },
-            { "script": "看书", "romanization": "kàn shū", "english": "to read (a book)" },
-            { "script": "做", "romanization": "zuò", "english": "to do" },
-            { "script": "家", "romanization": "jiā", "english": "home" },
-            { "script": "喂", "romanization": "wéi", "english": "hello (answering the phone)" },
-            { "script": "电话", "romanization": "diànhuà", "english": "telephone / phone call" },
-            { "script": "呢", "romanization": "ne", "english": "and...? (follow-up question particle)" }
+            {
+              "script": "吃饭",
+              "romanization": "chī fàn",
+              "english": "to eat / have a meal"
+            },
+            {
+              "script": "睡觉",
+              "romanization": "shuìjiào",
+              "english": "to sleep"
+            },
+            {
+              "script": "工作",
+              "romanization": "gōngzuò",
+              "english": "to work / job"
+            },
+            {
+              "script": "看书",
+              "romanization": "kàn shū",
+              "english": "to read (a book)"
+            },
+            {
+              "script": "做",
+              "romanization": "zuò",
+              "english": "to do"
+            },
+            {
+              "script": "家",
+              "romanization": "jiā",
+              "english": "home"
+            },
+            {
+              "script": "喂",
+              "romanization": "wéi",
+              "english": "hello (answering the phone)"
+            },
+            {
+              "script": "电话",
+              "romanization": "diànhuà",
+              "english": "telephone / phone call"
+            },
+            {
+              "script": "呢",
+              "romanization": "ne",
+              "english": "and...? (follow-up question particle)"
+            }
           ],
           "dialogue": {
             "title": "On the Phone",
@@ -323,15 +496,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "你在做什么? means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "你在做什么?",
                 "questionRomanization": "Nǐ zài zuò shénme?",
                 "options": [
-                  { "text": "What are you doing?", "isCorrect": true },
-                  { "text": "Where are you?", "isCorrect": false },
-                  { "text": "What do you want?", "isCorrect": false },
-                  { "text": "Are you busy?", "isCorrect": false }
+                  {
+                    "text": "What are you doing?",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Where are you?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "What do you want?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Are you busy?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -339,15 +526,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "我在吃饭。",
                 "audioRomanization": "Wǒ zài chī fàn.",
                 "options": [
-                  { "text": "I'm eating.", "isCorrect": true },
-                  { "text": "I want to eat.", "isCorrect": false },
-                  { "text": "I already ate.", "isCorrect": false },
-                  { "text": "Are you eating?", "isCorrect": false }
+                  {
+                    "text": "I'm eating.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "I want to eat.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I already ate.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Are you eating?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -355,23 +557,51 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "他___看书。",
                 "correctAnswer": "在",
-                "choices": ["在", "是", "要", "的"]
+                "choices": [
+                  {
+                    "text": "在",
+                    "romanization": "zài"
+                  },
+                  {
+                    "text": "是",
+                    "romanization": "shì"
+                  },
+                  {
+                    "text": "要",
+                    "romanization": "yào"
+                  },
+                  {
+                    "text": "的",
+                    "romanization": "de"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Tā ___ kànshū."
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "I'm working.",
                 "sourceLang": "en",
                 "correctAnswer": "我在工作。",
-                "acceptableAnswers": ["我在工作", "Wǒ zài gōngzuò."]
+                "acceptableAnswers": [
+                  "我在工作",
+                  "Wǒ zài gōngzuò."
+                ],
+                "correctAnswerRomanization": "Wǒ zài gōngzuò."
               }
             },
             {
@@ -392,9 +622,21 @@
                 "targetScript": "我在家。我在看书。",
                 "targetRomanization": "Wǒ zài jiā. Wǒ zài kàn shū.",
                 "targetEnglish": "I'm at home. I'm reading.",
-                "tokens": ["我", "在", "家", "看书"],
-                "distractorTokens": ["工作", "睡觉", "吃饭"],
-                "acceptablePinyin": ["wo zai jia wo zai kan shu", "wǒ zài jiā wǒ zài kàn shū"],
+                "tokens": [
+                  "我",
+                  "在",
+                  "家",
+                  "看书"
+                ],
+                "distractorTokens": [
+                  "工作",
+                  "睡觉",
+                  "吃饭"
+                ],
+                "acceptablePinyin": [
+                  "wo zai jia wo zai kan shu",
+                  "wǒ zài jiā wǒ zài kàn shū"
+                ],
                 "englishPrompt": "Say you're at home reading.",
                 "dialogueChoiceOptions": [
                   {
@@ -423,12 +665,26 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
-                  { "promptScript": "吃饭", "promptRomanization": "chī fàn", "answerEnglish": "to eat" },
-                  { "promptScript": "工作", "promptRomanization": "gōngzuò", "answerEnglish": "to work" },
-                  { "promptScript": "看书", "promptRomanization": "kàn shū", "answerEnglish": "to read" }
+                  {
+                    "promptScript": "吃饭",
+                    "promptRomanization": "chī fàn",
+                    "answerEnglish": "to eat"
+                  },
+                  {
+                    "promptScript": "工作",
+                    "promptRomanization": "gōngzuò",
+                    "answerEnglish": "to work"
+                  },
+                  {
+                    "promptScript": "看书",
+                    "promptRomanization": "kàn shū",
+                    "answerEnglish": "to read"
+                  }
                 ]
               }
             }
@@ -476,19 +732,52 @@
               },
               {
                 "prompt": "我们都很忙 means:",
-                "options": ["I'm busy.", "We're all busy.", "Are we busy?", "We're also busy."],
+                "options": [
+                  "I'm busy.",
+                  "We're all busy.",
+                  "Are we busy?",
+                  "We're also busy."
+                ],
                 "correctIndex": 1
               }
             ]
           },
           "vocabulary": [
-            { "script": "都", "romanization": "dōu", "english": "all / both" },
-            { "script": "朋友", "romanization": "péngyou", "english": "friend" },
-            { "script": "周末", "romanization": "zhōumò", "english": "weekend" },
-            { "script": "计划", "romanization": "jìhuà", "english": "plan" },
-            { "script": "一起", "romanization": "yìqǐ", "english": "together" },
-            { "script": "有", "romanization": "yǒu", "english": "to have" },
-            { "script": "时间", "romanization": "shíjiān", "english": "time" }
+            {
+              "script": "都",
+              "romanization": "dōu",
+              "english": "all / both"
+            },
+            {
+              "script": "朋友",
+              "romanization": "péngyou",
+              "english": "friend"
+            },
+            {
+              "script": "周末",
+              "romanization": "zhōumò",
+              "english": "weekend"
+            },
+            {
+              "script": "计划",
+              "romanization": "jìhuà",
+              "english": "plan"
+            },
+            {
+              "script": "一起",
+              "romanization": "yìqǐ",
+              "english": "together"
+            },
+            {
+              "script": "有",
+              "romanization": "yǒu",
+              "english": "to have"
+            },
+            {
+              "script": "时间",
+              "romanization": "shíjiān",
+              "english": "time"
+            }
           ],
           "dialogue": {
             "title": "Weekend Plans",
@@ -537,15 +826,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "我们都很忙 means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "我们都很忙。",
                 "questionRomanization": "Wǒmen dōu hěn máng.",
                 "options": [
-                  { "text": "We're all busy.", "isCorrect": true },
-                  { "text": "I'm busy.", "isCorrect": false },
-                  { "text": "Are we busy?", "isCorrect": false },
-                  { "text": "We're also busy.", "isCorrect": false }
+                  {
+                    "text": "We're all busy.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "I'm busy.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Are we busy?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "We're also busy.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -553,15 +856,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "我朋友都很忙。",
                 "audioRomanization": "Wǒ péngyou dōu hěn máng.",
                 "options": [
-                  { "text": "My friends are all busy.", "isCorrect": true },
-                  { "text": "My friend is busy.", "isCorrect": false },
-                  { "text": "Are my friends busy?", "isCorrect": false },
-                  { "text": "My friends are also busy.", "isCorrect": false }
+                  {
+                    "text": "My friends are all busy.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "My friend is busy.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Are my friends busy?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "My friends are also busy.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -569,23 +887,51 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "我们___有计划。",
                 "correctAnswer": "都",
-                "choices": ["都", "也", "的", "是"]
+                "choices": [
+                  {
+                    "text": "都",
+                    "romanization": "dōu"
+                  },
+                  {
+                    "text": "也",
+                    "romanization": "yě"
+                  },
+                  {
+                    "text": "的",
+                    "romanization": "de"
+                  },
+                  {
+                    "text": "是",
+                    "romanization": "shì"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Wǒmen ___ yǒu jìhuà."
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "We are all students.",
                 "sourceLang": "en",
                 "correctAnswer": "我们都是学生。",
-                "acceptableAnswers": ["我们都是学生", "Wǒmen dōu shì xuéshēng."]
+                "acceptableAnswers": [
+                  "我们都是学生",
+                  "Wǒmen dōu shì xuéshēng."
+                ],
+                "correctAnswerRomanization": "Wǒmen dōu shì xuéshēng."
               }
             },
             {
@@ -606,9 +952,23 @@
                 "targetScript": "我朋友也都很忙。",
                 "targetRomanization": "Wǒ péngyou yě dōu hěn máng.",
                 "targetEnglish": "My friends are all also busy.",
-                "tokens": ["我", "朋友", "也", "都", "很", "忙"],
-                "distractorTokens": ["周末", "计划", "一起"],
-                "acceptablePinyin": ["wo pengyou ye dou hen mang", "wǒ péngyou yě dōu hěn máng"],
+                "tokens": [
+                  "我",
+                  "朋友",
+                  "也",
+                  "都",
+                  "很",
+                  "忙"
+                ],
+                "distractorTokens": [
+                  "周末",
+                  "计划",
+                  "一起"
+                ],
+                "acceptablePinyin": [
+                  "wo pengyou ye dou hen mang",
+                  "wǒ péngyou yě dōu hěn máng"
+                ],
                 "englishPrompt": "Say that your friends are all also busy.",
                 "dialogueChoiceOptions": [
                   {
@@ -637,12 +997,26 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
-                  { "promptScript": "都", "promptRomanization": "dōu", "answerEnglish": "all / both" },
-                  { "promptScript": "朋友", "promptRomanization": "péngyou", "answerEnglish": "friend" },
-                  { "promptScript": "计划", "promptRomanization": "jìhuà", "answerEnglish": "plan" }
+                  {
+                    "promptScript": "都",
+                    "promptRomanization": "dōu",
+                    "answerEnglish": "all / both"
+                  },
+                  {
+                    "promptScript": "朋友",
+                    "promptRomanization": "péngyou",
+                    "answerEnglish": "friend"
+                  },
+                  {
+                    "promptScript": "计划",
+                    "promptRomanization": "jìhuà",
+                    "answerEnglish": "plan"
+                  }
                 ]
               }
             }
@@ -680,7 +1054,12 @@
             "quiz": [
               {
                 "prompt": "What does 然后 mean?",
-                "options": ["first", "then / after that", "now", "all"],
+                "options": [
+                  "first",
+                  "then / after that",
+                  "now",
+                  "all"
+                ],
                 "correctIndex": 1
               },
               {
@@ -696,12 +1075,36 @@
             ]
           },
           "vocabulary": [
-            { "script": "然后", "romanization": "ránhòu", "english": "then / after that" },
-            { "script": "先", "romanization": "xiān", "english": "first" },
-            { "script": "起床", "romanization": "qǐchuáng", "english": "to get up / wake up" },
-            { "script": "刷牙", "romanization": "shuā yá", "english": "to brush teeth" },
-            { "script": "洗澡", "romanization": "xǐzǎo", "english": "to shower / bathe" },
-            { "script": "上班", "romanization": "shàngbān", "english": "to go to work" }
+            {
+              "script": "然后",
+              "romanization": "ránhòu",
+              "english": "then / after that"
+            },
+            {
+              "script": "先",
+              "romanization": "xiān",
+              "english": "first"
+            },
+            {
+              "script": "起床",
+              "romanization": "qǐchuáng",
+              "english": "to get up / wake up"
+            },
+            {
+              "script": "刷牙",
+              "romanization": "shuā yá",
+              "english": "to brush teeth"
+            },
+            {
+              "script": "洗澡",
+              "romanization": "xǐzǎo",
+              "english": "to shower / bathe"
+            },
+            {
+              "script": "上班",
+              "romanization": "shàngbān",
+              "english": "to go to work"
+            }
           ],
           "dialogue": {
             "title": "My Morning",
@@ -750,15 +1153,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "我先起床,然后刷牙 means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "我先起床,然后刷牙。",
                 "questionRomanization": "Wǒ xiān qǐchuáng, ránhòu shuāyá.",
                 "options": [
-                  { "text": "First I get up, then I brush my teeth.", "isCorrect": true },
-                  { "text": "First I brush my teeth, then I get up.", "isCorrect": false },
-                  { "text": "I get up and brush my teeth at the same time.", "isCorrect": false },
-                  { "text": "I don't get up in the morning.", "isCorrect": false }
+                  {
+                    "text": "First I get up, then I brush my teeth.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "First I brush my teeth, then I get up.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I get up and brush my teeth at the same time.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I don't get up in the morning.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -766,15 +1183,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "然后我上班。",
                 "audioRomanization": "Ránhòu wǒ shàngbān.",
                 "options": [
-                  { "text": "Then I go to work.", "isCorrect": true },
-                  { "text": "First I go to work.", "isCorrect": false },
-                  { "text": "I go to work.", "isCorrect": false },
-                  { "text": "Do you go to work?", "isCorrect": false }
+                  {
+                    "text": "Then I go to work.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "First I go to work.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I go to work.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Do you go to work?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -782,23 +1214,51 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "我先吃饭,___工作。",
                 "correctAnswer": "然后",
-                "choices": ["然后", "先", "都", "也"]
+                "choices": [
+                  {
+                    "text": "然后",
+                    "romanization": "ránhòu"
+                  },
+                  {
+                    "text": "先",
+                    "romanization": "xiān"
+                  },
+                  {
+                    "text": "都",
+                    "romanization": "dōu"
+                  },
+                  {
+                    "text": "也",
+                    "romanization": "yě"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Wǒ xiān chīfàn, ___ gōngzuò."
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "First I shower, then I sleep.",
                 "sourceLang": "en",
                 "correctAnswer": "我先洗澡,然后睡觉。",
-                "acceptableAnswers": ["我先洗澡,然后睡觉", "Wǒ xiān xǐzǎo, ránhòu shuìjiào."]
+                "acceptableAnswers": [
+                  "我先洗澡,然后睡觉",
+                  "Wǒ xiān xǐzǎo, ránhòu shuìjiào."
+                ],
+                "correctAnswerRomanization": "Wǒ xiān xǐzǎo, ránhòu shuìjiào."
               }
             },
             {
@@ -819,9 +1279,22 @@
                 "targetScript": "我先起床,然后刷牙。",
                 "targetRomanization": "Wǒ xiān qǐchuáng, ránhòu shuāyá.",
                 "targetEnglish": "First I get up, then I brush my teeth.",
-                "tokens": ["我", "先", "起床", "然后", "刷牙"],
-                "distractorTokens": ["洗澡", "上班", "都"],
-                "acceptablePinyin": ["wo xian qichuang ranhou shuaya", "wǒ xiān qǐchuáng ránhòu shuāyá"],
+                "tokens": [
+                  "我",
+                  "先",
+                  "起床",
+                  "然后",
+                  "刷牙"
+                ],
+                "distractorTokens": [
+                  "洗澡",
+                  "上班",
+                  "都"
+                ],
+                "acceptablePinyin": [
+                  "wo xian qichuang ranhou shuaya",
+                  "wǒ xiān qǐchuáng ránhòu shuāyá"
+                ],
                 "englishPrompt": "Say that you first get up, then brush your teeth.",
                 "dialogueChoiceOptions": [
                   {
@@ -850,12 +1323,26 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
-                  { "promptScript": "先", "promptRomanization": "xiān", "answerEnglish": "first" },
-                  { "promptScript": "然后", "promptRomanization": "ránhòu", "answerEnglish": "then / after that" },
-                  { "promptScript": "起床", "promptRomanization": "qǐchuáng", "answerEnglish": "to get up" }
+                  {
+                    "promptScript": "先",
+                    "promptRomanization": "xiān",
+                    "answerEnglish": "first"
+                  },
+                  {
+                    "promptScript": "然后",
+                    "promptRomanization": "ránhòu",
+                    "answerEnglish": "then / after that"
+                  },
+                  {
+                    "promptScript": "起床",
+                    "promptRomanization": "qǐchuáng",
+                    "answerEnglish": "to get up"
+                  }
                 ]
               }
             }

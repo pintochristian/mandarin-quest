@@ -44,27 +44,77 @@
             "quiz": [
               {
                 "prompt": "How do you say 'I have an older brother'?",
-                "options": ["我有哥哥。", "我是哥哥。", "我要哥哥。", "我不哥哥。"],
+                "options": [
+                  "我有哥哥。",
+                  "我是哥哥。",
+                  "我要哥哥。",
+                  "我不哥哥。"
+                ],
                 "correctIndex": 0
               },
               {
                 "prompt": "Which word negates 有?",
-                "options": ["不", "没", "吗", "很"],
+                "options": [
+                  "不",
+                  "没",
+                  "吗",
+                  "很"
+                ],
                 "correctIndex": 1
               }
             ]
           },
           "vocabulary": [
-            { "script": "爸爸", "romanization": "bàba", "english": "dad" },
-            { "script": "妈妈", "romanization": "māma", "english": "mom" },
-            { "script": "哥哥", "romanization": "gēge", "english": "older brother" },
-            { "script": "姐姐", "romanization": "jiějie", "english": "older sister" },
-            { "script": "弟弟", "romanization": "dìdi", "english": "younger brother" },
-            { "script": "妹妹", "romanization": "mèimei", "english": "younger sister" },
-            { "script": "有", "romanization": "yǒu", "english": "to have / there is" },
-            { "script": "没有", "romanization": "méiyǒu", "english": "to not have / there isn't" },
-            { "script": "家", "romanization": "jiā", "english": "family / home" },
-            { "script": "呢", "romanization": "ne", "english": "and...? / what about...? (question particle)" }
+            {
+              "script": "爸爸",
+              "romanization": "bàba",
+              "english": "dad"
+            },
+            {
+              "script": "妈妈",
+              "romanization": "māma",
+              "english": "mom"
+            },
+            {
+              "script": "哥哥",
+              "romanization": "gēge",
+              "english": "older brother"
+            },
+            {
+              "script": "姐姐",
+              "romanization": "jiějie",
+              "english": "older sister"
+            },
+            {
+              "script": "弟弟",
+              "romanization": "dìdi",
+              "english": "younger brother"
+            },
+            {
+              "script": "妹妹",
+              "romanization": "mèimei",
+              "english": "younger sister"
+            },
+            {
+              "script": "有",
+              "romanization": "yǒu",
+              "english": "to have / there is"
+            },
+            {
+              "script": "没有",
+              "romanization": "méiyǒu",
+              "english": "to not have / there isn't"
+            },
+            {
+              "script": "家",
+              "romanization": "jiā",
+              "english": "family / home"
+            },
+            {
+              "script": "呢",
+              "romanization": "ne",
+              "english": "and...? / what about...? (question particle)"
+            }
           ],
           "dialogue": {
             "title": "My Family",
@@ -113,15 +163,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "我有哥哥。means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "我有哥哥。",
                 "questionRomanization": "Wǒ yǒu gēge.",
                 "options": [
-                  { "text": "I have an older brother.", "isCorrect": true },
-                  { "text": "I have an older sister.", "isCorrect": false },
-                  { "text": "I don't have an older brother.", "isCorrect": false },
-                  { "text": "Do you have an older brother?", "isCorrect": false }
+                  {
+                    "text": "I have an older brother.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "I have an older sister.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I don't have an older brother.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Do you have an older brother?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -129,15 +193,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "我没有姐姐。",
                 "audioRomanization": "Wǒ méiyǒu jiějie.",
                 "options": [
-                  { "text": "I don't have an older sister.", "isCorrect": true },
-                  { "text": "I have an older sister.", "isCorrect": false },
-                  { "text": "I don't have an older brother.", "isCorrect": false },
-                  { "text": "Do you have an older sister?", "isCorrect": false }
+                  {
+                    "text": "I don't have an older sister.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "I have an older sister.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I don't have an older brother.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Do you have an older sister?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -145,23 +224,51 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "你___哥哥吗?",
                 "correctAnswer": "有",
-                "choices": ["有", "是", "要", "很"]
+                "choices": [
+                  {
+                    "text": "有",
+                    "romanization": "yǒu"
+                  },
+                  {
+                    "text": "是",
+                    "romanization": "shì"
+                  },
+                  {
+                    "text": "要",
+                    "romanization": "yào"
+                  },
+                  {
+                    "text": "很",
+                    "romanization": "hěn"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Nǐ ___ gēge ma?"
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "I have a younger sister.",
                 "sourceLang": "en",
                 "correctAnswer": "我有妹妹。",
-                "acceptableAnswers": ["我有妹妹", "Wǒ yǒu mèimei."]
+                "acceptableAnswers": [
+                  "我有妹妹",
+                  "Wǒ yǒu mèimei."
+                ],
+                "correctAnswerRomanization": "Wǒ yǒu mèimei."
               }
             },
             {
@@ -182,8 +289,18 @@
                 "targetScript": "我没有哥哥,我有姐姐。",
                 "targetRomanization": "Wǒ méiyǒu gēge, wǒ yǒu jiějie.",
                 "targetEnglish": "I don't have an older brother, I have an older sister.",
-                "tokens": ["我", "没有", "哥哥", "有", "姐姐"],
-                "distractorTokens": ["妹妹", "爸爸", "吗"],
+                "tokens": [
+                  "我",
+                  "没有",
+                  "哥哥",
+                  "有",
+                  "姐姐"
+                ],
+                "distractorTokens": [
+                  "妹妹",
+                  "爸爸",
+                  "吗"
+                ],
                 "acceptablePinyin": [
                   "wo meiyou gege wo you jiejie",
                   "wǒ méiyǒu gēge wǒ yǒu jiějie"
@@ -216,7 +333,9 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
                   {
@@ -272,25 +391,67 @@
             "quiz": [
               {
                 "prompt": "Which word means 'how many' (for small numbers)?",
-                "options": ["几", "个", "多少", "二"],
+                "options": [
+                  "几",
+                  "个",
+                  "多少",
+                  "二"
+                ],
                 "correctIndex": 0
               },
               {
                 "prompt": "What goes between a number and a noun like 人?",
-                "options": ["吗", "的", "个", "很"],
+                "options": [
+                  "吗",
+                  "的",
+                  "个",
+                  "很"
+                ],
                 "correctIndex": 2
               }
             ]
           },
           "vocabulary": [
-            { "script": "二", "romanization": "èr", "english": "two (counting numbers themselves, not before a measure word)" },
-            { "script": "三", "romanization": "sān", "english": "three" },
-            { "script": "四", "romanization": "sì", "english": "four" },
-            { "script": "五", "romanization": "wǔ", "english": "five" },
-            { "script": "六", "romanization": "liù", "english": "six" },
-            { "script": "几", "romanization": "jǐ", "english": "how many (small numbers)" },
-            { "script": "个", "romanization": "gè", "english": "measure word (general, default)" },
-            { "script": "口", "romanization": "kǒu", "english": "measure word for counting family members" }
+            {
+              "script": "二",
+              "romanization": "èr",
+              "english": "two (counting numbers themselves, not before a measure word)"
+            },
+            {
+              "script": "三",
+              "romanization": "sān",
+              "english": "three"
+            },
+            {
+              "script": "四",
+              "romanization": "sì",
+              "english": "four"
+            },
+            {
+              "script": "五",
+              "romanization": "wǔ",
+              "english": "five"
+            },
+            {
+              "script": "六",
+              "romanization": "liù",
+              "english": "six"
+            },
+            {
+              "script": "几",
+              "romanization": "jǐ",
+              "english": "how many (small numbers)"
+            },
+            {
+              "script": "个",
+              "romanization": "gè",
+              "english": "measure word (general, default)"
+            },
+            {
+              "script": "口",
+              "romanization": "kǒu",
+              "english": "measure word for counting family members"
+            }
           ],
           "dialogue": {
             "title": "How Many People in Your Family?",
@@ -339,15 +500,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "你家有几口人?means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "你家有几口人?",
                 "questionRomanization": "Nǐ jiā yǒu jǐ kǒu rén?",
                 "options": [
-                  { "text": "How many people are in your family?", "isCorrect": true },
-                  { "text": "Where is your family?", "isCorrect": false },
-                  { "text": "Do you have a family?", "isCorrect": false },
-                  { "text": "Is your family big?", "isCorrect": false }
+                  {
+                    "text": "How many people are in your family?",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Where is your family?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Do you have a family?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Is your family big?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -355,15 +530,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "我家有五口人。",
                 "audioRomanization": "Wǒ jiā yǒu wǔ kǒu rén.",
                 "options": [
-                  { "text": "There are five people in my family.", "isCorrect": true },
-                  { "text": "There are four people in my family.", "isCorrect": false },
-                  { "text": "How many people are in your family?", "isCorrect": false },
-                  { "text": "I have five older sisters.", "isCorrect": false }
+                  {
+                    "text": "There are five people in my family.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "There are four people in my family.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "How many people are in your family?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I have five older sisters.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -371,18 +561,42 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "我有一___妹妹。",
                 "correctAnswer": "个",
-                "choices": ["个", "口", "几", "是"]
+                "choices": [
+                  {
+                    "text": "个",
+                    "romanization": "gè"
+                  },
+                  {
+                    "text": "口",
+                    "romanization": "kǒu"
+                  },
+                  {
+                    "text": "几",
+                    "romanization": "jǐ"
+                  },
+                  {
+                    "text": "是",
+                    "romanization": "shì"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Wǒ yǒu yí ___ mèimei."
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "How many people are in your family?",
                 "sourceLang": "en",
@@ -392,7 +606,8 @@
                   "Nǐ jiā yǒu jǐ kǒu rén?",
                   "你家有几个人?",
                   "Nǐ jiā yǒu jǐ gè rén?"
-                ]
+                ],
+                "correctAnswerRomanization": "Nǐ jiā yǒu jǐ gè rén?"
               }
             },
             {
@@ -413,9 +628,23 @@
                 "targetScript": "我家有四口人。",
                 "targetRomanization": "Wǒ jiā yǒu sì kǒu rén.",
                 "targetEnglish": "There are four people in my family.",
-                "tokens": ["我", "家", "有", "四", "口", "人"],
-                "distractorTokens": ["五", "个", "几"],
-                "acceptablePinyin": ["wo jia you si kou ren", "wǒ jiā yǒu sì kǒu rén"],
+                "tokens": [
+                  "我",
+                  "家",
+                  "有",
+                  "四",
+                  "口",
+                  "人"
+                ],
+                "distractorTokens": [
+                  "五",
+                  "个",
+                  "几"
+                ],
+                "acceptablePinyin": [
+                  "wo jia you si kou ren",
+                  "wǒ jiā yǒu sì kǒu rén"
+                ],
                 "englishPrompt": "Tell them there are four people in your family.",
                 "dialogueChoiceOptions": [
                   {
@@ -444,7 +673,9 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
                   {
@@ -499,7 +730,12 @@
             "quiz": [
               {
                 "prompt": "谁 means:",
-                "options": ["what", "where", "who", "which"],
+                "options": [
+                  "what",
+                  "where",
+                  "who",
+                  "which"
+                ],
                 "correctIndex": 2
               },
               {
@@ -515,14 +751,46 @@
             ]
           },
           "vocabulary": [
-            { "script": "谁", "romanization": "shéi", "english": "who" },
-            { "script": "朋友", "romanization": "péngyou", "english": "friend" },
-            { "script": "男", "romanization": "nán", "english": "male" },
-            { "script": "女", "romanization": "nǚ", "english": "female" },
-            { "script": "照片", "romanization": "zhàopiàn", "english": "photo / picture" },
-            { "script": "看", "romanization": "kàn", "english": "to look at / to see" },
-            { "script": "家人", "romanization": "jiārén", "english": "family member(s)" },
-            { "script": "同学", "romanization": "tóngxué", "english": "classmate" }
+            {
+              "script": "谁",
+              "romanization": "shéi",
+              "english": "who"
+            },
+            {
+              "script": "朋友",
+              "romanization": "péngyou",
+              "english": "friend"
+            },
+            {
+              "script": "男",
+              "romanization": "nán",
+              "english": "male"
+            },
+            {
+              "script": "女",
+              "romanization": "nǚ",
+              "english": "female"
+            },
+            {
+              "script": "照片",
+              "romanization": "zhàopiàn",
+              "english": "photo / picture"
+            },
+            {
+              "script": "看",
+              "romanization": "kàn",
+              "english": "to look at / to see"
+            },
+            {
+              "script": "家人",
+              "romanization": "jiārén",
+              "english": "family member(s)"
+            },
+            {
+              "script": "同学",
+              "romanization": "tóngxué",
+              "english": "classmate"
+            }
           ],
           "dialogue": {
             "title": "Who Is This?",
@@ -571,15 +839,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "这是谁?means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "这是谁?",
                 "questionRomanization": "Zhè shì shéi?",
                 "options": [
-                  { "text": "Who is this?", "isCorrect": true },
-                  { "text": "What is this?", "isCorrect": false },
-                  { "text": "This is my friend.", "isCorrect": false },
-                  { "text": "Where is this?", "isCorrect": false }
+                  {
+                    "text": "Who is this?",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "What is this?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "This is my friend.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Where is this?",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -587,15 +869,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "他是我朋友。",
                 "audioRomanization": "Tā shì wǒ péngyou.",
                 "options": [
-                  { "text": "He is my friend.", "isCorrect": true },
-                  { "text": "He is my brother.", "isCorrect": false },
-                  { "text": "Who is he?", "isCorrect": false },
-                  { "text": "She is my friend.", "isCorrect": false }
+                  {
+                    "text": "He is my friend.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "He is my brother.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Who is he?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "She is my friend.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -603,23 +900,51 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "这个人是___?",
                 "correctAnswer": "谁",
-                "choices": ["谁", "什么", "哪儿", "的"]
+                "choices": [
+                  {
+                    "text": "谁",
+                    "romanization": "shéi"
+                  },
+                  {
+                    "text": "什么",
+                    "romanization": "shénme"
+                  },
+                  {
+                    "text": "哪儿",
+                    "romanization": "nǎr"
+                  },
+                  {
+                    "text": "的",
+                    "romanization": "de"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Zhège rén shì ___?"
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "Who is she?",
                 "sourceLang": "en",
                 "correctAnswer": "她是谁?",
-                "acceptableAnswers": ["她是谁", "Tā shì shéi?"]
+                "acceptableAnswers": [
+                  "她是谁",
+                  "Tā shì shéi?"
+                ],
+                "correctAnswerRomanization": "Tā shì shéi?"
               }
             },
             {
@@ -640,9 +965,21 @@
                 "targetScript": "这个人是谁?",
                 "targetRomanization": "Zhège rén shì shéi?",
                 "targetEnglish": "Who is this person?",
-                "tokens": ["这个", "人", "是", "谁"],
-                "distractorTokens": ["那个", "朋友", "吗"],
-                "acceptablePinyin": ["zhege ren shi shei", "zhège rén shì shéi"],
+                "tokens": [
+                  "这个",
+                  "人",
+                  "是",
+                  "谁"
+                ],
+                "distractorTokens": [
+                  "那个",
+                  "朋友",
+                  "吗"
+                ],
+                "acceptablePinyin": [
+                  "zhege ren shi shei",
+                  "zhège rén shì shéi"
+                ],
                 "englishPrompt": "Ask who the person in the photo is.",
                 "dialogueChoiceOptions": [
                   {
@@ -671,7 +1008,9 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
                   {
@@ -726,25 +1065,67 @@
             "quiz": [
               {
                 "prompt": "Where does a time word like 明天 go in a Chinese sentence?",
-                "options": ["After the verb", "At the very end only", "Before the verb", "It doesn't matter"],
+                "options": [
+                  "After the verb",
+                  "At the very end only",
+                  "Before the verb",
+                  "It doesn't matter"
+                ],
                 "correctIndex": 2
               },
               {
                 "prompt": "周末 means:",
-                "options": ["tomorrow", "weekend", "today", "next week"],
+                "options": [
+                  "tomorrow",
+                  "weekend",
+                  "today",
+                  "next week"
+                ],
                 "correctIndex": 1
               }
             ]
           },
           "vocabulary": [
-            { "script": "明天", "romanization": "míngtiān", "english": "tomorrow" },
-            { "script": "周末", "romanization": "zhōumò", "english": "weekend" },
-            { "script": "见面", "romanization": "jiànmiàn", "english": "to meet up (with each other)" },
-            { "script": "见", "romanization": "jiàn", "english": "to see" },
-            { "script": "今天", "romanization": "jīntiān", "english": "today" },
-            { "script": "时间", "romanization": "shíjiān", "english": "time" },
-            { "script": "一起", "romanization": "yìqǐ", "english": "together" },
-            { "script": "可以", "romanization": "kěyǐ", "english": "can / may" }
+            {
+              "script": "明天",
+              "romanization": "míngtiān",
+              "english": "tomorrow"
+            },
+            {
+              "script": "周末",
+              "romanization": "zhōumò",
+              "english": "weekend"
+            },
+            {
+              "script": "见面",
+              "romanization": "jiànmiàn",
+              "english": "to meet up (with each other)"
+            },
+            {
+              "script": "见",
+              "romanization": "jiàn",
+              "english": "to see"
+            },
+            {
+              "script": "今天",
+              "romanization": "jīntiān",
+              "english": "today"
+            },
+            {
+              "script": "时间",
+              "romanization": "shíjiān",
+              "english": "time"
+            },
+            {
+              "script": "一起",
+              "romanization": "yìqǐ",
+              "english": "together"
+            },
+            {
+              "script": "可以",
+              "romanization": "kěyǐ",
+              "english": "can / may"
+            }
           ],
           "dialogue": {
             "title": "Let's Meet This Weekend",
@@ -793,15 +1174,29 @@
               "type": "MULTIPLE_CHOICE",
               "order": 1,
               "prompt": "我们周末见面,好吗?means:",
-              "supportedModes": ["DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "questionScript": "我们周末见面,好吗?",
                 "questionRomanization": "Wǒmen zhōumò jiànmiàn, hǎo ma?",
                 "options": [
-                  { "text": "Let's meet up this weekend, okay?", "isCorrect": true },
-                  { "text": "Are you busy this weekend?", "isCorrect": false },
-                  { "text": "We met yesterday.", "isCorrect": false },
-                  { "text": "I don't have time this weekend.", "isCorrect": false }
+                  {
+                    "text": "Let's meet up this weekend, okay?",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "Are you busy this weekend?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "We met yesterday.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I don't have time this weekend.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -809,15 +1204,30 @@
               "type": "LISTENING",
               "order": 2,
               "prompt": "Listen and choose what you hear.",
-              "supportedModes": ["SHADOW_LISTEN", "DIALOGUE_CHOICE"],
+              "supportedModes": [
+                "SHADOW_LISTEN",
+                "DIALOGUE_CHOICE"
+              ],
               "data": {
                 "audioScript": "周末我有时间。",
                 "audioRomanization": "Zhōumò wǒ yǒu shíjiān.",
                 "options": [
-                  { "text": "I have time this weekend.", "isCorrect": true },
-                  { "text": "I don't have time today.", "isCorrect": false },
-                  { "text": "Do you have time tomorrow?", "isCorrect": false },
-                  { "text": "I'm busy this weekend.", "isCorrect": false }
+                  {
+                    "text": "I have time this weekend.",
+                    "isCorrect": true
+                  },
+                  {
+                    "text": "I don't have time today.",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "Do you have time tomorrow?",
+                    "isCorrect": false
+                  },
+                  {
+                    "text": "I'm busy this weekend.",
+                    "isCorrect": false
+                  }
                 ]
               }
             },
@@ -825,23 +1235,51 @@
               "type": "FILL_BLANK",
               "order": 3,
               "prompt": "Fill in the missing word.",
-              "supportedModes": ["TYPE_PINYIN", "WORD_TILE_SELECT"],
+              "supportedModes": [
+                "TYPE_PINYIN",
+                "WORD_TILE_SELECT"
+              ],
               "data": {
                 "sentenceTemplate": "我们___见面,好吗?",
                 "correctAnswer": "周末",
-                "choices": ["周末", "咖啡", "老师", "谢谢"]
+                "choices": [
+                  {
+                    "text": "周末",
+                    "romanization": "zhōumò"
+                  },
+                  {
+                    "text": "咖啡",
+                    "romanization": "kāfēi"
+                  },
+                  {
+                    "text": "老师",
+                    "romanization": "lǎoshī"
+                  },
+                  {
+                    "text": "谢谢",
+                    "romanization": "xièxie"
+                  }
+                ],
+                "sentenceTemplateRomanization": "Wǒmen ___ jiànmiàn, hǎo ma?"
               }
             },
             {
               "type": "TRANSLATION",
               "order": 4,
               "prompt": "Translate into Mandarin.",
-              "supportedModes": ["TYPE_ENGLISH_GUIDED", "TYPE_PINYIN"],
+              "supportedModes": [
+                "TYPE_ENGLISH_GUIDED",
+                "TYPE_PINYIN"
+              ],
               "data": {
                 "sourceText": "See you tomorrow!",
                 "sourceLang": "en",
                 "correctAnswer": "明天见!",
-                "acceptableAnswers": ["明天见", "Míngtiān jiàn!"]
+                "acceptableAnswers": [
+                  "明天见",
+                  "Míngtiān jiàn!"
+                ],
+                "correctAnswerRomanization": "Míngtiān jiàn!"
               }
             },
             {
@@ -862,8 +1300,18 @@
                 "targetScript": "我们周末见面,好吗?",
                 "targetRomanization": "Wǒmen zhōumò jiànmiàn, hǎo ma?",
                 "targetEnglish": "Let's meet up this weekend, okay?",
-                "tokens": ["我们", "周末", "见面", "好", "吗"],
-                "distractorTokens": ["明天", "今天", "不"],
+                "tokens": [
+                  "我们",
+                  "周末",
+                  "见面",
+                  "好",
+                  "吗"
+                ],
+                "distractorTokens": [
+                  "明天",
+                  "今天",
+                  "不"
+                ],
                 "acceptablePinyin": [
                   "women zhoumo jianmian hao ma",
                   "wǒmen zhōumò jiànmiàn hǎo ma"
@@ -896,7 +1344,9 @@
               "type": "RAPID_REVIEW",
               "order": 6,
               "prompt": "Quick review.",
-              "supportedModes": ["SHADOW_LISTEN"],
+              "supportedModes": [
+                "SHADOW_LISTEN"
+              ],
               "data": {
                 "items": [
                   {

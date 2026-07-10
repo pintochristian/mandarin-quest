@@ -151,8 +151,14 @@ export const level1: LevelContentInput = {
               supportedModes: ["TYPE_PINYIN", "WORD_TILE_SELECT"],
               data: {
                 sentenceTemplate: "你___什么名字?",
+                sentenceTemplateRomanization: "Nǐ ___ shénme míngzi?",
                 correctAnswer: "叫",
-                choices: ["叫", "是", "很", "你"],
+                choices: [
+                  { text: "叫", romanization: "jiào" },
+                  { text: "是", romanization: "shì" },
+                  { text: "很", romanization: "hěn" },
+                  { text: "你", romanization: "nǐ" },
+                ],
               },
             },
             {
@@ -164,6 +170,7 @@ export const level1: LevelContentInput = {
                 sourceText: "What is your name?",
                 sourceLang: "en",
                 correctAnswer: "你叫什么名字?",
+                correctAnswerRomanization: "Nǐ jiào shénme míngzi?",
                 acceptableAnswers: ["你叫什么名字", "Nǐ jiào shénme míngzi?"],
               },
             },
@@ -374,8 +381,14 @@ export const level1: LevelContentInput = {
               supportedModes: ["TYPE_PINYIN", "WORD_TILE_SELECT"],
               data: {
                 sentenceTemplate: "你是中国人___?",
+                sentenceTemplateRomanization: "Nǐ shì Zhōngguó rén ___?",
                 correctAnswer: "吗",
-                choices: ["吗", "呢", "不", "是"],
+                choices: [
+                  { text: "吗", romanization: "ma" },
+                  { text: "呢", romanization: "ne" },
+                  { text: "不", romanization: "bù" },
+                  { text: "是", romanization: "shì" },
+                ],
               },
             },
             {
@@ -387,6 +400,7 @@ export const level1: LevelContentInput = {
                 sourceText: "Are you busy?",
                 sourceLang: "en",
                 correctAnswer: "你忙吗?",
+                correctAnswerRomanization: "Nǐ máng ma?",
                 acceptableAnswers: ["你忙吗", "Nǐ máng ma?"],
               },
             },
@@ -602,8 +616,14 @@ export const level1: LevelContentInput = {
               supportedModes: ["TYPE_PINYIN", "WORD_TILE_SELECT"],
               data: {
                 sentenceTemplate: "我要一___咖啡。",
+                sentenceTemplateRomanization: "Wǒ yào yì ___ kāfēi.",
                 correctAnswer: "杯",
-                choices: ["杯", "个", "本", "是"],
+                choices: [
+                  { text: "杯", romanization: "bēi" },
+                  { text: "个", romanization: "gè" },
+                  { text: "本", romanization: "běn" },
+                  { text: "是", romanization: "shì" },
+                ],
               },
             },
             {
@@ -615,6 +635,7 @@ export const level1: LevelContentInput = {
                 sourceText: "I'd like two cups of tea.",
                 sourceLang: "en",
                 correctAnswer: "我要两杯茶。",
+                correctAnswerRomanization: "Wǒ yào liǎng bēi chá.",
                 acceptableAnswers: ["我要两杯茶", "Wǒ yào liǎng bēi chá."],
               },
             },
@@ -818,8 +839,14 @@ export const level1: LevelContentInput = {
               supportedModes: ["TYPE_PINYIN", "WORD_TILE_SELECT"],
               data: {
                 sentenceTemplate: "这不___你的咖啡。",
+                sentenceTemplateRomanization: "Zhè bú ___ nǐ de kāfēi.",
                 correctAnswer: "是",
-                choices: ["是", "不", "的", "这"],
+                choices: [
+                  { text: "是", romanization: "shì" },
+                  { text: "不", romanization: "bù" },
+                  { text: "的", romanization: "de" },
+                  { text: "这", romanization: "zhè" },
+                ],
               },
             },
             {
@@ -831,6 +858,7 @@ export const level1: LevelContentInput = {
                 sourceText: "This is my water.",
                 sourceLang: "en",
                 correctAnswer: "这是我的水。",
+                correctAnswerRomanization: "Zhè shì wǒ de shuǐ.",
                 acceptableAnswers: ["这是我的水", "Zhè shì wǒ de shuǐ."],
               },
             },
@@ -1044,8 +1072,14 @@ export const level1: LevelContentInput = {
               supportedModes: ["TYPE_PINYIN", "WORD_TILE_SELECT"],
               data: {
                 sentenceTemplate: "火车站___哪儿?",
+                sentenceTemplateRomanization: "Huǒchēzhàn ___ nǎr?",
                 correctAnswer: "在",
-                choices: ["在", "是", "要", "的"],
+                choices: [
+                  { text: "在", romanization: "zài" },
+                  { text: "是", romanization: "shì" },
+                  { text: "要", romanization: "yào" },
+                  { text: "的", romanization: "de" },
+                ],
               },
             },
             {
@@ -1057,6 +1091,7 @@ export const level1: LevelContentInput = {
                 sourceText: "Excuse me, where is the bank?",
                 sourceLang: "en",
                 correctAnswer: "请问,银行在哪儿?",
+                correctAnswerRomanization: "Qǐngwèn, yínháng zài nǎr?",
                 acceptableAnswers: ["请问,银行在哪儿", "Qǐngwèn, yínháng zài nǎr?"],
               },
             },

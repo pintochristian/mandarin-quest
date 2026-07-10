@@ -106,16 +106,32 @@ export const sentenceOrderDataSchema = z.object({
   englishHint: z.string().min(1),
 });
 
+// Every choice carries its own pinyin — the learner must never be shown a
+// bare Chinese character with no romanization anywhere on screen.
+export const fillBlankChoiceSchema = z.object({
+  text: z.string().min(1),
+  romanization: z.string().min(1),
+});
+
 export const fillBlankDataSchema = z.object({
   sentenceTemplate: z.string().min(1).includes("___"),
+  // Pinyin for the full (correctly filled) sentence, blank marked the same
+  // way as sentenceTemplate so both lines split identically.
+  sentenceTemplateRomanization: z.string().min(1).includes("___"),
   correctAnswer: z.string().min(1),
-  choices: z.array(z.string().min(1)).optional(),
+  choices: z.array(fillBlankChoiceSchema).min(2).optional(),
 });
 
 export const translationDataSchema = z.object({
   sourceText: z.string().min(1),
+  // Required whenever sourceText is Chinese (sourceLang "zh") — optional
+  // because when sourceLang is "en" the source is already English.
+  sourceTextRomanization: z.string().min(1).optional(),
   sourceLang: z.enum(["en", "zh"]),
   correctAnswer: z.string().min(1),
+  // Required whenever correctAnswer is Chinese (sourceLang "en") — the
+  // "Correct answer" reveal must never show bare characters with no pinyin.
+  correctAnswerRomanization: z.string().min(1).optional(),
   acceptableAnswers: z.array(z.string().min(1)).default([]),
 });
 

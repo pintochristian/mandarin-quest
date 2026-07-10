@@ -32,6 +32,18 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  session: {
+    // Every server-rendered page calls getSession() (lib/session.ts) — without
+    // this, that's a full DB round-trip on every single navigation, even
+    // clicking between pages seconds apart. Caches the session in a signed
+    // cookie for a short window instead; still re-validates against the DB
+    // at least once a minute, and any explicit sign-out still clears the
+    // session token itself.
+    cookieCache: {
+      enabled: true,
+      maxAge: 60,
+    },
+  },
   user: {
     additionalFields: {
       role: {

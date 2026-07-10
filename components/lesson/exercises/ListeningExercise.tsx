@@ -69,7 +69,12 @@ export function ListeningExercise({
                 !showState && "border-border hover:border-primary/50",
               )}
             >
-              {opt.text}
+              <span className={opt.romanization ? "font-zh" : undefined}>{opt.text}</span>
+              {opt.romanization && (
+                <span className="block text-xs font-normal text-muted-foreground">
+                  {opt.romanization}
+                </span>
+              )}
             </button>
           );
         })}

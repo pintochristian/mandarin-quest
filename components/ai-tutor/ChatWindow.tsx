@@ -65,7 +65,7 @@ export function ChatWindow({
     <div className="flex w-full max-w-lg flex-col gap-3">
       {isMock && (
         <Badge variant="secondary" className="self-center text-[11px]">
-          Mock AI tutor — add ANTHROPIC_API_KEY for real replies
+          Development preview — mock AI tutor, not a real model
         </Badge>
       )}
       <Card className="flex max-h-80 min-h-40 flex-col gap-2 overflow-y-auto rounded-3xl p-4">

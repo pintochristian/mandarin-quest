@@ -15,6 +15,13 @@ import {
 } from "@/components/ui/select";
 
 type LevelOption = { id: string; index: number; title: string };
+type LintFinding = { severity: "ERROR" | "WARNING" | "INFO"; code: string; message: string; location?: string };
+
+const SEVERITY_STYLE: Record<LintFinding["severity"], string> = {
+  ERROR: "bg-destructive/10 text-destructive",
+  WARNING: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200",
+  INFO: "bg-secondary text-secondary-foreground",
+};
 
 export function ImportExportPanel({ levels }: { levels: LevelOption[] }) {
   const [kind, setKind] = useState<"full" | "outline">("outline");
@@ -22,6 +29,7 @@ export function ImportExportPanel({ levels }: { levels: LevelOption[] }) {
   const [languageName, setLanguageName] = useState("Mandarin Chinese");
   const [json, setJson] = useState("");
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
+  const [lintFindings, setLintFindings] = useState<LintFinding[]>([]);
   const [submitting, setSubmitting] = useState(false);
 
   const [exportLevelId, setExportLevelId] = useState(levels[0]?.id ?? "");
@@ -30,6 +38,7 @@ export function ImportExportPanel({ levels }: { levels: LevelOption[] }) {
   async function handleImport() {
     setSubmitting(true);
     setResult(null);
+    setLintFindings([]);
     try {
       const level = JSON.parse(json);
       const res = await fetch("/api/admin/import", {
@@ -38,6 +47,7 @@ export function ImportExportPanel({ levels }: { levels: LevelOption[] }) {
         body: JSON.stringify({ languageCode, languageName, kind, level }),
       });
       const data = await res.json();
+      setLintFindings(data.lintFindings ?? []);
       if (!res.ok) {
         const issues = data.issues
           ?.map(
@@ -45,7 +55,10 @@ export function ImportExportPanel({ levels }: { levels: LevelOption[] }) {
               `${i.path.join(".")}: ${i.message}`,
           )
           .join("\n");
-        setResult({ ok: false, message: issues || data.error || "Import failed." });
+        setResult({
+          ok: false,
+          message: issues || data.error || "Import failed.",
+        });
       } else {
         setResult({
           ok: true,
@@ -123,6 +136,27 @@ export function ImportExportPanel({ levels }: { levels: LevelOption[] }) {
           >
             {result.message}
           </pre>
+        )}
+        {lintFindings.length > 0 && (
+          <div className="space-y-2">
+            <p className="text-sm font-medium">
+              Content lint — {lintFindings.filter((f) => f.severity === "ERROR").length} error(s),{" "}
+              {lintFindings.filter((f) => f.severity === "WARNING").length} warning(s),{" "}
+              {lintFindings.filter((f) => f.severity === "INFO").length} info
+            </p>
+            <div className="max-h-64 space-y-1 overflow-y-auto">
+              {lintFindings.map((f, i) => (
+                <div
+                  key={i}
+                  className={`rounded-lg px-3 py-2 text-xs ${SEVERITY_STYLE[f.severity]}`}
+                >
+                  <span className="font-semibold">{f.severity}</span> [{f.code}]{" "}
+                  {f.location && <span className="opacity-80">{f.location}: </span>}
+                  {f.message}
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </Card>
 

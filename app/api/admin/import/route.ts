@@ -8,6 +8,7 @@ import {
   importFullyAuthoredLevel,
   importOutlineLevel,
 } from "@/lib/content/import";
+import { lintLevelContent, lintLevelOutline } from "@/lib/content/lint";
 
 const requestSchema = z.object({
   languageCode: z.string().min(1),
@@ -32,11 +33,24 @@ export async function POST(request: Request) {
   }
 
   const language = await importLanguage(body.languageCode, body.languageName);
+
+  const lintFindings =
+    body.kind === "full"
+      ? await lintLevelContent(parsed.data as never, language.id)
+      : await lintLevelOutline(parsed.data as never, language.id);
+  const blockingErrors = lintFindings.filter((f) => f.severity === "ERROR");
+  if (blockingErrors.length > 0) {
+    return NextResponse.json(
+      { error: "Content lint failed", lintFindings },
+      { status: 422 },
+    );
+  }
+
   const dbLevel =
     body.kind === "full"
       ? await importFullyAuthoredLevel(language.id, parsed.data as never)
       : await importOutlineLevel(language.id, parsed.data as never);
   revalidateTag("course-content");
 
-  return NextResponse.json({ level: dbLevel });
+  return NextResponse.json({ level: dbLevel, lintFindings });
 }

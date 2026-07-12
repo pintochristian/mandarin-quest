@@ -13,6 +13,7 @@ export type MasteryRow = {
   intervalDays: number;
   nextReviewAt: Date;
   lastReviewedAt: Date | null;
+  createdAt: Date;
   node: { title: string; type: KnowledgeNodeType };
 };
 
@@ -36,6 +37,7 @@ export const getMasteryRows = cache((userId: string): Promise<MasteryRow[]> =>
       intervalDays: true,
       nextReviewAt: true,
       lastReviewedAt: true,
+      createdAt: true,
       node: { select: { title: true, type: true } },
     },
   }),

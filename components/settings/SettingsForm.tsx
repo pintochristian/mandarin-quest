@@ -148,8 +148,13 @@ export function SettingsForm({ aiProviderConfigured }: { aiProviderConfigured: b
           <p className="text-sm text-muted-foreground">
             {aiProviderConfigured
               ? "AI conversation practice and chat, in addition to the core course."
-              : "No AI provider is connected on this deployment — turning this on won't do anything yet."}
+              : "No AI provider is currently connected."}
           </p>
+          {!aiProviderConfigured && aiEnabled && (
+            <p className="mt-1 text-xs text-muted-foreground">
+              Your preference is saved and will take effect once a provider is connected.
+            </p>
+          )}
         </div>
         <Switch
           id="ai-enabled"

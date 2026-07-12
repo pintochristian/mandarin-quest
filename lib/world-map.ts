@@ -70,6 +70,19 @@ const getCourseStructure = unstable_cache(
 );
 
 /**
+ * Levels that have at least one published lesson — used by Practice
+ * Anytime's "a specific level" source picker. Reuses the same cached
+ * course-structure fetch getWorldMap already relies on, instead of a
+ * second raw db.level.findMany query on a route that gets visited often.
+ */
+export async function getPublishedLevels(): Promise<{ index: number; title: string }[]> {
+  const levels = await getCourseStructure();
+  return levels
+    .filter((l) => l.modules.some((m) => m.lessons.length > 0))
+    .map((l) => ({ index: l.index, title: l.title }));
+}
+
+/**
  * The RPG "world map": every module across every level, in order, with
  * unlock state computed from the learner's progress. A module unlocks once
  * the previous module's published lessons are all completed. The very

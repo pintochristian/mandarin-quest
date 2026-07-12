@@ -36,6 +36,26 @@ export function hasAiProvider(): boolean {
   return !isMockMode();
 }
 
+/** True only for a real production deployment (Vercel's "production"
+ * environment, or NODE_ENV=production off Vercel) — Vercel preview
+ * deployments and local dev both count as non-production, where mock
+ * replies remain a legitimate testing convenience. Mirrors the same
+ * VERCEL_ENV convention already used in lib/auth.ts. */
+function isProductionDeployment(): boolean {
+  if (process.env.VERCEL_ENV) return process.env.VERCEL_ENV === "production";
+  return process.env.NODE_ENV === "production";
+}
+
+/** Thrown instead of ever faking a reply when this is a real production
+ * deployment with no AI provider configured. Callers must surface this as
+ * "unavailable," never catch-and-mock. */
+export class AiUnavailableError extends Error {
+  constructor() {
+    super("No AI provider is currently connected.");
+    this.name = "AiUnavailableError";
+  }
+}
+
 const MOCK_REPLIES = [
   "That's a good try! Can you say a bit more about that?",
   "很好 (hěn hǎo)! Let's keep going — what else can you tell me?",
@@ -45,20 +65,26 @@ const MOCK_REPLIES = [
 
 function mockTutorReply(history: ChatTurn[]): string {
   const pick = MOCK_REPLIES[history.length % MOCK_REPLIES.length];
-  return `[Mock AI Tutor — set ANTHROPIC_API_KEY to enable real replies] ${pick}`;
+  return `[Mock AI Tutor — development preview only, not connected to a real model] ${pick}`;
 }
 
 /**
- * Simulated response used whenever ANTHROPIC_API_KEY isn't configured, so
- * the AI tutor, conversation sandbox, and mistake classification all keep
- * working (clearly labeled as mock) rather than erroring out. A real
- * Anthropic key is an optional upgrade, never a requirement to run the app.
+ * Simulated response used only outside of production (local dev, Vercel
+ * preview deployments) whenever ANTHROPIC_API_KEY isn't configured — a
+ * clearly-labeled testing convenience, never shown in a real production
+ * deployment. In production with no provider configured, this throws
+ * AiUnavailableError instead of silently substituting a fake reply — the
+ * core course must never depend on AI, but AI-flavored UI must also never
+ * pretend to work when it can't.
  */
 export async function getTutorReply(
   systemPrompt: string,
   history: ChatTurn[],
 ): Promise<string> {
   if (isMockMode()) {
+    if (isProductionDeployment()) {
+      throw new AiUnavailableError();
+    }
     return mockTutorReply(history);
   }
 

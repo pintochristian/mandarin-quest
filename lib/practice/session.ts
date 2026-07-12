@@ -6,11 +6,15 @@ import { getRecentPracticeHistory } from "@/lib/practice/history";
 import {
   synthesizeVocabQuestion,
   synthesizeGrammarQuestion,
+  synthesizeShadowListenQuestion,
+  synthesizeMatchQuestion,
   VOCAB_FORMATS,
   type PracticeNode,
+  type ExerciseQuestion,
   type PracticeQuestion,
 } from "@/lib/practice/synthesize";
-import { createRng } from "@/lib/practice/seededRandom";
+import { getEligibleLessonIds, getAuthoredReplayQuestions } from "@/lib/practice/authoredReplay";
+import { createRng, seededShuffle } from "@/lib/practice/seededRandom";
 
 export type PracticeSource =
   | { kind: "ALL" }
@@ -28,6 +32,12 @@ const MASTERED_THRESHOLD = 0.8;
 const DUE_SOON_MS = 48 * 60 * 60 * 1000;
 const MASTERED_TIER_CAP_RATIO = 0.15;
 const RECENT_REPEAT_PENALTY = 0.3;
+/** Share of a session reserved for authored-content replay (fill-blank,
+ * sentence-order, dialogue-choice, rapid-review) and shadow-listen, so a
+ * session isn't 100% multiple-choice even when there's real authored
+ * variety available. Best-effort: if there isn't enough authored content
+ * in scope, the primary node-weighted synthesis fills the gap instead. */
+const SUPPLEMENTARY_RATIO = 0.3;
 
 /** Only these two node types have a synthesis path today (see
  * lib/practice/synthesize.ts) — SENTENCE_PATTERN and the other graph node
@@ -40,7 +50,13 @@ const SYNTHESIZABLE_TYPES = new Set(["VOCAB", "GRAMMAR"]);
  * actually been enrolled in — never the whole knowledge graph, never a
  * node the learner hasn't encountered), weights it, samples without
  * replacement (seeded, so it's deterministic for tests but varies session
- * to session in real use), and synthesizes one question per selected node.
+ * to session in real use). Most of the session is synthesized per-node
+ * (multiple-choice recognition/recall/pinyin, grammar quiz); a portion is
+ * replayed from real authored Exercise content (fill-blank, sentence
+ * order, dialogue choice, rapid review) scoped to lessons that taught
+ * something in the pool — reused rather than freely generated, since a
+ * synthesized fill-blank or word-order question risks an ambiguous
+ * multi-valid answer that authored, reviewed content doesn't have.
  */
 export async function generatePracticeSession(
   userId: string,
@@ -73,11 +89,17 @@ export async function generatePracticeSession(
     })
     .sort((a, b) => b.key - a.key);
 
-  const masteredCap = Math.max(1, Math.ceil(length * MASTERED_TIER_CAP_RATIO));
+  const supplementaryTarget = Math.min(
+    Math.round(length * SUPPLEMENTARY_RATIO),
+    ranked.length,
+  );
+  const primaryTarget = length - supplementaryTarget;
+
+  const masteredCap = Math.max(1, Math.ceil(primaryTarget * MASTERED_TIER_CAP_RATIO));
   const selected: MasteryRow[] = [];
   let masteredCount = 0;
   for (const { row, weight } of ranked) {
-    if (selected.length >= length) break;
+    if (selected.length >= primaryTarget) break;
     if (weight === 1) {
       if (masteredCount >= masteredCap) continue;
       masteredCount += 1;
@@ -86,9 +108,9 @@ export async function generatePracticeSession(
   }
   // Pool too small to fill the session at the cap — top up with whatever's
   // left rather than return a short session.
-  if (selected.length < length) {
+  if (selected.length < primaryTarget) {
     for (const { row } of ranked) {
-      if (selected.length >= length) break;
+      if (selected.length >= primaryTarget) break;
       if (!selected.includes(row)) selected.push(row);
     }
   }
@@ -102,14 +124,14 @@ export async function generatePracticeSession(
   const nodeById = new Map(poolNodes.map((n) => [n.id, n]));
 
   let lastVocabFormat: string | null = null;
-  const questions: PracticeQuestion[] = [];
+  const primaryQuestions: ExerciseQuestion[] = [];
   for (const row of selected) {
     const node = nodeById.get(row.nodeId);
     if (!node) continue;
 
     if (node.type === "GRAMMAR") {
       const q = synthesizeGrammarQuestion(node, `${sessionId}:${node.id}`);
-      if (q) questions.push(q);
+      if (q) primaryQuestions.push(q);
       continue;
     }
 
@@ -121,12 +143,66 @@ export async function generatePracticeSession(
       `${sessionId}:${node.id}`,
     );
     if (q) {
-      questions.push(q);
+      primaryQuestions.push(q);
       lastVocabFormat = format;
     }
   }
 
-  return questions;
+  // Supplementary: real authored content first (most reliable), then top
+  // up any shortfall (either from a small authored pool, or from
+  // primary synthesis returning fewer questions than requested) with
+  // shadow-listen acknowledgements from unused pool nodes — never
+  // synthesized multiple-choice again, to keep this portion format-varied.
+  const remaining = length - primaryQuestions.length;
+  const eligibleLessonIds = await getEligibleLessonIds(pool.map((r) => r.nodeId));
+  const authoredQuestions = await getAuthoredReplayQuestions(
+    eligibleLessonIds,
+    `${sessionId}:authored`,
+    remaining,
+  );
+
+  const usedNodeIds = new Set([
+    ...primaryQuestions.map((q) => q.nodeId),
+    ...authoredQuestions.map((q) => q.nodeId),
+  ]);
+
+  // "Match word and meaning" — one round per session at most, using
+  // whatever unused VOCAB nodes remain, when there's both room left in the
+  // session and enough candidates for a meaningful match (see
+  // MIN_MATCH_PAIRS in synthesize.ts).
+  const matchQuestions: PracticeQuestion[] = [];
+  if (primaryQuestions.length + authoredQuestions.length < length) {
+    const unusedVocab = poolNodes.filter((n) => !usedNodeIds.has(n.id) && n.type === "VOCAB");
+    const match = synthesizeMatchQuestion(unusedVocab, `${sessionId}:match`);
+    if (match) {
+      matchQuestions.push(match);
+      for (const pair of match.pairs) usedNodeIds.add(pair.nodeId);
+    }
+  }
+
+  const shadowListenQuestions: ExerciseQuestion[] = [];
+  const usedSlots = () =>
+    primaryQuestions.length + authoredQuestions.length + matchQuestions.length + shadowListenQuestions.length;
+  if (usedSlots() < length) {
+    const shadowRand = createRng(`${sessionId}:shadow`);
+    const shadowCandidates = seededShuffle(
+      poolNodes.filter((n) => !usedNodeIds.has(n.id) && (n.type === "VOCAB" || n.type === "SENTENCE_PATTERN")),
+      shadowRand,
+    );
+    for (const node of shadowCandidates) {
+      if (usedSlots() >= length) break;
+      const q = synthesizeShadowListenQuestion(node, sessionId);
+      if (q) shadowListenQuestions.push(q);
+    }
+  }
+
+  const all: PracticeQuestion[] = [
+    ...primaryQuestions,
+    ...authoredQuestions,
+    ...matchQuestions,
+    ...shadowListenQuestions,
+  ];
+  return seededShuffle(all, createRng(`${sessionId}:order`)).slice(0, length);
 }
 
 async function resolvePool(

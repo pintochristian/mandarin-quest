@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { cn, normalizeAnswer } from "@/lib/utils";
+import { cn, normalizePinyinAnswer } from "@/lib/utils";
 
 export function TypePinyinMode({
   instructions,
@@ -22,8 +22,8 @@ export function TypePinyinMode({
 
   function check() {
     const isCorrect = acceptablePinyin
-      .map(normalizeAnswer)
-      .includes(normalizeAnswer(value));
+      .map(normalizePinyinAnswer)
+      .includes(normalizePinyinAnswer(value));
     setChecked(isCorrect);
     onAnswered(isCorrect);
   }

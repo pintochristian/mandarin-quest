@@ -12,11 +12,13 @@ export type WordBankEntry = {
   category: WordBankCategory;
   masteryScore: number;
   repetitions: number;
+  enrolledAt: Date;
   lastReviewedAt: Date | null;
   nextReviewAt: Date;
   introducedIn: {
     lessonId: string;
     lessonTitle: string;
+    moduleId: string;
     moduleTitle: string;
     levelIndex: number;
   } | null;
@@ -29,6 +31,7 @@ export type WordBankEntry = {
 export type WordBankFilters = {
   category?: WordBankCategory;
   lessonId?: string;
+  moduleId?: string;
   levelIndex?: number;
   search?: string;
 };
@@ -37,7 +40,7 @@ type LessonRef = {
   id: string;
   title: string;
   index: number;
-  module: { title: string; index: number; level: { index: number } };
+  module: { id: string; title: string; index: number; level: { index: number } };
 };
 
 /**
@@ -45,7 +48,11 @@ type LessonRef = {
  * (UserNodeMastery, KnowledgeNode, LessonNode, PracticeAttempt,
  * MistakeLog) — there is no new "word bank" table. Everything is scoped to
  * this user's own enrolled nodes (indexed on userId), never a full-graph
- * scan.
+ * scan. The result is not paginated here — a learner's own vocabulary is
+ * inherently bounded (never the whole course graph), so the full derived
+ * set is small enough to compute in one request; the /words UI does its
+ * own progressive client-side reveal so the DOM never renders hundreds of
+ * cards at once.
  */
 export async function getWordBank(
   userId: string,
@@ -75,7 +82,12 @@ export async function getWordBank(
             title: true,
             index: true,
             module: {
-              select: { title: true, index: true, level: { select: { index: true } } },
+              select: {
+                id: true,
+                title: true,
+                index: true,
+                level: { select: { index: true } },
+              },
             },
           },
         },
@@ -104,7 +116,9 @@ export async function getWordBank(
   // Example sentences: dialogue-line SENTENCE_PATTERN nodes linked to the
   // same lesson that introduced the word, matched by substring — no new
   // schema, reuses the sentence nodes already created by the import
-  // pipeline for every dialogue line.
+  // pipeline for every dialogue line. If no sentence actually contains the
+  // word, exampleSentence stays null and the UI hides the field entirely
+  // rather than showing an unrelated sentence.
   const sentenceLinks = introducingLessonIds.length
     ? await db.lessonNode.findMany({
         where: {
@@ -155,9 +169,7 @@ export async function getWordBank(
     const introLesson = introducedInByNode.get(row.nodeId) ?? null;
     const sentences = introLesson ? (sentencesByLesson.get(introLesson.id) ?? []) : [];
     const bestSentence =
-      sentences.find((s) => vocabData && s.script.includes(vocabData.script)) ??
-      sentences[0] ??
-      null;
+      sentences.find((s) => vocabData && s.script.includes(vocabData.script)) ?? null;
     const total = totalByNode.get(row.nodeId) ?? 0;
     const correct = correctByNode.get(row.nodeId) ?? 0;
 
@@ -170,12 +182,14 @@ export async function getWordBank(
       category: categorizeWord(row),
       masteryScore: row.masteryScore,
       repetitions: row.repetitions,
+      enrolledAt: row.createdAt,
       lastReviewedAt: row.lastReviewedAt,
       nextReviewAt: row.nextReviewAt,
       introducedIn: introLesson
         ? {
             lessonId: introLesson.id,
             lessonTitle: introLesson.title,
+            moduleId: introLesson.module.id,
             moduleTitle: introLesson.module.title,
             levelIndex: introLesson.module.level.index,
           }
@@ -201,6 +215,7 @@ function isEarlier(a: LessonRef, b: LessonRef): boolean {
 function matchesFilters(entry: WordBankEntry, filters: WordBankFilters): boolean {
   if (filters.category && entry.category !== filters.category) return false;
   if (filters.lessonId && entry.introducedIn?.lessonId !== filters.lessonId) return false;
+  if (filters.moduleId && entry.introducedIn?.moduleId !== filters.moduleId) return false;
   if (filters.levelIndex !== undefined && entry.introducedIn?.levelIndex !== filters.levelIndex) {
     return false;
   }

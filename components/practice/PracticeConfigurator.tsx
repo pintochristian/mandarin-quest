@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PartyPopper } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ExerciseRenderer } from "@/components/lesson/exercises/ExerciseRenderer";
-import type { ExerciseRecord } from "@/lib/types/lesson";
+import { MatchPairsQuestion } from "@/components/practice/MatchPairsQuestion";
+import type { PracticeQuestion } from "@/lib/practice/synthesize";
 
 type PracticeSource =
   | { kind: "ALL" }
@@ -21,7 +22,8 @@ type PracticeSource =
   | { kind: "RECENT" }
   | { kind: "MASTERED" }
   | { kind: "MISTAKES" }
-  | { kind: "LEVEL"; levelIndex: number };
+  | { kind: "LEVEL"; levelIndex: number }
+  | { kind: "CUSTOM"; nodeIds: string[] };
 
 const SOURCE_OPTIONS: { value: string; label: string; source: PracticeSource }[] = [
   { value: "ALL", label: "Everything I've learned", source: { kind: "ALL" } },
@@ -33,14 +35,16 @@ const SOURCE_OPTIONS: { value: string; label: string; source: PracticeSource }[]
 
 const LENGTH_OPTIONS = [5, 10, 20] as const;
 
-type PracticeQuestion = { exerciseRecord: ExerciseRecord; nodeId: string; mode: string };
-
 type Phase = "config" | "running" | "empty" | "complete";
 
 export function PracticeConfigurator({ levels }: { levels: { index: number; title: string }[] }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const customNodeIds = searchParams.get("nodeIds")?.split(",").filter(Boolean) ?? [];
+  const isCustom = customNodeIds.length > 0;
+
   const [phase, setPhase] = useState<Phase>("config");
-  const [sourceValue, setSourceValue] = useState("ALL");
+  const [sourceValue, setSourceValue] = useState(isCustom ? "CUSTOM" : "ALL");
   const [levelIndex, setLevelIndex] = useState<number | null>(levels[0]?.index ?? null);
   const [length, setLength] = useState<number>(10);
   const [endless, setEndless] = useState(false);
@@ -55,6 +59,7 @@ export function PracticeConfigurator({ levels }: { levels: { index: number; titl
   const [startedAt, setStartedAt] = useState(Date.now());
 
   function resolveSource(): PracticeSource {
+    if (sourceValue === "CUSTOM") return { kind: "CUSTOM", nodeIds: customNodeIds };
     if (sourceValue === "LEVEL" && levelIndex !== null) {
       return { kind: "LEVEL", levelIndex };
     }
@@ -123,6 +128,21 @@ export function PracticeConfigurator({ levels }: { levels: { index: number; titl
     }
   }
 
+  function logAttempt(nodeId: string, mode: string, correct: boolean) {
+    if (!sessionId) return;
+    fetch("/api/practice/attempt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sessionId,
+        nodeId,
+        mode,
+        correct,
+        responseTimeMs: Date.now() - startedAt,
+      }),
+    }).catch(() => {});
+  }
+
   function handleAnswered(correct: boolean) {
     if (answeredThisRound) return;
     setAnsweredThisRound(true);
@@ -130,21 +150,23 @@ export function PracticeConfigurator({ levels }: { levels: { index: number; titl
     if (correct) setCorrectCount((c) => c + 1);
 
     const current = questions[index];
-    if (current && sessionId) {
-      fetch("/api/practice/attempt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sessionId,
-          nodeId: current.nodeId,
-          mode: current.mode,
-          correct,
-          responseTimeMs: Date.now() - startedAt,
-        }),
-      }).catch(() => {});
+    if (current && current.kind === "exercise") {
+      logAttempt(current.nodeId, current.mode, correct);
     }
 
     if (correct) setTimeout(() => advance(), 500);
+  }
+
+  function handleMatchPairAttempt(nodeId: string, correct: boolean) {
+    logAttempt(nodeId, "MATCH_PAIRS", correct);
+  }
+
+  function handleMatchComplete() {
+    if (answeredThisRound) return;
+    setAnsweredThisRound(true);
+    setLastCorrect(true);
+    setCorrectCount((c) => c + 1);
+    setTimeout(() => advance(), 500);
   }
 
   if (phase === "config") {
@@ -152,26 +174,44 @@ export function PracticeConfigurator({ levels }: { levels: { index: number; titl
       <div className="space-y-4">
         <Card className="space-y-3 rounded-2xl p-4">
           <p className="text-sm font-medium">What do you want to practice?</p>
-          <Select
-            value={sourceValue}
-            onValueChange={(v) => {
-              setSourceValue(v);
-            }}
-          >
-            <SelectTrigger className="w-full rounded-xl">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {SOURCE_OPTIONS.map((o) => (
-                <SelectItem key={o.value} value={o.value}>
-                  {o.label}
-                </SelectItem>
-              ))}
-              {levels.length > 0 && <SelectItem value="LEVEL">A specific level</SelectItem>}
-            </SelectContent>
-          </Select>
+          {isCustom ? (
+            <div className="flex items-center justify-between rounded-xl border px-3 py-2">
+              <span className="text-sm">
+                {customNodeIds.length} selected word{customNodeIds.length === 1 ? "" : "s"}
+              </span>
+              <button
+                type="button"
+                className="text-xs text-primary underline"
+                onClick={() => {
+                  setSourceValue("ALL");
+                  router.replace("/practice");
+                }}
+              >
+                Change
+              </button>
+            </div>
+          ) : (
+            <Select
+              value={sourceValue}
+              onValueChange={(v) => {
+                setSourceValue(v);
+              }}
+            >
+              <SelectTrigger className="w-full rounded-xl">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {SOURCE_OPTIONS.map((o) => (
+                  <SelectItem key={o.value} value={o.value}>
+                    {o.label}
+                  </SelectItem>
+                ))}
+                {levels.length > 0 && <SelectItem value="LEVEL">A specific level</SelectItem>}
+              </SelectContent>
+            </Select>
+          )}
 
-          {sourceValue === "LEVEL" && levels.length > 0 && (
+          {!isCustom && sourceValue === "LEVEL" && levels.length > 0 && (
             <Select
               value={String(levelIndex ?? levels[0].index)}
               onValueChange={(v) => setLevelIndex(Number(v))}
@@ -276,11 +316,20 @@ export function PracticeConfigurator({ levels }: { levels: { index: number; titl
       <p className="text-center text-xs text-muted-foreground">
         {endless ? `Question ${index + 1}` : `Question ${index + 1} of ${questions.length}`}
       </p>
-      <ExerciseRenderer
-        key={current.exerciseRecord.id}
-        exercise={current.exerciseRecord}
-        onAnswered={handleAnswered}
-      />
+      {current.kind === "exercise" ? (
+        <ExerciseRenderer
+          key={current.exerciseRecord.id}
+          exercise={current.exerciseRecord}
+          onAnswered={handleAnswered}
+        />
+      ) : (
+        <MatchPairsQuestion
+          key={current.pairs.map((p) => p.nodeId).join(",")}
+          pairs={current.pairs}
+          onPairMatched={handleMatchPairAttempt}
+          onComplete={handleMatchComplete}
+        />
+      )}
       {answeredThisRound && lastCorrect === false && (
         <Button size="lg" className="w-full rounded-full" onClick={() => advance()}>
           Continue

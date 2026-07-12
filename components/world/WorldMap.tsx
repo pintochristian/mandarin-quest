@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Lock, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Lock, CheckCircle2, ChevronDown, Circle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { WorldIcon } from "@/components/world/WorldIcon";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,7 @@ import type { WorldMapModule } from "@/lib/world-map";
 
 export function WorldMap({ modules }: { modules: WorldMapModule[] }) {
   const frontierIndex = modules.findIndex((m) => m.status === "unlocked-active");
+  const [expandedModuleId, setExpandedModuleId] = useState<string | null>(null);
 
   const grouped = modules.reduce<Record<string, WorldMapModule[]>>((acc, mod) => {
     (acc[mod.levelTitle] ??= []).push(mod);
@@ -27,10 +29,14 @@ export function WorldMap({ modules }: { modules: WorldMapModule[] }) {
             {mods.map((mod) => {
               const isFrontier = modules.indexOf(mod) === frontierIndex;
               const locked = mod.status === "locked";
+              const hasLessons = mod.lessons.length > 0;
+              const hasAnyCompleted = mod.lessons.some((l) => l.completed);
               const href =
                 !locked && mod.lessons[0]
                   ? `/lesson/${mod.lessons.find((l) => !l.completed)?.id ?? mod.lessons[0].id}`
                   : undefined;
+              const canPickLesson = !locked && hasLessons && mod.lessons.length > 1 && hasAnyCompleted;
+              const isExpanded = expandedModuleId === mod.id;
 
               const content = (
                 <Card
@@ -65,6 +71,23 @@ export function WorldMap({ modules }: { modules: WorldMapModule[] }) {
                         : `${mod.lessons.filter((l) => l.completed).length}/${mod.lessons.length} lessons`}
                     </p>
                   </div>
+                  {canPickLesson && (
+                    <button
+                      type="button"
+                      aria-label={isExpanded ? "Hide lesson list" : "Choose a lesson"}
+                      aria-expanded={isExpanded}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setExpandedModuleId(isExpanded ? null : mod.id);
+                      }}
+                      className="flex size-8 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    >
+                      <ChevronDown
+                        className={cn("size-5 transition-transform", isExpanded && "rotate-180")}
+                      />
+                    </button>
+                  )}
                 </Card>
               );
 
@@ -74,8 +97,39 @@ export function WorldMap({ modules }: { modules: WorldMapModule[] }) {
                   initial={{ opacity: 0, y: 8, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.25 }}
+                  className="sm:col-span-1"
                 >
                   {href ? <Link href={href}>{content}</Link> : content}
+                  <AnimatePresence initial={false}>
+                    {canPickLesson && isExpanded && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-2 space-y-1 rounded-2xl border bg-card/50 p-2">
+                          {mod.lessons.map((lesson, i) => (
+                            <Link
+                              key={lesson.id}
+                              href={`/lesson/${lesson.id}`}
+                              className="flex items-center gap-2 rounded-xl px-2 py-2 text-sm hover:bg-secondary"
+                            >
+                              {lesson.completed ? (
+                                <CheckCircle2 className="size-4 shrink-0 text-primary" />
+                              ) : (
+                                <Circle className="size-4 shrink-0 text-muted-foreground/50" />
+                              )}
+                              <span className="min-w-0 flex-1 truncate">
+                                {i + 1}. {lesson.title}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               );
             })}

@@ -113,7 +113,7 @@ export function WorldMap({ modules }: { modules: WorldMapModule[] }) {
                           {mod.lessons.map((lesson, i) => (
                             <Link
                               key={lesson.id}
-                              href={`/lesson/${lesson.id}`}
+                              href={`/lesson/${lesson.id}?start=content`}
                               className="flex items-center gap-2 rounded-xl px-2 py-2 text-sm hover:bg-secondary"
                             >
                               {lesson.completed ? (

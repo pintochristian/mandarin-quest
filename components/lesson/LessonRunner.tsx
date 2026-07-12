@@ -46,30 +46,45 @@ const PRACTICE_MODE_OPTIONS: { value: PracticeMode; label: string }[] = [
 export function LessonRunner({
   lesson,
   aiAvailable,
+  skipReview = false,
 }: {
   lesson: LessonDetail;
   aiAvailable: boolean;
+  skipReview?: boolean;
 }) {
   const router = useRouter();
-  const [stepIndex, setStepIndex] = useState(0);
+  const exercises = asExerciseRecords(lesson);
+  const dialogue = lesson.dialogues[0];
+
+  // Steps whose content the lesson doesn't have are skipped rather than
+  // shown blank — this mirrors the pre-existing AI_CONVERSATION skip and
+  // is what lets `skipReview` land cleanly on the first real content step
+  // instead of assuming GRAMMAR always applies.
+  function firstValidStepFrom(index: number) {
+    let n = index;
+    while (
+      n < STEPS.length - 1 &&
+      ((STEPS[n] === "AI_CONVERSATION" && !aiAvailable) ||
+        (STEPS[n] === "GRAMMAR" && !lesson.primaryGrammarConcept) ||
+        ((STEPS[n] === "DIALOGUE" || STEPS[n] === "DIALOGUE_BREAKDOWN") && !dialogue))
+    ) {
+      n += 1;
+    }
+    return n;
+  }
+
+  const [stepIndex, setStepIndex] = useState(() =>
+    skipReview ? firstValidStepFrom(1) : 0,
+  );
   const [score, setScore] = useState(0);
   const practiceMode = useSettingsStore((s) => s.practiceMode);
   const setPracticeMode = useSettingsStore((s) => s.setPracticeMode);
 
   const step = STEPS[stepIndex];
   const progressPct = Math.round((stepIndex / (STEPS.length - 1)) * 100);
-  const exercises = asExerciseRecords(lesson);
-  const dialogue = lesson.dialogues[0];
 
   function next() {
-    setStepIndex((i) => {
-      let n = i + 1;
-      // No AI provider connected, or the learner turned AI off — go
-      // straight from exercises to SRS enrollment rather than showing a
-      // step that leads into an AI chat window.
-      if (STEPS[n] === "AI_CONVERSATION" && !aiAvailable) n += 1;
-      return Math.min(n, STEPS.length - 1);
-    });
+    setStepIndex((i) => Math.min(firstValidStepFrom(i + 1), STEPS.length - 1));
   }
 
   return (

@@ -12,7 +12,7 @@ import { TypePinyinMode } from "@/components/lesson/exercises/speaking-modes/Typ
 import { DialogueChoiceMode } from "@/components/lesson/exercises/speaking-modes/DialogueChoiceMode";
 import { ShadowListenMode } from "@/components/lesson/exercises/speaking-modes/ShadowListenMode";
 import { AiTextChatMode } from "@/components/lesson/exercises/speaking-modes/AiTextChatMode";
-import { MicSpeakingMode } from "@/components/lesson/exercises/speaking-modes/MicSpeakingMode";
+import { MicSpeakingModeLazy } from "@/components/lesson/exercises/speaking-modes/MicSpeakingModeLazy";
 
 const MODE_LABEL: Record<InteractionMode, string> = {
   MIC_SPEAKING: "Speak it",
@@ -114,7 +114,7 @@ export function SpeakingExercise({
         <AiTextChatMode scenario={data.aiScenarioPrompt} onAnswered={onAnswered} />
       )}
       {mode === "MIC_SPEAKING" && (
-        <MicSpeakingMode
+        <MicSpeakingModeLazy
           exerciseId={exerciseId}
           targetScript={data.targetScript}
           targetRomanization={data.targetRomanization}

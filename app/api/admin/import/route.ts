@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 import { getAdminUserId } from "@/lib/session";
 import { levelContentSchema, levelOutlineSchema } from "@/lib/validation/content";
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
     body.kind === "full"
       ? await importFullyAuthoredLevel(language.id, parsed.data as never)
       : await importOutlineLevel(language.id, parsed.data as never);
+  revalidateTag("course-content");
 
   return NextResponse.json({ level: dbLevel });
 }

@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { db } from "@/lib/db";
 import { decayedMasteryScore } from "@/lib/srs/decay";
 import type { KnowledgeNodeType } from "@/lib/generated/prisma/enums";
@@ -5,14 +6,52 @@ import type { KnowledgeNodeType } from "@/lib/generated/prisma/enums";
 /** An SRS item counts as "mastered" once it's survived 2+ successful reviews. */
 const MASTERED_REPETITIONS = 2;
 
-async function masteryRatio(userId: string, nodeType: KnowledgeNodeType) {
-  const items = await db.userNodeMastery.findMany({
-    where: { userId, node: { type: nodeType } },
-    select: { repetitions: true },
-  });
-  if (items.length === 0) return 0;
-  const mastered = items.filter((i) => i.repetitions >= MASTERED_REPETITIONS).length;
-  return mastered / items.length;
+type MasteryRow = {
+  repetitions: number;
+  masteryScore: number;
+  intervalDays: number;
+  nextReviewAt: Date;
+  node: { type: KnowledgeNodeType };
+};
+
+/**
+ * Both getUserStats and getMemoryScore need "this user's UserNodeMastery
+ * rows" and "this user's SpeakingAttempt rows" — previously each fetched
+ * these independently (6 queries + 2 queries = 8 total whenever a page,
+ * like Profile, calls both). `cache()` is React's per-request dedup: the
+ * underlying Prisma query runs once per request no matter how many times
+ * these are called, and never leaks between users/requests the way a
+ * module-level cache would.
+ */
+const getMasteryRows = cache((userId: string): Promise<MasteryRow[]> =>
+  db.userNodeMastery.findMany({
+    where: { userId },
+    select: {
+      repetitions: true,
+      masteryScore: true,
+      intervalDays: true,
+      nextReviewAt: true,
+      node: { select: { type: true } },
+    },
+  }),
+);
+
+const getSpeakingAttempts = cache((userId: string) =>
+  db.speakingAttempt.findMany({ where: { userId }, select: { accuracyScore: true } }),
+);
+
+function byType(rows: MasteryRow[], type: KnowledgeNodeType) {
+  return rows.filter((r) => r.node.type === type);
+}
+
+function masteryRatio(rows: MasteryRow[]) {
+  if (rows.length === 0) return 0;
+  return rows.filter((r) => r.repetitions >= MASTERED_REPETITIONS).length / rows.length;
+}
+
+function pronunciationFrom(attempts: { accuracyScore: number | null }[]) {
+  if (attempts.length === 0) return 0;
+  return attempts.reduce((sum, a) => sum + (a.accuracyScore ?? 0), 0) / attempts.length;
 }
 
 export type UserStats = {
@@ -26,43 +65,28 @@ export type UserStats = {
 };
 
 export async function getUserStats(userId: string): Promise<UserStats> {
-  const [
-    grammarMastery,
-    vocabularyMastery,
-    listeningMastery,
-    speakingAttempts,
-    wordsLearned,
-    grammarItems,
-  ] = await Promise.all([
-    masteryRatio(userId, "GRAMMAR"),
-    masteryRatio(userId, "VOCAB"),
-    masteryRatio(userId, "SENTENCE_PATTERN"),
-    db.speakingAttempt.findMany({ where: { userId }, select: { accuracyScore: true } }),
-    db.userNodeMastery.count({ where: { userId, node: { type: "VOCAB" } } }),
-    db.userNodeMastery.findMany({
-      where: { userId, node: { type: "GRAMMAR" } },
-      select: { repetitions: true },
-    }),
+  const [rows, speakingAttempts] = await Promise.all([
+    getMasteryRows(userId),
+    getSpeakingAttempts(userId),
   ]);
 
-  const pronunciationScore =
-    speakingAttempts.length === 0
-      ? 0
-      : speakingAttempts.reduce((sum, a) => sum + (a.accuracyScore ?? 0), 0) /
-        speakingAttempts.length;
+  const grammarRows = byType(rows, "GRAMMAR");
+  const vocabRows = byType(rows, "VOCAB");
+  const listeningRows = byType(rows, "SENTENCE_PATTERN");
 
-  const grammarRulesMastered = grammarItems.filter(
-    (g) => g.repetitions >= MASTERED_REPETITIONS,
-  ).length;
+  const grammarMastery = masteryRatio(grammarRows);
+  const vocabularyMastery = masteryRatio(vocabRows);
+  const listeningMastery = masteryRatio(listeningRows);
 
   return {
     grammarMastery,
     vocabularyMastery,
     listeningMastery,
     conversationMastery: (grammarMastery + vocabularyMastery + listeningMastery) / 3,
-    pronunciationScore,
-    wordsLearned,
-    grammarRulesMastered,
+    pronunciationScore: pronunciationFrom(speakingAttempts),
+    wordsLearned: vocabRows.length,
+    grammarRulesMastered: grammarRows.filter((r) => r.repetitions >= MASTERED_REPETITIONS)
+      .length,
   };
 }
 
@@ -84,22 +108,14 @@ export type MemoryScore = {
  * I actually still know right now," not "how much did I ever learn."
  */
 export async function getMemoryScore(userId: string): Promise<MemoryScore> {
-  const [masteries, speakingAttempts] = await Promise.all([
-    db.userNodeMastery.findMany({
-      where: { userId },
-      select: {
-        masteryScore: true,
-        intervalDays: true,
-        nextReviewAt: true,
-        node: { select: { type: true } },
-      },
-    }),
-    db.speakingAttempt.findMany({ where: { userId }, select: { accuracyScore: true } }),
+  const [rows, speakingAttempts] = await Promise.all([
+    getMasteryRows(userId),
+    getSpeakingAttempts(userId),
   ]);
 
   const now = new Date();
-  const decayedByType = (types: KnowledgeNodeType[]) => {
-    const items = masteries.filter((m) => types.includes(m.node.type));
+  const decayedByType = (type: KnowledgeNodeType) => {
+    const items = byType(rows, type);
     if (items.length === 0) return 0;
     const sum = items.reduce(
       (s, m) => s + decayedMasteryScore(m.masteryScore, m.intervalDays, m.nextReviewAt, now),
@@ -108,20 +124,16 @@ export async function getMemoryScore(userId: string): Promise<MemoryScore> {
     return sum / items.length;
   };
 
-  const grammar = decayedByType(["GRAMMAR"]);
-  const vocabulary = decayedByType(["VOCAB"]);
-  const listening = decayedByType(["SENTENCE_PATTERN"]);
+  const grammar = decayedByType("GRAMMAR");
+  const vocabulary = decayedByType("VOCAB");
+  const listening = decayedByType("SENTENCE_PATTERN");
   const conversation = (grammar + vocabulary + listening) / 3;
-  const pronunciation =
-    speakingAttempts.length === 0
-      ? 0
-      : speakingAttempts.reduce((s, a) => s + (a.accuracyScore ?? 0), 0) /
-        speakingAttempts.length;
+  const pronunciation = pronunciationFrom(speakingAttempts);
 
   const reviewHealth =
-    masteries.length === 0
+    rows.length === 0
       ? 1
-      : masteries.reduce((sum, m) => {
+      : rows.reduce((sum, m) => {
           const decayed = decayedMasteryScore(
             m.masteryScore,
             m.intervalDays,
@@ -130,7 +142,7 @@ export async function getMemoryScore(userId: string): Promise<MemoryScore> {
           );
           const raw = Math.max(m.masteryScore, 1e-6);
           return sum + Math.min(1, decayed / raw);
-        }, 0) / masteries.length;
+        }, 0) / rows.length;
 
   const overall = (grammar + vocabulary + listening + pronunciation + reviewHealth) / 5;
 

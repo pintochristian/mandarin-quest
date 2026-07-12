@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { getAnalytics } from "@/lib/admin/analytics";
-import { CompletionTrendChart } from "@/components/admin/CompletionTrendChart";
+import { CompletionTrendChartLazy } from "@/components/admin/CompletionTrendChartLazy";
 
 export default async function AdminDashboardPage() {
   const analytics = await getAnalytics();
@@ -26,7 +26,7 @@ export default async function AdminDashboardPage() {
 
       <Card className="rounded-2xl p-4">
         <p className="mb-2 text-sm font-medium">Lesson completions, last 14 days</p>
-        <CompletionTrendChart data={analytics.completionTrend} />
+        <CompletionTrendChartLazy data={analytics.completionTrend} />
       </Card>
 
       <Card className="rounded-2xl p-4">

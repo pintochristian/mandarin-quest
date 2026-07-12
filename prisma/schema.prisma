@@ -536,6 +536,7 @@ model MistakeLog {
   createdAt DateTime @default(now())
 
   @@index([userId, mistakeType])
+  @@index([userId, nodeId])
 }
 
 model AiTutorSession {

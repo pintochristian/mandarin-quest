@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChatWindow } from "@/components/ai-tutor/ChatWindow";
+import { ChatWindowLazy } from "@/components/ai-tutor/ChatWindowLazy";
 
 export function AiTextChatMode({
   scenario,
@@ -15,7 +15,7 @@ export function AiTextChatMode({
       <p className="text-center text-sm font-medium text-muted-foreground">
         AI conversation practice
       </p>
-      <ChatWindow openingPrompt={scenario} />
+      <ChatWindowLazy openingPrompt={scenario} />
       <Button className="w-full rounded-full" onClick={() => onAnswered(true)}>
         Continue
       </Button>

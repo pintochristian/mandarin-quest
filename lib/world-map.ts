@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { db } from "@/lib/db";
 import { getWeakNodes, describeWeakNodes } from "@/lib/adaptive/recommend";
 
@@ -14,6 +15,60 @@ export type WorldMapModule = {
   status: "locked" | "unlocked-empty" | "unlocked-active" | "completed";
 };
 
+type CourseStructureLesson = { id: string; title: string; estimatedMinutes: number };
+type CourseStructureModule = {
+  id: string;
+  key: string;
+  title: string;
+  description: string;
+  worldIcon: string | null;
+  worldTheme: string | null;
+  lessons: CourseStructureLesson[];
+};
+type CourseStructureLevel = {
+  title: string;
+  index: number;
+  modules: CourseStructureModule[];
+};
+
+/**
+ * The level → module → lesson structure is identical for every learner and
+ * only changes when an admin edits content — it does not belong in a
+ * per-request query. Cached under the "course-content" tag; admin content
+ * mutations (lib/content/import.ts, the lesson publish/delete routes) call
+ * `revalidateTag("course-content")` to invalidate it on demand instead of
+ * waiting out the fallback revalidate window.
+ */
+const getCourseStructure = unstable_cache(
+  async (): Promise<CourseStructureLevel[]> => {
+    return db.level.findMany({
+      orderBy: { index: "asc" },
+      select: {
+        title: true,
+        index: true,
+        modules: {
+          orderBy: { index: "asc" },
+          select: {
+            id: true,
+            key: true,
+            title: true,
+            description: true,
+            worldIcon: true,
+            worldTheme: true,
+            lessons: {
+              where: { isPublished: true },
+              orderBy: { index: "asc" },
+              select: { id: true, title: true, estimatedMinutes: true },
+            },
+          },
+        },
+      },
+    });
+  },
+  ["course-structure"],
+  { tags: ["course-content"], revalidate: 3600 },
+);
+
 /**
  * The RPG "world map": every module across every level, in order, with
  * unlock state computed from the learner's progress. A module unlocks once
@@ -23,21 +78,19 @@ export type WorldMapModule = {
  * than fake-locking content that simply hasn't been authored yet.
  */
 export async function getWorldMap(userId: string): Promise<WorldMapModule[]> {
-  const levels = await db.level.findMany({
-    orderBy: { index: "asc" },
-    include: {
-      modules: {
-        orderBy: { index: "asc" },
-        include: {
-          lessons: {
-            where: { isPublished: true },
-            orderBy: { index: "asc" },
-            include: { userProgress: { where: { userId } } },
-          },
-        },
-      },
-    },
+  const levels = await getCourseStructure();
+  const lessonIds = levels.flatMap((level) =>
+    level.modules.flatMap((mod) => mod.lessons.map((l) => l.id)),
+  );
+
+  // The only genuinely per-user, per-request piece: which of these lessons
+  // has this learner completed. A single small indexed query instead of
+  // re-deriving the whole course structure every time.
+  const completedProgress = await db.userLessonProgress.findMany({
+    where: { userId, lessonId: { in: lessonIds }, status: "COMPLETED" },
+    select: { lessonId: true },
   });
+  const completedIds = new Set(completedProgress.map((p) => p.lessonId));
 
   const flatModules = levels.flatMap((level) =>
     level.modules.map((mod) => ({
@@ -53,7 +106,7 @@ export async function getWorldMap(userId: string): Promise<WorldMapModule[]> {
         id: l.id,
         title: l.title,
         estimatedMinutes: l.estimatedMinutes,
-        completed: l.userProgress.some((p) => p.status === "COMPLETED"),
+        completed: completedIds.has(l.id),
       })),
     })),
   );

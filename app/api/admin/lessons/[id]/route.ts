@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { getAdminUserId } from "@/lib/session";
@@ -19,6 +20,7 @@ export async function PATCH(
     where: { id },
     data: { isPublished: body.isPublished },
   });
+  revalidateTag("course-content");
 
   return NextResponse.json({ lesson });
 }
@@ -32,6 +34,7 @@ export async function DELETE(
 
   const { id } = await params;
   await db.lesson.delete({ where: { id } });
+  revalidateTag("course-content");
 
   return NextResponse.json({ ok: true });
 }

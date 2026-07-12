@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChatWindow } from "@/components/ai-tutor/ChatWindow";
+import { ChatWindowLazy } from "@/components/ai-tutor/ChatWindowLazy";
 import type { LessonDetail } from "@/lib/types/lesson";
 
 export function AiConversationStep({
@@ -18,7 +18,7 @@ export function AiConversationStep({
         <h2 className="text-2xl font-semibold tracking-tight">AI Conversation</h2>
       </div>
 
-      <ChatWindow
+      <ChatWindowLazy
         lessonId={lesson.id}
         openingPrompt={`Say hello and try out what you just learned about ${lesson.situationTag}.`}
       />

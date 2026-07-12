@@ -3,7 +3,7 @@ import { requireOnboardedUserId } from "@/lib/session";
 import { getUserStats, getMemoryScore } from "@/lib/stats";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { MasteryRadar } from "@/components/profile/MasteryRadar";
+import { MasteryRadarLazy } from "@/components/profile/MasteryRadarLazy";
 import { AchievementIcon } from "@/components/profile/AchievementIcon";
 import { BottomNav } from "@/components/nav/BottomNav";
 import { cn } from "@/lib/utils";
@@ -53,7 +53,7 @@ export default async function ProfilePage() {
       </Card>
 
       <Card className="rounded-3xl p-4">
-        <MasteryRadar data={radarData} />
+        <MasteryRadarLazy data={radarData} />
       </Card>
 
       <div className="grid grid-cols-2 gap-3">

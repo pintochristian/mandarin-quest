@@ -11,9 +11,11 @@ import type { ExerciseRecord } from "@/lib/types/lesson";
 
 export function ExerciseRenderer({
   exercise,
+  aiAvailable = true,
   onAnswered,
 }: {
   exercise: ExerciseRecord;
+  aiAvailable?: boolean;
   onAnswered: (correct: boolean) => void;
 }) {
   switch (exercise.type) {
@@ -90,6 +92,7 @@ export function ExerciseRenderer({
           prompt={exercise.prompt}
           data={exercise.data}
           supportedModes={exercise.supportedModes}
+          aiAvailable={aiAvailable}
           onAnswered={onAnswered}
         />
       );

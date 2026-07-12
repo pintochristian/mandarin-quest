@@ -43,7 +43,13 @@ const PRACTICE_MODE_OPTIONS: { value: PracticeMode; label: string }[] = [
   { value: "LISTENING_ONLY", label: "Listening-only" },
 ];
 
-export function LessonRunner({ lesson }: { lesson: LessonDetail }) {
+export function LessonRunner({
+  lesson,
+  aiAvailable,
+}: {
+  lesson: LessonDetail;
+  aiAvailable: boolean;
+}) {
   const router = useRouter();
   const [stepIndex, setStepIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -56,7 +62,14 @@ export function LessonRunner({ lesson }: { lesson: LessonDetail }) {
   const dialogue = lesson.dialogues[0];
 
   function next() {
-    setStepIndex((i) => Math.min(i + 1, STEPS.length - 1));
+    setStepIndex((i) => {
+      let n = i + 1;
+      // No AI provider connected, or the learner turned AI off — go
+      // straight from exercises to SRS enrollment rather than showing a
+      // step that leads into an AI chat window.
+      if (STEPS[n] === "AI_CONVERSATION" && !aiAvailable) n += 1;
+      return Math.min(n, STEPS.length - 1);
+    });
   }
 
   return (
@@ -109,13 +122,14 @@ export function LessonRunner({ lesson }: { lesson: LessonDetail }) {
         {step === "EXERCISES" && (
           <ExercisesStep
             exercises={exercises}
+            aiAvailable={aiAvailable}
             onComplete={(finalScore) => {
               setScore(finalScore);
               next();
             }}
           />
         )}
-        {step === "AI_CONVERSATION" && (
+        {step === "AI_CONVERSATION" && aiAvailable && (
           <AiConversationStep lesson={lesson} onContinue={next} />
         )}
         {step === "SRS_ENROLLMENT" && (

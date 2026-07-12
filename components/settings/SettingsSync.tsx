@@ -23,6 +23,7 @@ export function SettingsSync() {
             showPinyin: data.settings.showPinyin,
             showEnglish: data.settings.showEnglish,
             speakingSensitivity: data.settings.speakingSensitivity,
+            aiEnabled: data.settings.aiEnabled,
           });
         }
       })

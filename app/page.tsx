@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import { Flame, Star } from "lucide-react";
+import Link from "next/link";
+import { Flame, Star, Dumbbell, BookMarked } from "lucide-react";
 import { db } from "@/lib/db";
 import { requireOnboardedUserId } from "@/lib/session";
 import { Card } from "@/components/ui/card";
@@ -49,6 +50,21 @@ export default async function Home() {
       <Suspense fallback={<Skeleton className="h-20 w-full rounded-2xl" />}>
         <ReviewCard userId={userId} />
       </Suspense>
+
+      <div className="grid grid-cols-2 gap-3">
+        <Link href="/practice">
+          <Card className="items-center gap-2 rounded-2xl p-4 text-center transition-colors hover:border-primary/50">
+            <Dumbbell className="size-5 text-primary" />
+            <p className="text-sm font-medium">Practice Anytime</p>
+          </Card>
+        </Link>
+        <Link href="/words">
+          <Card className="items-center gap-2 rounded-2xl p-4 text-center transition-colors hover:border-primary/50">
+            <BookMarked className="size-5 text-primary" />
+            <p className="text-sm font-medium">My Words</p>
+          </Card>
+        </Link>
+      </div>
 
       <Suspense fallback={<Skeleton className="h-40 w-full rounded-2xl" />}>
         <MasteryCard userId={userId} />

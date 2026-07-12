@@ -30,12 +30,14 @@ export function SpeakingExercise({
   prompt,
   data,
   supportedModes,
+  aiAvailable = true,
   onAnswered,
 }: {
   exerciseId: string;
   prompt: string;
   data: SpeakingData;
   supportedModes: InteractionMode[];
+  aiAvailable?: boolean;
   onAnswered: (correct: boolean) => void;
 }) {
   const practiceMode = useSettingsStore((s) => s.practiceMode);
@@ -50,10 +52,14 @@ export function SpeakingExercise({
 
   const [manualMode, setManualMode] = useState<InteractionMode | null>(null);
   const mode =
-    manualMode ?? resolveInteractionMode(practiceMode, supportedModes, micAvailable);
+    manualMode ??
+    resolveInteractionMode(practiceMode, supportedModes, micAvailable, aiAvailable);
 
   const switchableModes = supportedModes.filter(
-    (m) => m !== mode && (m !== "MIC_SPEAKING" || micAvailable),
+    (m) =>
+      m !== mode &&
+      (m !== "MIC_SPEAKING" || micAvailable) &&
+      (m !== "AI_TEXT_CHAT" || aiAvailable),
   );
 
   return (

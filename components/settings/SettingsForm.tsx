@@ -23,7 +23,7 @@ const PRACTICE_MODE_OPTIONS: { value: PracticeMode; label: string }[] = [
   { value: "LISTENING_ONLY", label: "Listening-only" },
 ];
 
-export function SettingsForm() {
+export function SettingsForm({ aiProviderConfigured }: { aiProviderConfigured: boolean }) {
   const { theme, setTheme } = useTheme();
   const practiceMode = useSettingsStore((s) => s.practiceMode);
   const setPracticeMode = useSettingsStore((s) => s.setPracticeMode);
@@ -35,6 +35,8 @@ export function SettingsForm() {
   const setAudioSpeed = useSettingsStore((s) => s.setAudioSpeed);
   const speakingSensitivity = useSettingsStore((s) => s.speakingSensitivity);
   const setSpeakingSensitivity = useSettingsStore((s) => s.setSpeakingSensitivity);
+  const aiEnabled = useSettingsStore((s) => s.aiEnabled);
+  const setAiEnabled = useSettingsStore((s) => s.setAiEnabled);
 
   return (
     <div className="space-y-4">
@@ -137,6 +139,25 @@ export function SettingsForm() {
           value={[speakingSensitivity]}
           onValueChange={([v]) => setSpeakingSensitivity(v)}
           onValueCommit={([v]) => patchSettings({ speakingSensitivity: v })}
+        />
+      </Card>
+
+      <Card className="flex-row items-center justify-between rounded-2xl p-4">
+        <div>
+          <Label htmlFor="ai-enabled">AI features</Label>
+          <p className="text-sm text-muted-foreground">
+            {aiProviderConfigured
+              ? "AI conversation practice and chat, in addition to the core course."
+              : "No AI provider is connected on this deployment — turning this on won't do anything yet."}
+          </p>
+        </div>
+        <Switch
+          id="ai-enabled"
+          checked={aiEnabled}
+          onCheckedChange={(checked) => {
+            setAiEnabled(checked);
+            patchSettings({ aiEnabled: checked });
+          }}
         />
       </Card>
     </div>

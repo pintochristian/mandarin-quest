@@ -49,12 +49,16 @@ export function resolveInteractionMode(
   practiceMode: PracticeMode,
   supportedModes: InteractionMode[],
   micAvailable: boolean,
+  aiAvailable: boolean = true,
 ): InteractionMode {
   const preferences = PREFERENCE_BY_PRACTICE_MODE[practiceMode];
   for (const mode of preferences) {
     if (mode === "MIC_SPEAKING" && !micAvailable) continue;
+    if (mode === "AI_TEXT_CHAT" && !aiAvailable) continue;
     if (supportedModes.includes(mode)) return mode;
   }
-  const fallback = supportedModes.find((m) => m !== "MIC_SPEAKING");
+  const fallback = supportedModes.find(
+    (m) => m !== "MIC_SPEAKING" && (m !== "AI_TEXT_CHAT" || aiAvailable),
+  );
   return fallback ?? supportedModes[0];
 }

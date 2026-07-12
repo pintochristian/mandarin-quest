@@ -28,6 +28,14 @@ export function isMockMode(): boolean {
   return !process.env.ANTHROPIC_API_KEY;
 }
 
+/** Deployment-level provider readiness — the inverse of isMockMode(), named
+ * for readability wherever the question is "is a provider configured at
+ * all" rather than "should this specific reply be mocked." See
+ * lib/ai-tutor/settings.ts for the learner-level opt-in this combines with. */
+export function hasAiProvider(): boolean {
+  return !isMockMode();
+}
+
 const MOCK_REPLIES = [
   "That's a good try! Can you say a bit more about that?",
   "很好 (hěn hǎo)! Let's keep going — what else can you tell me?",

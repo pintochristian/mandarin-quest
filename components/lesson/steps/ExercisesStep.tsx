@@ -8,9 +8,11 @@ import type { ExerciseRecord } from "@/lib/types/lesson";
 
 export function ExercisesStep({
   exercises,
+  aiAvailable,
   onComplete,
 }: {
   exercises: ExerciseRecord[];
+  aiAvailable: boolean;
   onComplete: (score: number) => void;
 }) {
   const [index, setIndex] = useState(0);
@@ -60,6 +62,7 @@ export function ExercisesStep({
       <ExerciseRenderer
         key={exercise.id}
         exercise={exercise}
+        aiAvailable={aiAvailable}
         onAnswered={handleAnswered}
       />
 

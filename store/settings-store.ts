@@ -13,12 +13,14 @@ type SettingsState = {
   showEnglish: boolean;
   audioSpeed: number;
   speakingSensitivity: number;
+  aiEnabled: boolean;
   hydrated: boolean;
   setPracticeMode: (mode: PracticeMode) => void;
   setShowPinyin: (show: boolean) => void;
   setShowEnglish: (show: boolean) => void;
   setAudioSpeed: (speed: number) => void;
   setSpeakingSensitivity: (value: number) => void;
+  setAiEnabled: (value: boolean) => void;
   hydrate: (settings: Partial<Omit<SettingsState, "hydrate" | "hydrated">>) => void;
 };
 
@@ -28,11 +30,13 @@ export const useSettingsStore = create<SettingsState>()((set) => ({
   showEnglish: true,
   audioSpeed: 1,
   speakingSensitivity: 0.5,
+  aiEnabled: false,
   hydrated: false,
   setPracticeMode: (mode) => set({ practiceMode: mode }),
   setShowPinyin: (show) => set({ showPinyin: show }),
   setShowEnglish: (show) => set({ showEnglish: show }),
   setAudioSpeed: (speed) => set({ audioSpeed: speed }),
   setSpeakingSensitivity: (value) => set({ speakingSensitivity: value }),
+  setAiEnabled: (value) => set({ aiEnabled: value }),
   hydrate: (settings) => set({ ...settings, hydrated: true }),
 }));

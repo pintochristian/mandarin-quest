@@ -19,7 +19,7 @@ describe("normalizeAnswer", () => {
     expect(normalizeAnswer("Nǐ hǎo?")).toBe(normalizeAnswer("nǐ  hǎo"));
   });
 
-  it("does NOT strip tone-mark diacritics — acceptablePinyin variants must be listed explicitly", () => {
-    expect(normalizeAnswer("nǐ hǎo")).not.toBe(normalizeAnswer("ni hao"));
+  it("strips tone-mark diacritics, so toneless typed pinyin matches a toned authored answer", () => {
+    expect(normalizeAnswer("nǐ hǎo")).toBe(normalizeAnswer("ni hao"));
   });
 });

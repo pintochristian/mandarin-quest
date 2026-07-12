@@ -8,6 +8,7 @@ export async function patchSettings(body: {
   showPinyin?: boolean;
   showEnglish?: boolean;
   speakingSensitivity?: number;
+  aiEnabled?: boolean;
 }) {
   await fetch("/api/settings", {
     method: "PATCH",

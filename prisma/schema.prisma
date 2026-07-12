@@ -213,6 +213,7 @@ model KnowledgeNode {
   mistakes          MistakeLog[]
   exercises         Exercise[]
   dialogues         Dialogue[]
+  practiceAttempts  PracticeAttempt[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -347,6 +348,7 @@ model User {
   speakingAttempts SpeakingAttempt[]
   aiTutorSessions  AiTutorSession[]
   mistakes         MistakeLog[]
+  practiceAttempts PracticeAttempt[]
   settings         UserSettings?
 
   createdAt DateTime @default(now())
@@ -539,6 +541,29 @@ model MistakeLog {
   @@index([userId, nodeId])
 }
 
+/// Voluntary "Practice Anytime" attempts — deliberately separate from
+/// UserNodeMastery/UserNodeMasteryLog so unlimited voluntary practice can
+/// never move nextReviewAt or otherwise affect formal SRS scheduling.
+/// Recent accuracy, practice count, and repeat-avoidance are all derived
+/// at read time from this table (lib/practice/*, lib/wordbank/*) rather
+/// than duplicating mastery state.
+model PracticeAttempt {
+  id             String   @id @default(cuid())
+  userId         String
+  nodeId         String
+  sessionId      String
+  mode           String
+  correct        Boolean
+  responseTimeMs Int?
+  createdAt      DateTime @default(now())
+
+  user User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  node KnowledgeNode @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+
+  @@index([userId, nodeId, createdAt])
+  @@index([userId, createdAt])
+}
+
 model AiTutorSession {
   id        String    @id @default(cuid())
   userId    String
@@ -573,6 +598,10 @@ model UserSettings {
   showPinyin          Boolean      @default(true)
   showEnglish         Boolean      @default(true)
   speakingSensitivity Float        @default(0.5)
+  // Learner-level opt-in, independent of whether an AI provider is actually
+  // configured (see lib/ai-tutor/client.ts's hasAiProvider()). Defaults off
+  // for every user so the core course never silently depends on AI.
+  aiEnabled           Boolean      @default(false)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

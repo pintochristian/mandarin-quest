@@ -31,7 +31,14 @@ export async function POST(request: Request) {
   const mistake = await db.mistakeLog.create({
     data: {
       userId,
-      exerciseId: body.exerciseId,
+      // Practice Anytime reuses these same exercise-rendering components
+      // with synthesized, non-persisted exercise ids (see lib/practice/) —
+      // an id that doesn't match a real Exercise row would otherwise
+      // violate the exerciseId foreign key here. Falls back to null
+      // rather than crash; Practice Anytime's own PracticeAttempt log
+      // (with an accurate nodeId) is the primary mistake signal for
+      // voluntary practice anyway.
+      exerciseId: exercise ? body.exerciseId : null,
       nodeId: exercise?.primaryNodeId ?? null,
       mistakeType,
       detail,

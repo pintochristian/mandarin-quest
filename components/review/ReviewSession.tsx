@@ -68,21 +68,27 @@ export function ReviewSession() {
         <PartyPopper className="size-12 text-primary" />
         <div className="space-y-1">
           <h1 className="text-2xl font-semibold tracking-tight">
-            {items.length === 0 ? "Nothing due right now" : "Review complete!"}
+            {items.length === 0 ? "Nothing due right now" : "Daily review complete."}
           </h1>
           <p className="text-sm text-muted-foreground">
             {items.length === 0
-              ? "Come back later, or start a new lesson."
-              : `You reviewed ${items.length} item${items.length === 1 ? "" : "s"}.`}
+              ? "Keep practising anytime."
+              : `You reviewed ${items.length} item${items.length === 1 ? "" : "s"}. Keep practising anytime.`}
           </p>
         </div>
-        <Button
-          size="lg"
-          className="w-full max-w-xs rounded-full"
-          onClick={() => router.push("/")}
-        >
-          Back home
-        </Button>
+        <div className="flex w-full max-w-xs flex-col gap-2">
+          <Button size="lg" className="w-full rounded-full" onClick={() => router.push("/practice")}>
+            Practice Anytime
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="w-full rounded-full"
+            onClick={() => router.push("/")}
+          >
+            Back home
+          </Button>
+        </div>
       </div>
     );
   }

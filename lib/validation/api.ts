@@ -65,4 +65,30 @@ export const updateSettingsSchema = z.object({
   showPinyin: z.boolean().optional(),
   showEnglish: z.boolean().optional(),
   speakingSensitivity: z.number().min(0).max(1).optional(),
+  aiEnabled: z.boolean().optional(),
+});
+
+export const practiceSourceSchema = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("ALL") }),
+  z.object({ kind: z.literal("WEAK") }),
+  z.object({ kind: z.literal("RECENT") }),
+  z.object({ kind: z.literal("MASTERED") }),
+  z.object({ kind: z.literal("MISTAKES") }),
+  z.object({ kind: z.literal("LESSON"), lessonId: z.string().min(1) }),
+  z.object({ kind: z.literal("MODULE"), moduleId: z.string().min(1) }),
+  z.object({ kind: z.literal("LEVEL"), levelIndex: z.number().int().min(1) }),
+  z.object({ kind: z.literal("CUSTOM"), nodeIds: z.array(z.string().min(1)).min(1) }),
+]);
+
+export const startPracticeSessionSchema = z.object({
+  source: practiceSourceSchema,
+  length: z.number().int().min(1).max(50),
+});
+
+export const logPracticeAttemptSchema = z.object({
+  sessionId: z.string().min(1),
+  nodeId: z.string().min(1),
+  mode: z.string().min(1),
+  correct: z.boolean(),
+  responseTimeMs: z.number().int().positive().optional(),
 });

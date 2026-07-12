@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   // the production bundle. This rewrites those imports to per-module
   // paths automatically.
   experimental: {
-    optimizePackageImports: ["lucide-react", "recharts"],
+    optimizePackageImports: ["lucide-react", "recharts", "radix-ui"],
   },
 };
 

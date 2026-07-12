@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { getMasteryRows } from "@/lib/stats";
 import { decayedMasteryScore } from "@/lib/srs/decay";
 import { getNodesWithRecurringMistakes } from "@/lib/mistakes/analyze";
 import type { KnowledgeNodeType } from "@/lib/generated/prisma/enums";
@@ -24,22 +24,15 @@ export type WeakNode = {
  * and the Review Health sub-score (lib/stats.ts).
  */
 export async function getWeakNodes(userId: string, limit = 5): Promise<WeakNode[]> {
-  const [masteries, mistakeNodes] = await Promise.all([
-    db.userNodeMastery.findMany({
-      // A node with no reviews yet has masteryScore 0 by default — that
-      // means "not yet assessed," not "forgotten," so it's excluded here.
-      // Only nodes that were actually reviewed at least once can be "weak."
-      where: { userId, lastReviewedAt: { not: null } },
-      select: {
-        nodeId: true,
-        masteryScore: true,
-        intervalDays: true,
-        nextReviewAt: true,
-        node: { select: { title: true, type: true } },
-      },
-    }),
+  const [allRows, mistakeNodes] = await Promise.all([
+    getMasteryRows(userId),
     getNodesWithRecurringMistakes(userId, limit),
   ]);
+
+  // A node with no reviews yet has masteryScore 0 by default — that means
+  // "not yet assessed," not "forgotten," so it's excluded here. Only nodes
+  // that were actually reviewed at least once can be "weak."
+  const masteries = allRows.filter((r) => r.lastReviewedAt !== null);
 
   const now = new Date();
   const byId = new Map<string, WeakNode>();

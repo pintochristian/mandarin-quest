@@ -6,32 +6,37 @@ import type { KnowledgeNodeType } from "@/lib/generated/prisma/enums";
 /** An SRS item counts as "mastered" once it's survived 2+ successful reviews. */
 const MASTERED_REPETITIONS = 2;
 
-type MasteryRow = {
+export type MasteryRow = {
+  nodeId: string;
   repetitions: number;
   masteryScore: number;
   intervalDays: number;
   nextReviewAt: Date;
-  node: { type: KnowledgeNodeType };
+  lastReviewedAt: Date | null;
+  node: { title: string; type: KnowledgeNodeType };
 };
 
 /**
- * Both getUserStats and getMemoryScore need "this user's UserNodeMastery
- * rows" and "this user's SpeakingAttempt rows" — previously each fetched
- * these independently (6 queries + 2 queries = 8 total whenever a page,
- * like Profile, calls both). `cache()` is React's per-request dedup: the
- * underlying Prisma query runs once per request no matter how many times
- * these are called, and never leaks between users/requests the way a
+ * Both getUserStats/getMemoryScore (this file) and getWeakNodes
+ * (lib/adaptive/recommend.ts) need "this user's UserNodeMastery rows" —
+ * previously each fetched its own copy, costing an extra full-table query
+ * whenever a request touched both (e.g. Home calls getUserStats and, via
+ * getNextLesson, getWeakNodes). `cache()` is React's per-request dedup: the
+ * underlying Prisma query runs once per request no matter how many of these
+ * callers use it, and never leaks between users/requests the way a
  * module-level cache would.
  */
-const getMasteryRows = cache((userId: string): Promise<MasteryRow[]> =>
+export const getMasteryRows = cache((userId: string): Promise<MasteryRow[]> =>
   db.userNodeMastery.findMany({
     where: { userId },
     select: {
+      nodeId: true,
       repetitions: true,
       masteryScore: true,
       intervalDays: true,
       nextReviewAt: true,
-      node: { select: { type: true } },
+      lastReviewedAt: true,
+      node: { select: { title: true, type: true } },
     },
   }),
 );
